@@ -1,4 +1,10 @@
-﻿using Microsoft.Practices.Unity;
+using System;
+using System.Web.Http;
+using Microsoft.Practices.Unity;
+using VirtoCommerce.ExportModule.Core.Model;
+using VirtoCommerce.ExportModule.Core.Services;
+using VirtoCommerce.ExportModule.Data.Services;
+using VirtoCommerce.ExportModule.Web.JsonConverters;
 using VirtoCommerce.Platform.Core.Modularity;
 
 namespace VirtoCommerce.ExportModule.Web
@@ -27,13 +33,24 @@ namespace VirtoCommerce.ExportModule.Web
         {
             base.Initialize();
 
-            // This method is called for each installed module on the first stage of initialization.
+            _container.RegisterType<KnownExportTypesService>();
+            _container.RegisterInstance<IKnownExportTypesRegistrar>(_container.Resolve<KnownExportTypesService>());
+            _container.RegisterInstance<IKnownExportTypesResolver>(_container.Resolve<KnownExportTypesService>());
 
-            // Register implementations:
-            // _container.RegisterType<IMyRepository>(new InjectionFactory(c => new MyRepository(_connectionString, new EntityPrimaryKeyGeneratorInterceptor()));
-            // _container.RegisterType<IMyService, MyService>();
+            _container.RegisterInstance<Func<ExportDataRequest, IExportProvider>>(request => new JsonExportProvider(request));
+            _container.RegisterInstance<Func<ExportDataRequest, IExportProvider>>(request => new CsvExportProvider(request));
+            _container.RegisterType<IExportProviderFactory, ExportProviderFactory>();
 
-            // Try to avoid calling _container.Resolve<>();
+            _container.RegisterType<IDataExporter, DataExporter>();
+
+            // ExportPolicyRegistrar   // registerPolicy    and   AuthorizeAsync
+            // public bool Succeeded { get; private set; }
+
+
+            //Next lines allow to use polymorph types in API controller methods
+            var httpConfiguration = _container.Resolve<HttpConfiguration>();
+            httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicExportDataQueryJsonConverter());
+
         }
 
         public override void PostInitialize()
