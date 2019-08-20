@@ -168,7 +168,7 @@
     <Content Include="Scripts\blades\export-settings.tpl.html" />
     <Content Include="Scripts\blades\export-type-selector.js" />
     <Content Include="Scripts\blades\export-type-selector.tpl.html" />
-    <Content Include="Scripts\module.js" />
+    <Content Include="Scripts\export.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackgroundJobs\ExportJob.cs" />

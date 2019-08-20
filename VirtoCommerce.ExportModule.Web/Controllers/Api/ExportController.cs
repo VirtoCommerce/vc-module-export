@@ -9,40 +9,32 @@ using VirtoCommerce.ExportModule.Core.Services;
 using VirtoCommerce.ExportModule.Web.BackgroundJobs;
 using VirtoCommerce.ExportModule.Web.Model;
 using VirtoCommerce.ExportModule.Web.Security;
-using VirtoCommerce.Platform.Core.PushNotifications;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Web.Security;
 
 namespace VirtoCommerce.ExportModule.Web.Controllers
 {
-    [Route("api/export")]
+    [RoutePrefix("api/export")]
     public class ExportController : ApiController
     {
         private readonly IEnumerable<Func<ExportDataRequest, IExportProvider>> _exportProviderFactories;
         private readonly IKnownExportTypesRegistrar _knownExportTypesRegistrar;
         private readonly IUserNameResolver _userNameResolver;
-        private readonly IPushNotificationManager _pushNotificationManager;
-        //private readonly PlatformOptions _platformOptions;
+        //private readonly IPushNotificationManager _pushNotificationManager;
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
-        //private readonly IAuthorizationService _authorizationService;
 
         public ExportController(
             IEnumerable<Func<ExportDataRequest, IExportProvider>> exportProviderFactories,
             IKnownExportTypesRegistrar knownExportTypesRegistrar,
             IUserNameResolver userNameResolver,
-            IPushNotificationManager pushNotificationManager,
-            //IOptions<PlatformOptions> platformOptions,
-            IKnownExportTypesResolver knownExportTypesResolver
-            //IAuthorizationService authorizationService
-            )
+            //IPushNotificationManager pushNotificationManager,
+            IKnownExportTypesResolver knownExportTypesResolver)
         {
             _exportProviderFactories = exportProviderFactories;
             _knownExportTypesRegistrar = knownExportTypesRegistrar;
             _userNameResolver = userNameResolver;
-            _pushNotificationManager = pushNotificationManager;
-            //_platformOptions = platformOptions.Value;
+            // _pushNotificationManager = pushNotificationManager;
             _knownExportTypesResolver = knownExportTypesResolver;
-            //_authorizationService = authorizationService;
         }
 
         /// <summary>
@@ -120,6 +112,8 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             //    return Unauthorized();
             //}
 
+
+            var user = User;
             var notification = new ExportPushNotification(_userNameResolver.GetCurrentUserName())
             {
                 Title = $"{request.ExportTypeName} export task",

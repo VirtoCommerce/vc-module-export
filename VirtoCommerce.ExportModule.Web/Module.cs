@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using Microsoft.Practices.Unity;
 using VirtoCommerce.ExportModule.Core.Model;
@@ -19,16 +20,6 @@ namespace VirtoCommerce.ExportModule.Web
             _container = container;
         }
 
-        public override void SetupDatabase()
-        {
-            // Modify database schema with EF migrations
-            // using (var context = new MyRepository(_connectionString)))
-            // {
-            //     var initializer = new SetupDatabaseInitializer<MyRepository, Data.Migrations.Configuration>();
-            //     initializer.InitializeDatabase(context);
-            // }
-        }
-
         public override void Initialize()
         {
             base.Initialize();
@@ -37,14 +28,16 @@ namespace VirtoCommerce.ExportModule.Web
             _container.RegisterInstance<IKnownExportTypesRegistrar>(_container.Resolve<KnownExportTypesService>());
             _container.RegisterInstance<IKnownExportTypesResolver>(_container.Resolve<KnownExportTypesService>());
 
-            _container.RegisterInstance<Func<ExportDataRequest, IExportProvider>>(request => new JsonExportProvider(request));
-            _container.RegisterInstance<Func<ExportDataRequest, IExportProvider>>(request => new CsvExportProvider(request));
+            _container.RegisterInstance<IEnumerable<Func<ExportDataRequest, IExportProvider>>>(new Func<ExportDataRequest, IExportProvider>[] { request => new JsonExportProvider(request), request => new CsvExportProvider(request) });
+
+            //var httpConfiguration = _container.Resolve<HttpConfiguration>();
+
+
+            //_container.RegisterInstance<Func<ExportDataRequest, IExportProvider>>(request => new JsonExportProvider(request));
+            //_container.RegisterInstance<Func<ExportDataRequest, IExportProvider>>(request => new CsvExportProvider(request));
             _container.RegisterType<IExportProviderFactory, ExportProviderFactory>();
 
             _container.RegisterType<IDataExporter, DataExporter>();
-
-            // ExportPolicyRegistrar   // registerPolicy    and   AuthorizeAsync
-            // public bool Succeeded { get; private set; }
 
 
             //Next lines allow to use polymorph types in API controller methods
