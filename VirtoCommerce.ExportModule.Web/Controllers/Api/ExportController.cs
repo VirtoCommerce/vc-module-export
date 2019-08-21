@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -17,14 +16,14 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
     [RoutePrefix("api/export")]
     public class ExportController : ApiController
     {
-        private readonly IEnumerable<Func<ExportDataRequest, IExportProvider>> _exportProviderFactories;
+        private readonly Func<ExportDataRequest, IExportProvider>[] _exportProviderFactories;
         private readonly IKnownExportTypesRegistrar _knownExportTypesRegistrar;
         private readonly IUserNameResolver _userNameResolver;
         //private readonly IPushNotificationManager _pushNotificationManager;
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
 
         public ExportController(
-            IEnumerable<Func<ExportDataRequest, IExportProvider>> exportProviderFactories,
+            Func<ExportDataRequest, IExportProvider>[] exportProviderFactories,
             IKnownExportTypesRegistrar knownExportTypesRegistrar,
             IUserNameResolver userNameResolver,
             //IPushNotificationManager pushNotificationManager,

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Web.Http;
 using Microsoft.Practices.Unity;
 using VirtoCommerce.ExportModule.Core.Model;
@@ -24,21 +23,18 @@ namespace VirtoCommerce.ExportModule.Web
         {
             base.Initialize();
 
-            _container.RegisterType<KnownExportTypesService>();
+            _container.RegisterInstance(new KnownExportTypesService());
             _container.RegisterInstance<IKnownExportTypesRegistrar>(_container.Resolve<KnownExportTypesService>());
             _container.RegisterInstance<IKnownExportTypesResolver>(_container.Resolve<KnownExportTypesService>());
 
-            _container.RegisterInstance<IEnumerable<Func<ExportDataRequest, IExportProvider>>>(new Func<ExportDataRequest, IExportProvider>[] { request => new JsonExportProvider(request), request => new CsvExportProvider(request) });
+            _container.RegisterType<Func<ExportDataRequest, IExportProvider>>(nameof(JsonExportProvider), new InjectionFactory(i =>
+               new Func<ExportDataRequest, IExportProvider>(request => new JsonExportProvider(request))));
 
-            //var httpConfiguration = _container.Resolve<HttpConfiguration>();
+            _container.RegisterType<Func<ExportDataRequest, IExportProvider>>(nameof(CsvExportProvider), new InjectionFactory(i =>
+                new Func<ExportDataRequest, IExportProvider>(request => new CsvExportProvider(request))));
 
-
-            //_container.RegisterInstance<Func<ExportDataRequest, IExportProvider>>(request => new JsonExportProvider(request));
-            //_container.RegisterInstance<Func<ExportDataRequest, IExportProvider>>(request => new CsvExportProvider(request));
             _container.RegisterType<IExportProviderFactory, ExportProviderFactory>();
-
             _container.RegisterType<IDataExporter, DataExporter>();
-
 
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
