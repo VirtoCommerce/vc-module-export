@@ -50,6 +50,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Models\ExportableSearchResult.cs" />
     <Compile Include="Models\ExportDataQuery.cs" />
     <Compile Include="Models\ExportDataRequest.cs" />

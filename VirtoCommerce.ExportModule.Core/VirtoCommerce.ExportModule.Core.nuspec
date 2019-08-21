@@ -11,6 +11,6 @@
         <iconUrl>https://github.com/VirtoCommerce/vc-module-export/raw/master/NuGet/icon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Export implementation</description>
-        <copyright>Copyright © VirtoCommerce 2011-2018</copyright>
+        <copyright>Copyright © VirtoCommerce 2011-2019</copyright>
     </metadata>
 </package>

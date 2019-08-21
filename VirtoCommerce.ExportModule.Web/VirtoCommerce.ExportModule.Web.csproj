@@ -140,10 +140,6 @@
     <Content Include="Scripts\services\generic-viewer-item-service.js" />
     <None Include="module.ignore" />
     <None Include="packages.config" />
-    <None Include="Content\help\index.html" />
-    <None Include="Content\help\stylesheet.css" />
-    <None Include="Content\help\sample.png" />
-    <None Include="Content\help\arch_scheme.png" />
     <None Include="app.config" />
     <None Include="Web.config" />
     <None Include="Web.Debug.config">
@@ -171,6 +167,9 @@
     <Content Include="Scripts\export.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="BackgroundJobs\ExportJob.cs" />
     <Compile Include="BackgroundJobs\JobCancellationTokenWrapper.cs" />
     <Compile Include="Controllers\Api\ExportController.cs" />
