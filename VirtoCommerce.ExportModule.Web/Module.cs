@@ -4,7 +4,9 @@ using Hangfire.Common;
 using Microsoft.Practices.Unity;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Services;
+using VirtoCommerce.ExportModule.CsvProvider;
 using VirtoCommerce.ExportModule.Data.Services;
+using VirtoCommerce.ExportModule.JsonProvider;
 using VirtoCommerce.ExportModule.Web.JsonConverters;
 using VirtoCommerce.Platform.Core.Modularity;
 
