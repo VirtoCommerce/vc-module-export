@@ -3,7 +3,9 @@ using System.Web.Http;
 using Hangfire.Common;
 using Microsoft.Practices.Unity;
 using VirtoCommerce.ExportModule.Core.Model;
+using VirtoCommerce.ExportModule.Core.Security;
 using VirtoCommerce.ExportModule.Core.Services;
+using VirtoCommerce.ExportModule.Data.Security;
 using VirtoCommerce.ExportModule.Data.Services;
 using VirtoCommerce.ExportModule.Web.JsonConverters;
 using VirtoCommerce.Platform.Core.Modularity;
@@ -35,7 +37,9 @@ namespace VirtoCommerce.ExportModule.Web
                 new Func<ExportDataRequest, IExportProvider>(request => new CsvExportProvider(request))));
 
             _container.RegisterType<IExportProviderFactory, ExportProviderFactory>();
-            _container.RegisterType<IDataExporter, DataExporter>();
+            _container.RegisterType<IExportSecurityHandlerRegistrar, ExportSecurityHandlerRegistrar>();
+            _container.RegisterType<IDataExporter, DataExporter>();            
+
 
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();

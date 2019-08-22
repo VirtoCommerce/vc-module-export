@@ -88,6 +88,8 @@
     <Compile Include="Models\CsvProviderConfiguration.cs" />
     <Compile Include="Models\JsonProviderConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\ExportSecurityHandlerRegistrar.cs" />
+    <Compile Include="Security\ExportSecurityPermissionHandler.cs" />
     <Compile Include="Services\CsvExportProvider.cs" />
     <Compile Include="Services\DataExporter.cs" />
     <Compile Include="Services\ExportedTypeDefinitionBuilder.cs" />
