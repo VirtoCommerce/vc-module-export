@@ -7,8 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CsvHelper.Configuration;
 using VirtoCommerce.ExportModule.Core.Model;
-using VirtoCommerce.ExportModule.Data.Model;
-using VirtoCommerce.ExportModule.Data.Services;
+using VirtoCommerce.ExportModule.CsvProvider;
 using VirtoCommerce.ExportModule.Tests.PricingModuleModelMocks;
 using Xunit;
 

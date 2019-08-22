@@ -24,10 +24,7 @@ angular.module('virtoCommerce.exportModule')
                     if (blade.isExportedTypeSelected) {
                         getKnownTypes();
                     }
-
                 }
-
-
             });
 
             blade.isLoading = false;
@@ -124,6 +121,8 @@ angular.module('virtoCommerce.exportModule')
             }
 
             blade.exportDataRequest.providerName = blade.selectedProvider.id;
+            delete blade.exportDataRequest.dataQuery.skip;
+            delete blade.exportDataRequest.dataQuery.take;
             blade.isExporting = true;
 
             var progressBlade = {

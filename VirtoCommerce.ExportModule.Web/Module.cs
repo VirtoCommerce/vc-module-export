@@ -6,7 +6,9 @@ using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Security;
 using VirtoCommerce.ExportModule.Core.Services;
 using VirtoCommerce.ExportModule.Data.Security;
+using VirtoCommerce.ExportModule.CsvProvider;
 using VirtoCommerce.ExportModule.Data.Services;
+using VirtoCommerce.ExportModule.JsonProvider;
 using VirtoCommerce.ExportModule.Web.JsonConverters;
 using VirtoCommerce.Platform.Core.Modularity;
 
