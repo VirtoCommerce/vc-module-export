@@ -73,7 +73,6 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
                 using (var stream = File.OpenWrite(localTmpPath))
                 {
                     _dataExporter.Export(stream, request, progressCallback, new JobCancellationTokenWrapper(cancellationToken));
-                    /*"api/platform/export/download/"*/
                     notification.DownloadUrl = $"api/export/download/{fileName}";
                 }
             }
