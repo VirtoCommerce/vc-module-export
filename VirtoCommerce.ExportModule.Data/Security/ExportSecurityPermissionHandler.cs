@@ -6,12 +6,12 @@ namespace VirtoCommerce.ExportModule.Data.Security
     /// <summary>
     /// Simple export security handler. Checks all of specified permissions
     /// </summary>
-    class ExportSecurityPermissionHandler : IExportSecurityHandler
+    public class ExportSecurityPermissionHandler : IExportSecurityHandler
     {
         private ISecurityService _securityService;
         private string[] _permissions;
 
-        public ExportSecurityPermissionHandler(ISecurityService securityService, string[] permissions)
+        public ExportSecurityPermissionHandler(ISecurityService securityService, params string[] permissions)
         {
             _securityService = securityService;
             _permissions = permissions;
