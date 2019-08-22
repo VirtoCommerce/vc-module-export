@@ -3,8 +3,10 @@ using System.Web.Http;
 using Hangfire.Common;
 using Microsoft.Practices.Unity;
 using VirtoCommerce.ExportModule.Core.Model;
+using VirtoCommerce.ExportModule.Core.Security;
 using VirtoCommerce.ExportModule.Core.Services;
 using VirtoCommerce.ExportModule.CsvProvider;
+using VirtoCommerce.ExportModule.Data.Security;
 using VirtoCommerce.ExportModule.Data.Services;
 using VirtoCommerce.ExportModule.JsonProvider;
 using VirtoCommerce.ExportModule.Web.JsonConverters;
@@ -14,7 +16,6 @@ namespace VirtoCommerce.ExportModule.Web
 {
     public class Module : ModuleBase
     {
-        // private readonly string _connectionString = ConfigurationHelper.GetConnectionStringValue("VirtoCommerce.ExportModule") ?? ConfigurationHelper.GetConnectionStringValue("VirtoCommerce");
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container)
@@ -37,7 +38,9 @@ namespace VirtoCommerce.ExportModule.Web
                 new Func<ExportDataRequest, IExportProvider>(request => new CsvExportProvider(request))));
 
             _container.RegisterType<IExportProviderFactory, ExportProviderFactory>();
+            _container.RegisterInstance<IExportSecurityHandlerRegistrar>(new ExportSecurityHandlerRegistrar());
             _container.RegisterType<IDataExporter, DataExporter>();
+
 
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
@@ -53,14 +56,6 @@ namespace VirtoCommerce.ExportModule.Web
             base.PostInitialize();
 
             // This method is called for each installed module on the second stage of initialization.
-
-            // Override types using AbstractTypeFactory:
-            // AbstractTypeFactory<BaseModel>.OverrideType<BaseModel, BaseModelEx>();
-            // AbstractTypeFactory<BaseModelEntity>.OverrideType<BaseModelEntity, BaseModelExEntity>();
-
-            // Resolve registered implementations:
-            // var settingManager = _container.Resolve<ISettingsManager>();
-            // var value = settingManager.GetValue("Pricing.ExportImport.Description", string.Empty);
         }
     }
 }

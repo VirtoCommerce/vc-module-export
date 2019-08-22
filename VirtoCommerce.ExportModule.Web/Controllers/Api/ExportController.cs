@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Hangfire;
 using VirtoCommerce.ExportModule.Core.Model;
+using VirtoCommerce.ExportModule.Core.Security;
 using VirtoCommerce.ExportModule.Core.Services;
 using VirtoCommerce.ExportModule.Web.BackgroundJobs;
 using VirtoCommerce.ExportModule.Web.Model;
@@ -28,19 +29,23 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         private readonly IUserNameResolver _userNameResolver;
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
         private readonly string _defaultExportFolder;
+        private readonly IExportSecurityHandlerRegistrar _exportSecurityHandlerRegistrar;
+
 
         public ExportController(
             Func<ExportDataRequest, IExportProvider>[] exportProviderFactories,
             IKnownExportTypesRegistrar knownExportTypesRegistrar,
             IUserNameResolver userNameResolver,
             IModuleInitializerOptions moduleInitializerOptions,
-            IKnownExportTypesResolver knownExportTypesResolver)
+            IKnownExportTypesResolver knownExportTypesResolver,
+            IExportSecurityHandlerRegistrar exportSecurityHandlerRegistrar)
         {
             _exportProviderFactories = exportProviderFactories;
             _knownExportTypesRegistrar = knownExportTypesRegistrar;
             _userNameResolver = userNameResolver;
             _knownExportTypesResolver = knownExportTypesResolver;
             _defaultExportFolder = moduleInitializerOptions.VirtualRoot + "/App_Data/Export/";
+            _exportSecurityHandlerRegistrar = exportSecurityHandlerRegistrar;
         }
 
         /// <summary>
@@ -80,12 +85,10 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         [CheckPermission(Permission = ExportPredefinedPermissions.Access)]
         public IHttpActionResult GetData([FromBody]ExportDataRequest request)
         {
-
-            //var authorizationResult = await _authorizationService.AuthorizeAsync(User, request, request.ExportTypeName + "ExportDataPolicy");
-            //if (!authorizationResult.Succeeded)
-            //{
-            //    return Unauthorized();
-            //}
+            if (_exportSecurityHandlerRegistrar.GetHandler(request.ExportTypeName + "ExportDataPolicy")?.Authorize(User.Identity.Name, request) != true)
+            {
+                return Unauthorized();
+            }
 
             var exportedTypeDefinition = _knownExportTypesResolver.ResolveExportedTypeDefinition(request.ExportTypeName);
             var pagedDataSource = exportedTypeDefinition.ExportedDataSourceFactory(request.DataQuery);
@@ -112,14 +115,11 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         //[ResponseType(typeof(PlatformExportPushNotification))]
         public IHttpActionResult RunExport([FromBody]ExportDataRequest request)
         {
-            //var authorizationResult = await _authorizationService.AuthorizeAsync(User, request, request.ExportTypeName + "ExportDataPolicy");
-            //if (!authorizationResult.Succeeded)
-            //{
-            //    return Unauthorized();
-            //}
+            if (_exportSecurityHandlerRegistrar.GetHandler(request.ExportTypeName + "ExportDataPolicy")?.Authorize(User.Identity.Name, request) != true)
+            {
+                return Unauthorized();
+            }
 
-
-            var user = User;
             var notification = new ExportPushNotification(_userNameResolver.GetCurrentUserName())
             {
                 Title = $"{request.ExportTypeName} export task",
