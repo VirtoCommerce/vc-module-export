@@ -29,7 +29,6 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         private readonly IUserNameResolver _userNameResolver;
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
         private readonly string _defaultExportFolder;
-        private readonly ISecurityService _securityService;
         private readonly IExportSecurityHandlerRegistrar _exportSecurityHandlerRegistrar;
 
 
@@ -39,7 +38,6 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             IUserNameResolver userNameResolver,
             IModuleInitializerOptions moduleInitializerOptions,
             IKnownExportTypesResolver knownExportTypesResolver,
-            ISecurityService securityService,
             IExportSecurityHandlerRegistrar exportSecurityHandlerRegistrar)
         {
             _exportProviderFactories = exportProviderFactories;
@@ -47,7 +45,6 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             _userNameResolver = userNameResolver;
             _knownExportTypesResolver = knownExportTypesResolver;
             _defaultExportFolder = moduleInitializerOptions.VirtualRoot + "/App_Data/Export/";
-            _securityService = securityService;
             _exportSecurityHandlerRegistrar = exportSecurityHandlerRegistrar;
         }
 
@@ -88,8 +85,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         [CheckPermission(Permission = ExportPredefinedPermissions.Access)]
         public IHttpActionResult GetData([FromBody]ExportDataRequest request)
         {
-
-            if (!_exportSecurityHandlerRegistrar.GetHandler(request.ExportTypeName + "ExportDataPolicy").Authorize(User.Identity.Name, request))
+            if (_exportSecurityHandlerRegistrar.GetHandler(request.ExportTypeName + "ExportDataPolicy")?.Authorize(User.Identity.Name, request) != true)
             {
                 return Unauthorized();
             }
@@ -119,8 +115,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         //[ResponseType(typeof(PlatformExportPushNotification))]
         public IHttpActionResult RunExport([FromBody]ExportDataRequest request)
         {
-
-            if (!_exportSecurityHandlerRegistrar.GetHandler(request.ExportTypeName + "ExportDataPolicy").Authorize(User.Identity.Name, request))
+            if (_exportSecurityHandlerRegistrar.GetHandler(request.ExportTypeName + "ExportDataPolicy")?.Authorize(User.Identity.Name, request) != true)
             {
                 return Unauthorized();
             }

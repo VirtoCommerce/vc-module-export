@@ -6,16 +6,16 @@ namespace VirtoCommerce.ExportModule.Data.Security
 {
     public class ExportSecurityHandlerRegistrar : IExportSecurityHandlerRegistrar
     {
-        private Dictionary<string, Func<IExportSecurityHandler>> _handlers = new Dictionary<string, Func<IExportSecurityHandler>>();
+        private readonly Dictionary<string, Func<IExportSecurityHandler>> _handlerFactories = new Dictionary<string, Func<IExportSecurityHandler>>();
 
-        public IExportSecurityHandler GetHandler(string handlerName)
+        public IExportSecurityHandler GetHandler(string policyName)
         {
-            return _handlers[handlerName]();
+            return _handlerFactories.ContainsKey(policyName) ? _handlerFactories[policyName]() : null;
         }
 
-        public void Register(string handlerName, Func<IExportSecurityHandler> handlerFactory)
+        public void RegisterHandler(string policyName, Func<IExportSecurityHandler> handlerFactory)
         {
-            _handlers.Add(handlerName, handlerFactory);
+            _handlerFactories[policyName] = handlerFactory;
         }
     }
 }

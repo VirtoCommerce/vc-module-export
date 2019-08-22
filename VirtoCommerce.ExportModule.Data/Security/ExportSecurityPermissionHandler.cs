@@ -4,14 +4,14 @@ using VirtoCommerce.Platform.Core.Security;
 namespace VirtoCommerce.ExportModule.Data.Security
 {
     /// <summary>
-    /// Simple export security handler. Checks all of specified permissions
+    /// Export security handler which checks user have all specified permissions.
     /// </summary>
-    public class ExportSecurityPermissionHandler : IExportSecurityHandler
+    public class PermissionExportSecurityHandler : IExportSecurityHandler
     {
         private ISecurityService _securityService;
         private string[] _permissions;
 
-        public ExportSecurityPermissionHandler(ISecurityService securityService, params string[] permissions)
+        public PermissionExportSecurityHandler(ISecurityService securityService, params string[] permissions)
         {
             _securityService = securityService;
             _permissions = permissions;
