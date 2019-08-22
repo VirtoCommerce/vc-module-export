@@ -19,7 +19,7 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
 
 
         private readonly string _defaultExportFolder;
-        private const string DefaultExportFileName = "exported_data.zip";
+        private const string DefaultExportFileName = "exported_data.json";
 
         public ExportJob(IDataExporter dataExporter,
             IPushNotificationManager pushNotificationManager,
@@ -73,6 +73,7 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
                 using (var stream = File.OpenWrite(localTmpPath))
                 {
                     _dataExporter.Export(stream, request, progressCallback, new JobCancellationTokenWrapper(cancellationToken));
+                    /*"api/platform/export/download/"*/
                     notification.DownloadUrl = $"api/export/download/{fileName}";
                 }
             }

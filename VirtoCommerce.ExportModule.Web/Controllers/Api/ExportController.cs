@@ -1,5 +1,11 @@
 using System;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Hangfire;
@@ -8,6 +14,7 @@ using VirtoCommerce.ExportModule.Core.Services;
 using VirtoCommerce.ExportModule.Web.BackgroundJobs;
 using VirtoCommerce.ExportModule.Web.Model;
 using VirtoCommerce.ExportModule.Web.Security;
+using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Web.Security;
 
@@ -19,21 +26,21 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         private readonly Func<ExportDataRequest, IExportProvider>[] _exportProviderFactories;
         private readonly IKnownExportTypesRegistrar _knownExportTypesRegistrar;
         private readonly IUserNameResolver _userNameResolver;
-        //private readonly IPushNotificationManager _pushNotificationManager;
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
+        private readonly string _defaultExportFolder;
 
         public ExportController(
             Func<ExportDataRequest, IExportProvider>[] exportProviderFactories,
             IKnownExportTypesRegistrar knownExportTypesRegistrar,
             IUserNameResolver userNameResolver,
-            //IPushNotificationManager pushNotificationManager,
+            IModuleInitializerOptions moduleInitializerOptions,
             IKnownExportTypesResolver knownExportTypesResolver)
         {
             _exportProviderFactories = exportProviderFactories;
             _knownExportTypesRegistrar = knownExportTypesRegistrar;
             _userNameResolver = userNameResolver;
-            // _pushNotificationManager = pushNotificationManager;
             _knownExportTypesResolver = knownExportTypesResolver;
+            _defaultExportFolder = moduleInitializerOptions.VirtualRoot + "/App_Data/Export/";
         }
 
         /// <summary>
@@ -148,22 +155,19 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         [HttpGet]
         [Route("download/{fileName}")]
         //[Authorize(ModuleConstants.Security.Permissions.Download)]
-        public IHttpActionResult DownloadExportFile([FromUri] string fileName)
+        public HttpResponseMessage DownloadExportFile([FromUri] string fileName)
         {
-            //var localTmpFolder = Path.GetFullPath(Path.Combine(_platformOptions.DefaultExportFolder));
-            //var localPath = Path.Combine(localTmpFolder, Path.GetFileName(fileName));
+            var localTmpFolder = HostingEnvironment.MapPath(_defaultExportFolder);
+            var localPath = Path.Combine(localTmpFolder, Path.GetFileName(fileName));
 
-            ////Load source data only from local file system 
-            //using (var stream = System.IO.File.Open(localPath, FileMode.Open))
-            //{
-            //    var provider = new FileExtensionContentTypeProvider();
-            //    if (!provider.TryGetContentType(localPath, out var contentType))
-            //    {
-            //        contentType = "application/octet-stream";
-            //    }
-            //    return PhysicalFile(localPath, contentType);
-            //}
-            return Ok();
+            var stream = File.Open(localPath, FileMode.Open);
+            var result = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StreamContent(stream) };
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = fileName
+            };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(localPath));
+            return result;
         }
     }
 }
