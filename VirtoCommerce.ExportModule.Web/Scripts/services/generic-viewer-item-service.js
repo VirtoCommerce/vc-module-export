@@ -1,4 +1,4 @@
-angular.module('virtoCommerce.customerModule')
+angular.module('virtoCommerce.exportModule')
 .factory('virtoCommerce.exportModule.genericViewerItemService', function () {
     var viewers = {};
     
