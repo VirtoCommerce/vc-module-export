@@ -41,11 +41,6 @@ namespace VirtoCommerce.ExportModule.Web
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicExportDataQueryJsonConverter());
 
-
-            //var mvcJsonOptions = _container.Resolve<HttpConfiguration>();
-
-            //mvcJsonOptions.Value.SerializerSettings.Converters.Add(new PolymorphicExportDataQueryJsonConverter());
-
             // This line refreshes Hangfire JsonConverter with the current JsonSerializerSettings - PolymorphicExportDataQueryJsonConverter needs to be included
             JobHelper.SetSerializerSettings(httpConfiguration.Formatters.JsonFormatter.SerializerSettings);
 
