@@ -28,19 +28,23 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         private readonly IUserNameResolver _userNameResolver;
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
         private readonly string _defaultExportFolder;
+        private readonly ISecurityService _securityService;
+
 
         public ExportController(
             Func<ExportDataRequest, IExportProvider>[] exportProviderFactories,
             IKnownExportTypesRegistrar knownExportTypesRegistrar,
             IUserNameResolver userNameResolver,
             IModuleInitializerOptions moduleInitializerOptions,
-            IKnownExportTypesResolver knownExportTypesResolver)
+            IKnownExportTypesResolver knownExportTypesResolver,
+            ISecurityService securityService)
         {
             _exportProviderFactories = exportProviderFactories;
             _knownExportTypesRegistrar = knownExportTypesRegistrar;
             _userNameResolver = userNameResolver;
             _knownExportTypesResolver = knownExportTypesResolver;
             _defaultExportFolder = moduleInitializerOptions.VirtualRoot + "/App_Data/Export/";
+            _securityService = securityService;
         }
 
         /// <summary>
@@ -81,6 +85,11 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         public IHttpActionResult GetData([FromBody]ExportDataRequest request)
         {
 
+            if (!_securityService.UserHasAnyPermission(User.Identity.Name, null, request.ExportTypeName + "ExportDataPolicy"))
+            {
+                return Unauthorized();
+            }
+
             //var authorizationResult = await _authorizationService.AuthorizeAsync(User, request, request.ExportTypeName + "ExportDataPolicy");
             //if (!authorizationResult.Succeeded)
             //{
@@ -112,6 +121,12 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         //[ResponseType(typeof(PlatformExportPushNotification))]
         public IHttpActionResult RunExport([FromBody]ExportDataRequest request)
         {
+
+            if (!_securityService.UserHasAnyPermission(User.Identity.Name, null, request.ExportTypeName + "ExportDataPolicy"))
+            {
+                return Unauthorized();
+            }
+
             //var authorizationResult = await _authorizationService.AuthorizeAsync(User, request, request.ExportTypeName + "ExportDataPolicy");
             //if (!authorizationResult.Succeeded)
             //{
