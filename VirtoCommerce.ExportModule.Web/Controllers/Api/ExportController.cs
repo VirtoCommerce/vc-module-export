@@ -154,7 +154,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("download/{fileName}")]
-        //[Authorize(ModuleConstants.Security.Permissions.Download)]
+        [CheckPermission(Permission = ExportPredefinedPermissions.Download)]
         public HttpResponseMessage DownloadExportFile([FromUri] string fileName)
         {
             var localTmpFolder = HostingEnvironment.MapPath(_defaultExportFolder);
