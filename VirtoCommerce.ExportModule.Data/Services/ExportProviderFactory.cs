@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Services;
@@ -9,9 +8,9 @@ namespace VirtoCommerce.ExportModule.Data.Services
 {
     public class ExportProviderFactory : IExportProviderFactory
     {
-        private readonly IEnumerable<Func<ExportDataRequest, IExportProvider>> _providerFactories;
+        private readonly Func<ExportDataRequest, IExportProvider>[] _providerFactories;
 
-        public ExportProviderFactory(IEnumerable<Func<ExportDataRequest, IExportProvider>> providerFactories)
+        public ExportProviderFactory(Func<ExportDataRequest, IExportProvider>[] providerFactories)
         {
             _providerFactories = providerFactories;
         }

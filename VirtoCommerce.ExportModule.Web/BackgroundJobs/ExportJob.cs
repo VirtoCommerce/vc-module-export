@@ -19,7 +19,7 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
 
 
         private readonly string _defaultExportFolder;
-        private const string DefaultExportFileName = "exported_data.zip";
+        private const string DefaultExportFileName = "exported_data.json";
 
         public ExportJob(IDataExporter dataExporter,
             IPushNotificationManager pushNotificationManager,
