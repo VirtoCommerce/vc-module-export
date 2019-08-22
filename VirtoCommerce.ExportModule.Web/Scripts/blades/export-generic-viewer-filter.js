@@ -15,12 +15,18 @@ angular.module('virtoCommerce.exportModule')
 
             if (needSave) {
                 $localStorage.exportSearchFilterIds[blade.exportTypeName] = blade.origEntity.id;
-            } 
+
+                var savedFilterIndex = _.findIndex($localStorage.exportSearchFilters[blade.exportTypeName], { id: blade.origEntity.id });
+
+                if (savedFilterIndex !== -1) {
+                    $localStorage.exportSearchFilters[blade.exportTypeName][savedFilterIndex] = blade.origEntity;
+                } else {
+                    $localStorage.exportSearchFilters[blade.exportTypeName].push(blade.origEntity);
+                }
+            }
 
             if (blade.isNew) {
-                if (needSave) {
-                    $localStorage.exportSearchFilters[blade.exportTypeName].push(blade.origEntity);
-                } else {
+                if (!needSave) {
                     $localStorage.exportSearchFilterIds[blade.exportTypeName] = undefined;
                 }
 
