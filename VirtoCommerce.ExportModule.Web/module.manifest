@@ -27,6 +27,17 @@
         <directory virtualPath="$/Scripts" searchPattern="*.js" searchSubdirectories="true" />
     </scripts>
 
+    <settings>
+        <group name="Export|General">
+            <setting>
+            <name>Export.FileNameTemplate</name>
+            <valueType>string</valueType>
+            <defaultValue>export_{0:yyyyMMddHHmmss}</defaultValue>
+            <title>ExportFileNameTemplate</title>
+            <description>ExportFileNameTemplate</description>
+            </setting>
+        </group>
+    </settings>
     <permissions>
         <group name="VirtoCommerce.ExportModule">
             <permission id="VirtoCommerce.ExportModule:read" name="Read" />

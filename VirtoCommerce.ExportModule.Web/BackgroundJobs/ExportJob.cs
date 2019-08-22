@@ -7,6 +7,7 @@ using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Services;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.PushNotifications;
+using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.Common;
 
 namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
@@ -16,20 +17,33 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
         private readonly IPushNotificationManager _pushNotificationManager;
         private readonly IDataExporter _dataExporter;
         private readonly IExportProviderFactory _exportProviderFactory;
-
-
+        private readonly ISettingsManager _settingsManager;
         private readonly string _defaultExportFolder;
-        private const string DefaultExportFileName = "exported_data.json";
+        private string fileNameTemplate;
 
         public ExportJob(IDataExporter dataExporter,
             IPushNotificationManager pushNotificationManager,
             IExportProviderFactory exportProviderFactory,
-            IModuleInitializerOptions moduleInitializerOptions)
+            IModuleInitializerOptions moduleInitializerOptions,
+            ISettingsManager settingsManager)
         {
             _dataExporter = dataExporter;
             _pushNotificationManager = pushNotificationManager;
             _exportProviderFactory = exportProviderFactory;
+            _settingsManager = settingsManager;
             _defaultExportFolder = moduleInitializerOptions.VirtualRoot + "/App_Data/Export/";
+        }
+        private string FileNameTemplate
+        {
+            get
+            {
+                if (fileNameTemplate == null)
+                {
+                    fileNameTemplate = _settingsManager.GetValue("Export.FileNameTemplate", string.Empty);
+                }
+
+                return fileNameTemplate;
+            }
         }
 
         public void ExportBackground(ExportDataRequest request, ExportPushNotification notification, IJobCancellationToken cancellationToken, PerformContext context)
@@ -43,10 +57,8 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
 
             try
             {
-
                 var localTmpFolder = HostingEnvironment.MapPath(_defaultExportFolder);
-                var fileName = Path.Combine(localTmpFolder, Path.GetFileName(DefaultExportFileName));
-
+                var fileName = Path.Combine(localTmpFolder, string.Format(FileNameTemplate, DateTime.UtcNow));
 
                 // Do not like provider creation here to get file extension, maybe need to pass created provider to Exporter.
                 // Create stream inside Exporter is not good as it is not Exporter resposibility to decide where to write.
@@ -54,7 +66,7 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
 
                 if (!string.IsNullOrEmpty(provider.ExportedFileExtension))
                 {
-                    fileName = Path.ChangeExtension(Path.GetFileName(DefaultExportFileName), provider.ExportedFileExtension);
+                    fileName = Path.ChangeExtension(string.Format(FileNameTemplate, DateTime.UtcNow), provider.ExportedFileExtension);
                 }
 
                 var localTmpPath = Path.Combine(localTmpFolder, fileName);

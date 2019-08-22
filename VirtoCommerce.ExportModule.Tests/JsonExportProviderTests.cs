@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VirtoCommerce.ExportModule.Core.Model;
-using VirtoCommerce.ExportModule.Data.Model;
-using VirtoCommerce.ExportModule.Data.Services;
+using VirtoCommerce.ExportModule.JsonProvider;
 using Xunit;
 
 namespace VirtoCommerce.ExportModule.Tests
@@ -119,7 +118,7 @@ namespace VirtoCommerce.ExportModule.Tests
 
             var resultArray = JArray.Parse(deserializedString);
 
-            return resultArray.Select(x => x.ToObject(Type.GetType(x["$discriminator"]?.ToString())))
+            return resultArray.Select(x => x.ToObject(Type.GetType($@"{typeof(Price).Namespace}.{x["$discriminator"]?.ToString()}")))
                 .ToArray();
         }
 

@@ -184,9 +184,17 @@
       <Project>{6cc502df-2f38-4c89-ba75-2ca0cb3ba0e8}</Project>
       <Name>VirtoCommerce.ExportModule.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VirtoCommerce.ExportModule.CsvProvider\VirtoCommerce.ExportModule.CsvProvider.csproj">
+      <Project>{3A1F6829-D51D-48D7-8CD4-E77CF382F100}</Project>
+      <Name>VirtoCommerce.ExportModule.CsvProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VirtoCommerce.ExportModule.Data\VirtoCommerce.ExportModule.Data.csproj">
       <Project>{d3812129-19ad-4f93-ab4f-962bfeb71b1a}</Project>
       <Name>VirtoCommerce.ExportModule.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtoCommerce.ExportModule.JsonProvider\VirtoCommerce.ExportModule.JsonProvider.csproj">
+      <Project>{290CFB95-56C6-4083-BDAB-5ED676208AA9}</Project>
+      <Name>VirtoCommerce.ExportModule.JsonProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

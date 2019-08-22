@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.Tests", "VirtoCommerce.ExportModule.Tests\VirtoCommerce.ExportModule.Tests.csproj", "{C4E8EAC3-2FDF-4FFC-895D-C87D0BC93546}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.CsvProvider", "VirtoCommerce.ExportModule.CsvProvider\VirtoCommerce.ExportModule.CsvProvider.csproj", "{3A1F6829-D51D-48D7-8CD4-E77CF382F100}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.JsonProvider", "VirtoCommerce.ExportModule.JsonProvider\VirtoCommerce.ExportModule.JsonProvider.csproj", "{290CFB95-56C6-4083-BDAB-5ED676208AA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{C4E8EAC3-2FDF-4FFC-895D-C87D0BC93546}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4E8EAC3-2FDF-4FFC-895D-C87D0BC93546}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4E8EAC3-2FDF-4FFC-895D-C87D0BC93546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A1F6829-D51D-48D7-8CD4-E77CF382F100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A1F6829-D51D-48D7-8CD4-E77CF382F100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A1F6829-D51D-48D7-8CD4-E77CF382F100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A1F6829-D51D-48D7-8CD4-E77CF382F100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290CFB95-56C6-4083-BDAB-5ED676208AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290CFB95-56C6-4083-BDAB-5ED676208AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290CFB95-56C6-4083-BDAB-5ED676208AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290CFB95-56C6-4083-BDAB-5ED676208AA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
