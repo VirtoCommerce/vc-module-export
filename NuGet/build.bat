@@ -19,5 +19,7 @@ IF NOT DEFINED MSBUILD_PATH SET MSBUILD_PATH=%WINDIR%\Microsoft.NET\Framework\v4
 
 nuget pack "%SOURCE_DIR%\VirtoCommerce.ExportModule.Data\VirtoCommerce.ExportModule.Data.csproj" -IncludeReferencedProjects -Symbols -Properties Configuration=Release -OutputDirectory "%TARGET_DIR%"
 nuget pack "%SOURCE_DIR%\VirtoCommerce.ExportModule.Core\VirtoCommerce.ExportModule.Core.csproj" -IncludeReferencedProjects -Symbols -Properties Configuration=Release -OutputDirectory "%TARGET_DIR%"
+nuget pack "%SOURCE_DIR%\VirtoCommerce.ExportModule.CsvProvider\VirtoCommerce.ExportModule.CsvProvider.csproj" -IncludeReferencedProjects -Symbols -Properties Configuration=Release -OutputDirectory "%TARGET_DIR%"
+nuget pack "%SOURCE_DIR%\VirtoCommerce.ExportModule.JsonProvider\VirtoCommerce.ExportModule.JsonProvider.csproj" -IncludeReferencedProjects -Symbols -Properties Configuration=Release -OutputDirectory "%TARGET_DIR%"
 
 @pause
