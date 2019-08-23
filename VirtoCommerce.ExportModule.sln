@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.Web", "VirtoCommerce.ExportModule.Web\VirtoCommerce.ExportModule.Web.csproj", "{794E856F-97F6-45B5-9BA5-AA99216A9CAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.Core", "VirtoCommerce.ExportModule.Core\VirtoCommerce.ExportModule.Core.csproj", "{C076FD8B-1650-4D83-A73E-12E8ACCD4289}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.Data", "VirtoCommerce.ExportModule.Data\VirtoCommerce.ExportModule.Data.csproj", "{ED44C43D-A17C-48FB-80AA-A1390DE46528}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.Tests", "VirtoCommerce.ExportModule.Tests\VirtoCommerce.ExportModule.Tests.csproj", "{C4E8EAC3-2FDF-4FFC-895D-C87D0BC93546}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.CsvProvider", "VirtoCommerce.ExportModule.CsvProvider\VirtoCommerce.ExportModule.CsvProvider.csproj", "{3A1F6829-D51D-48D7-8CD4-E77CF382F100}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.ExportModule.JsonProvider", "VirtoCommerce.ExportModule.JsonProvider\VirtoCommerce.ExportModule.JsonProvider.csproj", "{290CFB95-56C6-4083-BDAB-5ED676208AA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{794E856F-97F6-45B5-9BA5-AA99216A9CAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{794E856F-97F6-45B5-9BA5-AA99216A9CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{794E856F-97F6-45B5-9BA5-AA99216A9CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{794E856F-97F6-45B5-9BA5-AA99216A9CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C076FD8B-1650-4D83-A73E-12E8ACCD4289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C076FD8B-1650-4D83-A73E-12E8ACCD4289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C076FD8B-1650-4D83-A73E-12E8ACCD4289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C076FD8B-1650-4D83-A73E-12E8ACCD4289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED44C43D-A17C-48FB-80AA-A1390DE46528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED44C43D-A17C-48FB-80AA-A1390DE46528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED44C43D-A17C-48FB-80AA-A1390DE46528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED44C43D-A17C-48FB-80AA-A1390DE46528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E8EAC3-2FDF-4FFC-895D-C87D0BC93546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E8EAC3-2FDF-4FFC-895D-C87D0BC93546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E8EAC3-2FDF-4FFC-895D-C87D0BC93546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E8EAC3-2FDF-4FFC-895D-C87D0BC93546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A1F6829-D51D-48D7-8CD4-E77CF382F100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A1F6829-D51D-48D7-8CD4-E77CF382F100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A1F6829-D51D-48D7-8CD4-E77CF382F100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A1F6829-D51D-48D7-8CD4-E77CF382F100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290CFB95-56C6-4083-BDAB-5ED676208AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290CFB95-56C6-4083-BDAB-5ED676208AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290CFB95-56C6-4083-BDAB-5ED676208AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290CFB95-56C6-4083-BDAB-5ED676208AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECFF1789-9822-4E05-BE2E-53B37C7D1F78}
+	EndGlobalSection
+EndGlobal
