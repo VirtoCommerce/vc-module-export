@@ -18,10 +18,11 @@
       <owner>Virto Commerce</owner>
     </owners>
     <projectUrl>https://virtocommerce.com/apps/extensions/virto-export-module</projectUrl>
+    <iconUrl>https://github.com/VirtoCommerce/vc-module-export/raw/master/VirtoCommerce.ExportModule.Web/Content/logo.png</iconUrl>
 
     <releaseNotes>First version.</releaseNotes>
-    <copyright>Copyright © 2019 . All rights reserved</copyright>
-    <tags>extension module</tags>
+    <copyright>Copyright © 2011-2019 Virto Commerce. All rights reserved</copyright>
+    <tags>export</tags>
   
     <assemblyFile>VirtoCommerce.ExportModule.Web.dll</assemblyFile>
     <moduleType>VirtoCommerce.ExportModule.Web.Module, VirtoCommerce.ExportModule.Web</moduleType>
