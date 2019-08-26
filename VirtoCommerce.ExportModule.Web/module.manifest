@@ -7,11 +7,17 @@
     <title>Export module</title>
     <description>Generic export functionality</description>
     <authors>
-        <author>Virto Commerce</author>
+        <author>Eugeny Tatarincev</author>
+        <author>Maya Al-Samarrai</author>
+        <author>Aleksandr Andreev</author>
+        <author>Andrey Kolchanov</author>
+        <author>Andrey Kozlov</author>
+        <author>Nikolay Sidelnikov</author>
     </authors>
     <owners>
       <owner>Virto Commerce</owner>
     </owners>
+    <projectUrl>https://virtocommerce.com/apps/extensions/virto-export-module</projectUrl>
 
     <releaseNotes>First version.</releaseNotes>
     <copyright>Copyright © 2019 . All rights reserved</copyright>
