@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using VirtoCommerce.ExportModule.Core.Security;
 
 namespace VirtoCommerce.ExportModule.Core.Model
 {
@@ -43,5 +44,15 @@ namespace VirtoCommerce.ExportModule.Core.Model
         /// </summary>
         [JsonIgnore]
         public Func<ExportDataQuery, IPagedDataSource> ExportedDataSourceFactory { get; set; }
+
+        /// <summary>
+        /// Security permissions that user should have to export this defenition data
+        /// </summary>
+        public string[] RequiredPermissions { get; set; }
+
+        /// <summary>
+        /// Custom security handler for the definition. Could be used for custom checks (e.g. scope based authorization).
+        /// </summary>
+        public IExportSecurityHandler SecurityHandler { get; set; }
     }
 }

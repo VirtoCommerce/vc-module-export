@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,9 +13,11 @@ using Hangfire;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Security;
 using VirtoCommerce.ExportModule.Core.Services;
+using VirtoCommerce.ExportModule.Data.Security;
 using VirtoCommerce.ExportModule.Web.BackgroundJobs;
 using VirtoCommerce.ExportModule.Web.Model;
 using VirtoCommerce.ExportModule.Web.Security;
+using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Web.Security;
@@ -29,7 +32,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         private readonly IUserNameResolver _userNameResolver;
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
         private readonly string _defaultExportFolder;
-        private readonly IExportSecurityHandlerRegistrar _exportSecurityHandlerRegistrar;
+        private readonly IPermissionExportSecurityHandlerFactory _permissionExportSecurityHandlerFactory;
 
 
         public ExportController(
@@ -38,14 +41,14 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             IUserNameResolver userNameResolver,
             IModuleInitializerOptions moduleInitializerOptions,
             IKnownExportTypesResolver knownExportTypesResolver,
-            IExportSecurityHandlerRegistrar exportSecurityHandlerRegistrar)
+            IPermissionExportSecurityHandlerFactory exportPermissionHandlerFactory)
         {
             _exportProviderFactories = exportProviderFactories;
             _knownExportTypesRegistrar = knownExportTypesRegistrar;
             _userNameResolver = userNameResolver;
             _knownExportTypesResolver = knownExportTypesResolver;
             _defaultExportFolder = moduleInitializerOptions.VirtualRoot + "/App_Data/Export/";
-            _exportSecurityHandlerRegistrar = exportSecurityHandlerRegistrar;
+            _permissionExportSecurityHandlerFactory = exportPermissionHandlerFactory;
         }
 
         /// <summary>
@@ -85,12 +88,14 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         [CheckPermission(Permission = ExportPredefinedPermissions.Access)]
         public IHttpActionResult GetData([FromBody]ExportDataRequest request)
         {
-            if (_exportSecurityHandlerRegistrar.GetHandler(request.ExportTypeName + "ExportDataPolicy")?.Authorize(User.Identity.Name, request) != true)
+            var exportedTypeDefinition = _knownExportTypesResolver.ResolveExportedTypeDefinition(request.ExportTypeName)
+                ?? throw new ArgumentException($"Export type \"{request.ExportTypeName}\" is not registered using \"{nameof(IKnownExportTypesRegistrar)}\".");
+
+            if (!Authorize(exportedTypeDefinition, request))
             {
                 return Unauthorized();
             }
 
-            var exportedTypeDefinition = _knownExportTypesResolver.ResolveExportedTypeDefinition(request.ExportTypeName);
             var pagedDataSource = exportedTypeDefinition.ExportedDataSourceFactory(request.DataQuery);
 
             pagedDataSource.Fetch();
@@ -115,7 +120,10 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         //[ResponseType(typeof(PlatformExportPushNotification))]
         public IHttpActionResult RunExport([FromBody]ExportDataRequest request)
         {
-            if (_exportSecurityHandlerRegistrar.GetHandler(request.ExportTypeName + "ExportDataPolicy")?.Authorize(User.Identity.Name, request) != true)
+            var exportedTypeDefinition = _knownExportTypesResolver.ResolveExportedTypeDefinition(request.ExportTypeName)
+                ?? throw new ArgumentException($"Export type \"{request.ExportTypeName}\" is not registered using \"{nameof(IKnownExportTypesRegistrar)}\".");
+
+            if (!Authorize(exportedTypeDefinition, request))
             {
                 return Unauthorized();
             }
@@ -170,5 +178,40 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             result.Content.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(localPath));
             return result;
         }
+
+        #region Authorization
+
+        /// <summary>
+        /// 
+        /// Performs all definition security handlers checks, and returns true if all are succeeded.
+        /// </summary>
+        /// <param name="exportedTypeDefinition">ExportedTypeDefinition.</param>
+        /// <param name="request">ExportDataRequest</param>
+        /// <returns>True if all checks are succeeded, otherwise false.</returns>
+        private bool Authorize(ExportedTypeDefinition exportedTypeDefinition, ExportDataRequest request)
+        {
+            var handlers = GetSecurityHandlers(exportedTypeDefinition);
+
+            return handlers.Any(x => !x.Authorize(User.Identity.Name, request.DataQuery));
+        }
+
+        private List<IExportSecurityHandler> GetSecurityHandlers(ExportedTypeDefinition exportedTypeDefinition)
+        {
+            var handlers = new List<IExportSecurityHandler>();
+
+            if (!exportedTypeDefinition.RequiredPermissions.IsNullOrEmpty())
+            {
+                handlers.Add(_permissionExportSecurityHandlerFactory.Create(exportedTypeDefinition.RequiredPermissions));
+            }
+
+            if (exportedTypeDefinition.SecurityHandler != null)
+            {
+                handlers.Add(exportedTypeDefinition.SecurityHandler);
+            }
+
+            return handlers;
+        }
+
+        #endregion Authorization
     }
 }
