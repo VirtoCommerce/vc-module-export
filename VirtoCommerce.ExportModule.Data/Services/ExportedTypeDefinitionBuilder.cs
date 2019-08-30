@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.Platform.Core.Common;
 
@@ -29,7 +30,10 @@ namespace VirtoCommerce.ExportModule.Data.Services
             var exportedType = typeof(TExportable);
             var dataQueryType = typeof(TDataQuery);
 
-            AbstractTypeFactory<ExportDataQuery>.RegisterType<TDataQuery>();
+            if (!AbstractTypeFactory<ExportDataQuery>.AllTypeInfos.Any(x => x.Type == typeof(TDataQuery)))
+            {
+                AbstractTypeFactory<ExportDataQuery>.RegisterType<TDataQuery>();
+            }
 
             return new ExportedTypeDefinitionBuilder(new ExportedTypeDefinition()
             {
