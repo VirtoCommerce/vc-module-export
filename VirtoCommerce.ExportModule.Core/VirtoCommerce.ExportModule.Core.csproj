@@ -75,6 +75,7 @@
     <Compile Include="Services\IExportProviderFactory.cs" />
     <Compile Include="Services\IKnownExportTypesRegistrar.cs" />
     <Compile Include="Services\IKnownExportTypesResolver.cs" />
+    <Compile Include="Services\IPagedDataSourceFactory.cs" />
     <Compile Include="Services\ITabularDataConverter.cs" />
   </ItemGroup>
   <ItemGroup />

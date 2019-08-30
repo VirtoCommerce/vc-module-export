@@ -96,7 +96,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
                 return Unauthorized();
             }
 
-            var pagedDataSource = exportedTypeDefinition.ExportedDataSourceFactory(request.DataQuery);
+            var pagedDataSource = (exportedTypeDefinition.DataSourceFactory ?? throw new ArgumentNullException(nameof(ExportedTypeDefinition.DataSourceFactory))).Create(request.DataQuery);
 
             pagedDataSource.Fetch();
             var queryResult = pagedDataSource.Items;

@@ -1,6 +1,6 @@
-using System;
 using Newtonsoft.Json;
 using VirtoCommerce.ExportModule.Core.Security;
+using VirtoCommerce.ExportModule.Core.Services;
 
 namespace VirtoCommerce.ExportModule.Core.Model
 {
@@ -43,7 +43,7 @@ namespace VirtoCommerce.ExportModule.Core.Model
         /// Factory function to create a data source for this type
         /// </summary>
         [JsonIgnore]
-        public Func<ExportDataQuery, IPagedDataSource> ExportedDataSourceFactory { get; set; }
+        public IPagedDataSourceFactory DataSourceFactory { get; set; }
 
         /// <summary>
         /// Security permissions that user should have to export this defenition data
