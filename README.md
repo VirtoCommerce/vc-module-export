@@ -40,9 +40,11 @@ In order to start the data export, the user should go through the following step
 1. Click 'Pricing'
 1. Select one of the following options :
 
-        1. Prices
-        1. Price lists
-        1. Price list assignments 
+   1. Prices
+
+   1. Price lists
+
+   1. Price list assignments
 
 ![Select Data Object](docs/media/screen-select-data-objects.png)
 
