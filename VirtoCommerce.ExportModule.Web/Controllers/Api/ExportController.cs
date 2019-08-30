@@ -186,7 +186,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         /// Performs all definition security handlers checks, and returns true if all are succeeded.
         /// </summary>
         /// <param name="exportedTypeDefinition">ExportedTypeDefinition.</param>
-        /// <param name="request">ExportDataRequest</param>
+        /// <param name="request">ExportDataRequest.</param>
         /// <returns>True if all checks are succeeded, otherwise false.</returns>
         private bool Authorize(ExportedTypeDefinition exportedTypeDefinition, ExportDataRequest request)
         {
