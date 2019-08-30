@@ -78,7 +78,7 @@ You can export your data using one of the following export providers:
 ### Start Export
 
 Once the data for export are specified, simply click the 'Start export' button. The system will start the data export, show the export progress and finally display the Export report.
-The export file will be available under the link that will be available when the export is completed.
+The export file will be available under the link that will be displayed when the export is completed.
 
 ![Export Report](docs/media/screen-export-report.png)
 
