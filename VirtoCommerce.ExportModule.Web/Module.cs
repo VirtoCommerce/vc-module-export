@@ -38,9 +38,8 @@ namespace VirtoCommerce.ExportModule.Web
                 new Func<ExportDataRequest, IExportProvider>(request => new CsvExportProvider(request))));
 
             _container.RegisterType<IExportProviderFactory, ExportProviderFactory>();
-            _container.RegisterInstance<IExportSecurityHandlerRegistrar>(new ExportSecurityHandlerRegistrar());
+            _container.RegisterType<IPermissionExportSecurityHandlerFactory, PermissionExportSecurityHandlerFactory>();
             _container.RegisterType<IDataExporter, DataExporter>();
-
 
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();

@@ -1,5 +1,6 @@
 using System;
 using VirtoCommerce.ExportModule.Core.Model;
+using VirtoCommerce.ExportModule.Core.Security;
 using VirtoCommerce.ExportModule.Data.Services;
 
 namespace VirtoCommerce.ExportModule.Data.Extensions
@@ -41,5 +42,18 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
             builder.ExportedTypeDefinition.ExportDataQueryType = exportDataQueryType;
             return builder;
         }
+
+        public static ExportedTypeDefinitionBuilder WithPermissionAuthorization(this ExportedTypeDefinitionBuilder builder, params string[] permissions)
+        {
+            builder.ExportedTypeDefinition.RequiredPermissions = permissions;
+            return builder;
+        }
+
+        public static ExportedTypeDefinitionBuilder WithAuthorizationHandler(this ExportedTypeDefinitionBuilder builder, IExportSecurityHandler exportSecurityHandler)
+        {
+            builder.ExportedTypeDefinition.SecurityHandler = exportSecurityHandler;
+            return builder;
+        }
+
     }
 }
