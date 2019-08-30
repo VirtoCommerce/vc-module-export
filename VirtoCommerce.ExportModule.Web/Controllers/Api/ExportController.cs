@@ -192,7 +192,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         {
             var handlers = GetSecurityHandlers(exportedTypeDefinition);
 
-            return handlers.Any(x => !x.Authorize(User.Identity.Name, request.DataQuery));
+            return handlers.All(x => x.Authorize(User.Identity.Name, request.DataQuery));
         }
 
         private List<IExportSecurityHandler> GetSecurityHandlers(ExportedTypeDefinition exportedTypeDefinition)
