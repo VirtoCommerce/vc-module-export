@@ -13,7 +13,7 @@ The Export reader role is the role that should be assigned to the user who will 
 1. **'Export access'** - this permission allows the user to access the 'Export new' tab;
 1. **'Export download'** - this permission allows the user to download exported data;
 1. **'Platform:export'** permission for v2 is needed to allow the download of exported data;
-1. 1. **'Security call API'** allows the user to use API methods.
+1. **'Security call API'** allows the user to use API methods.
 
 ### Pricing Specific Security Permissions
 
