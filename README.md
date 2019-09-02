@@ -1,25 +1,33 @@
 # vc-module-export
-Generic export functionality
+
+# Generic export functionality
 
 ## Security Settings
 
 The access to Export functionality should be assigned to users by the admin. The admin should first create roles, assign permissions to the created roles and then assign the roles with permissions to the users.
 
-The Export reader role is the role that should be assigned to the user who will be dealing with the Export functionality. This role contains the following main permissions that can be assigned :
+The Export reader role is the role that should be assigned to the user who will be dealing with the Export functionality. Bellow we are giving an example of how the export role permissions are set in Pricing Module:
 
-1. Export access - this permission allows the user to access the 'Export new' tab;
-1. Export download - this permission allows the user to download exported data;
-1. Platform:export permission for v2 is needed to allow the download of exported data;
-1. 'Pricing export' allows the user to export data to the selected provider;
-1. 'Pricing access' allows the user to access Pricing tab;
-1. 'Pricing:read' permission allows to read data from the database;
-1. Security call API allows the user to use API methods.
+### General Security Permissions
+
+1. **'Export access'** - this permission allows the user to access the 'Export new' tab;
+1. **'Export download'** - this permission allows the user to download exported data;
+1. **'Platform:export'** permission for v2 is needed to allow the download of exported data;
+1. 1. **'Security call API'** allows the user to use API methods.
+
+### Pricing Specific Security Permissions
+
+1. **'Pricing export'** allows the user to export data to the selected provider;
+1. **'Pricing access'** allows the user to access Pricing tab;
+1. **'Pricing:read'** permission allows to read data from the database.
 
 In order to create a new user and role, the admin should open the Security tab and manage users and roles.
 
 ![Roles](docs/media/screen-roles.png)
 
 ![Permissions](docs/media/screen-permissions.png)
+
+![Security Permissions](docs/media/screen-security-permissions.png)
 
 ## Export data
 
@@ -38,13 +46,13 @@ In order to start the data export, the user should go through the following step
 
 ### Select data Object
 
-The user is able to select one of the object types, which are grouped by some creteria.
+The user is able to select one of the object types, which are grouped by some criteria.
 
 ![Select Data Object](docs/media/screen-select-data-objects.png)
 
 ### Select Export Provider
 
-Json and CSV providers are supported out-of-the-box
+Json and Csv providers are supported out-of-the-box.
 
 **Important** Tabular providers (e.g. Csv provider) are unavailable for exported types which do not support tabular export.
 
@@ -52,10 +60,7 @@ Json and CSV providers are supported out-of-the-box
 
 ### Select Data For Export
 
-The system allows to select data for export using two approaches:
-
-1. Select ALL data;
-1. Select data using the advanced filter.
+The system allows to specify data for export, advanced filtering is available.
 
 ![Select data for export](docs/media/screen-select-data-for-export.png)
 
@@ -63,7 +68,7 @@ The system allows to select data for export using two approaches:
 
 ### Select Properties
 
-The user should specify which properties he wants to select. There is a possibility to select either all properties or some specific ones simply by removing the properties that should not be included into the export file.
+The user can specify which properties he wants to select. There is a possibility to keep either ALL properties, which are selected by default  or  some specific ones simply by removing the properties that should not be included into the export file.
 
 ![Properties](docs/media/screen-properties.png)
 

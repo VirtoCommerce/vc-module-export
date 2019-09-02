@@ -17,9 +17,9 @@ All filter criteria are applied separately. The user can either apply the specif
 
 ![Last modified](media/screen-modified-since.png)
 
-The 'Apply' button is used to apply the filter selected by user
+The 'Apply' button is used to apply the filter selected by user.
 
-The 'Save & Apply' button is used to save the selected filter so that it can be used in the future
+The 'Save & Apply' button is used to save the selected filter so that it can be used in the future.
 
 The 'Reset' button is used for resetting the filter state.
 
