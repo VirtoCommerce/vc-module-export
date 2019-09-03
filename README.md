@@ -56,7 +56,7 @@ Json and Csv providers are supported out-of-the-box.
 
 **Important** Tabular providers (e.g. Csv provider) are unavailable for exported types which do not support tabular export.
 
-![Select Export Provider](docs/media/screen-select-provider.png)
+![Select Provider](docs/media/screen-select-provider.png)
 
 ### Select Data For Export
 
