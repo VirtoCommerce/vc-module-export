@@ -133,7 +133,6 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
                 Title = $"{request.ExportTypeName} export task",
                 Description = "starting export...."
             };
-            //_pushNotificationManager.Send(notification);
 
             var jobId = BackgroundJob.Enqueue<ExportJob>(x => x.ExportBackground(request, notification, JobCancellationToken.Null, null));
             notification.JobId = jobId;
