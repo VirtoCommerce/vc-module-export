@@ -49,12 +49,5 @@ namespace VirtoCommerce.ExportModule.Web
             JobHelper.SetSerializerSettings(httpConfiguration.Formatters.JsonFormatter.SerializerSettings);
 
         }
-
-        public override void PostInitialize()
-        {
-            base.PostInitialize();
-
-            // This method is called for each installed module on the second stage of initialization.
-        }
     }
 }
