@@ -38,9 +38,8 @@ namespace VirtoCommerce.ExportModule.Web
                 new Func<ExportDataRequest, IExportProvider>(request => new CsvExportProvider(request))));
 
             _container.RegisterType<IExportProviderFactory, ExportProviderFactory>();
-            _container.RegisterInstance<IExportSecurityHandlerRegistrar>(new ExportSecurityHandlerRegistrar());
+            _container.RegisterType<IPermissionExportSecurityHandlerFactory, PermissionExportSecurityHandlerFactory>();
             _container.RegisterType<IDataExporter, DataExporter>();
-
 
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
@@ -49,13 +48,6 @@ namespace VirtoCommerce.ExportModule.Web
             // This line refreshes Hangfire JsonConverter with the current JsonSerializerSettings - PolymorphicExportDataQueryJsonConverter needs to be included
             JobHelper.SetSerializerSettings(httpConfiguration.Formatters.JsonFormatter.SerializerSettings);
 
-        }
-
-        public override void PostInitialize()
-        {
-            base.PostInitialize();
-
-            // This method is called for each installed module on the second stage of initialization.
         }
     }
 }

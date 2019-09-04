@@ -83,8 +83,10 @@
     <Compile Include="Extensions\ExportedTypeDefinitionBuilderExtensions.cs" />
     <Compile Include="Extensions\ExportedTypeMetadataExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\ExportSecurityHandlerRegistrar.cs" />
-    <Compile Include="Security\ExportSecurityPermissionHandler.cs" />
+    <Compile Include="Security\PermissionExportSecurityHandlerFactory.cs" />
+    <Compile Include="Security\PermissionExportSecurityHandler.cs" />
+    <Compile Include="Security\IPermissionExportSecurityHandlerFactory.cs" />
+    <Compile Include="Services\ComplexExportPagedDataSource.cs" />
     <Compile Include="Services\DataExporter.cs" />
     <Compile Include="Services\ExportedTypeDefinitionBuilder.cs" />
     <Compile Include="Services\ExportPagedDataSource.cs" />

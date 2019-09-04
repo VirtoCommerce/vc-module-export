@@ -1,3 +1,4 @@
+using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Security;
 using VirtoCommerce.Platform.Core.Security;
 
@@ -17,7 +18,7 @@ namespace VirtoCommerce.ExportModule.Data.Security
             _permissions = permissions;
         }
 
-        public bool Authorize(string userName, object resource)
+        public bool Authorize(string userName, ExportDataQuery dataQuery)
         {
             var result = true;
             foreach (var permission in _permissions)
