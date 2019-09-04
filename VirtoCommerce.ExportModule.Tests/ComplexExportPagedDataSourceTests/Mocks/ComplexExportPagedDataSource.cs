@@ -31,50 +31,45 @@ namespace VirtoCommerce.ExportModule.Tests.ComplexExportPagedDataSourceTests.Moc
             {
                 new ExportDataSourceState
                 {
-                    SearchCriteria = new ComplexSearchCriteria(),
                     FetchFunc = async (x) =>
                     {
-                        var searchResult = await _service1.SearchAsync((ComplexSearchCriteria)x.SearchCriteria);
+                        var searchResult = await _service1.SearchAsync(new ComplexSearchCriteria{Skip =x.Skip, Take = x.Take});
                         x.TotalCount = searchResult.TotalCount;
                         x.Result = searchResult.Results;
                     }
                 },
                 new ExportDataSourceState
                 {
-                    SearchCriteria = new ComplexSearchCriteria(),
                     FetchFunc = async (x) =>
                     {
-                        var searchResult = await _service2.SearchAsync((ComplexSearchCriteria)x.SearchCriteria);
+                        var searchResult = await _service2.SearchAsync(new ComplexSearchCriteria{Skip =x.Skip, Take = x.Take});
                         x.TotalCount = searchResult.TotalCount;
                         x.Result = searchResult.Results;
                     }
                 },
                 new ExportDataSourceState
                 {
-                    SearchCriteria = new ComplexSearchCriteria(),
                     FetchFunc = async (x) =>
                     {
-                        var searchResult = await _service3.SearchAsync((ComplexSearchCriteria)x.SearchCriteria);
+                        var searchResult = await _service3.SearchAsync(new ComplexSearchCriteria{Skip =x.Skip, Take = x.Take});
                         x.TotalCount = searchResult.TotalCount;
                         x.Result = searchResult.Results;
                     }
                 },
                 new ExportDataSourceState
                 {
-                    SearchCriteria = new ComplexSearchCriteria(),
                     FetchFunc = async (x) =>
                     {
-                        var searchResult = await _service4.SearchAsync((ComplexSearchCriteria)x.SearchCriteria);
+                        var searchResult = await _service4.SearchAsync(new ComplexSearchCriteria{Skip =x.Skip, Take = x.Take});
                         x.TotalCount = searchResult.TotalCount;
                         x.Result = searchResult.Results;
                     }
                 },
                 new ExportDataSourceState
                 {
-                    SearchCriteria = new ComplexSearchCriteria(),
                     FetchFunc = async (x) =>
                     {
-                        var searchResult = await _service5.SearchAsync((ComplexSearchCriteria)x.SearchCriteria);
+                        var searchResult = await _service5.SearchAsync(new ComplexSearchCriteria{Skip =x.Skip, Take = x.Take});
                         x.TotalCount = searchResult.TotalCount;
                         x.Result = searchResult.Results;
                     }

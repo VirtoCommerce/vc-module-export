@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VirtoCommerce.Domain.Commerce.Model.Search;
 using VirtoCommerce.ExportModule.Core.Model;
 
 namespace VirtoCommerce.ExportModule.Data.Services
@@ -20,7 +19,8 @@ namespace VirtoCommerce.ExportModule.Data.Services
         protected class ExportDataSourceState
         {
             public int TotalCount;
-            public SearchCriteriaBase SearchCriteria;
+            public int Skip;
+            public int Take;
             public IEnumerable<IExportable> Result = Array.Empty<IExportable>();
             public Func<ExportDataSourceState, Task> FetchFunc;
         }
@@ -90,8 +90,8 @@ namespace VirtoCommerce.ExportModule.Data.Services
                 else
                 {
                     var portionCount = (state.TotalCount - skip > take) ? take : state.TotalCount - skip;
-                    state.SearchCriteria.Take = portionCount;
-                    state.SearchCriteria.Skip = skip;
+                    state.Take = portionCount;
+                    state.Skip = skip;
                     taskList.Add(state.FetchFunc(state));
                     take -= portionCount;
                     skip = 0;
@@ -112,8 +112,8 @@ namespace VirtoCommerce.ExportModule.Data.Services
 
             foreach (var state in _exportDataSourceStates)
             {
-                state.SearchCriteria.Skip = 0;
-                state.SearchCriteria.Take = 0;
+                state.Skip = 0;
+                state.Take = 0;
                 taskList.Add(state.FetchFunc(state));
             }
 
