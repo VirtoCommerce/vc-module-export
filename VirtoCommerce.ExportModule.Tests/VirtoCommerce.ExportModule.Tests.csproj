@@ -112,14 +112,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComplexExportPagedDataSourceTests\ComplexExportPagedDataSourceTests.cs" />
-    <Compile Include="ComplexExportPagedDataSourceTests\FakeExportableEntityExtensions.cs" />
-    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\ComplexExportDataQuery.cs" />
-    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\ComplexExportPagedDataSource.cs" />
-    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\ComplexSearchCriteria.cs" />
-    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\ComplexSearchEntity.cs" />
-    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\ComplexSearchResult.cs" />
-    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\IComplexDataSearchService.cs" />
+    <Compile Include="ComplexExportPagedDataSourceTests\MultiplePagedDataSourcesTests.cs" />
+    <Compile Include="ComplexExportPagedDataSourceTests\TestExportableEntityExtensions.cs" />
+    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\ITestSearchService.cs" />
+    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\TestExportDataQuery.cs" />
+    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\TestPagedDataSource.cs" />
+    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\TestSearchCriteria.cs" />
+    <Compile Include="ComplexExportPagedDataSourceTests\Mocks\TestSearchEntity.cs" />
     <Compile Include="CsvExportProviderTests.cs" />
     <Compile Include="ExportDataQueryTests.cs" />
     <Compile Include="ExportedTypeMetadataTests.cs" />
