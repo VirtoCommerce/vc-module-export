@@ -71,8 +71,8 @@
     <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.42.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\vc-module-catalog\packages\VirtoCommerce.Platform.Core.2.13.42\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Data, Version=2.13.39.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.13.39\lib\net461\VirtoCommerce.Platform.Data.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Data, Version=2.13.42.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.13.42\lib\net461\VirtoCommerce.Platform.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -82,11 +82,11 @@
     <Compile Include="Extensions\ExportDataQueryExtensions.cs" />
     <Compile Include="Extensions\ExportedTypeDefinitionBuilderExtensions.cs" />
     <Compile Include="Extensions\ExportedTypeMetadataExtensions.cs" />
+    <Compile Include="Extensions\IPagedDataSourceCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\PermissionExportSecurityHandlerFactory.cs" />
     <Compile Include="Security\PermissionExportSecurityHandler.cs" />
     <Compile Include="Security\IPermissionExportSecurityHandlerFactory.cs" />
-    <Compile Include="Services\ComplexExportPagedDataSource.cs" />
     <Compile Include="Services\DataExporter.cs" />
     <Compile Include="Services\ExportedTypeDefinitionBuilder.cs" />
     <Compile Include="Services\ExportPagedDataSource.cs" />
