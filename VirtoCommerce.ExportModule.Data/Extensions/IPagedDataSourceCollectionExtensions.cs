@@ -31,7 +31,7 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
                 else if (currentSkip < totalCount && currentTake > 0)
                 {
                     datasource.Skip = currentSkip;
-                    datasource.PageSize = currentTake;
+                    datasource.Take = currentTake;
                     taskList.Add(Task.Factory.StartNew(() => datasource.Fetch() ? datasource.Items : Array.Empty<IExportable>()));
                 }
 
