@@ -87,7 +87,6 @@
     <Compile Include="Security\PermissionExportSecurityHandlerFactory.cs" />
     <Compile Include="Security\PermissionExportSecurityHandler.cs" />
     <Compile Include="Security\IPermissionExportSecurityHandlerFactory.cs" />
-    <Compile Include="Services\ComplexExportPagedDataSource.cs" />
     <Compile Include="Services\DataExporter.cs" />
     <Compile Include="Services\ExportedTypeDefinitionBuilder.cs" />
     <Compile Include="Services\ExportPagedDataSource.cs" />
