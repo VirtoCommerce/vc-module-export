@@ -1,90 +1,24 @@
-# vc-module-export
+# [VirtoCommerce.Core](https://virtocommerce.com/apps/extensions/virto-core-module) [![Share on Facebook](https://img.shields.io/badge/facebook--blue.svg?style=social&label=Share&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyNjYuODkzcHgiIGhlaWdodD0iMjY2Ljg5NXB4IiB2aWV3Qm94PSIwIDAgMjY2Ljg5MyAyNjYuODk1IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyNjYuODkzIDI2Ni44OTUiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGlkPSJCbHVlXzFfIiBmaWxsPSIjM0M1QTk5IiBkPSJNMjQ4LjA4MiwyNjIuMzA3YzcuODU0LDAsMTQuMjIzLTYuMzY5LDE0LjIyMy0xNC4yMjVWMTguODEyYzAtNy44NTctNi4zNjgtMTQuMjI0LTE0LjIyMy0xNC4yMjRIMTguODEyYy03Ljg1NywwLTE0LjIyNCw2LjM2Ny0xNC4yMjQsMTQuMjI0djIyOS4yN2MwLDcuODU1LDYuMzY2LDE0LjIyNSwxNC4yMjQsMTQuMjI1SDI0OC4wODJ6Ii8%2BPHBhdGggaWQ9ImYiIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xODIuNDA5LDI2Mi4zMDd2LTk5LjgwM2gzMy40OTlsNS4wMTYtMzguODk1aC0zOC41MTVWOTguNzc3YzAtMTEuMjYxLDMuMTI3LTE4LjkzNSwxOS4yNzUtMTguOTM1bDIwLjU5Ni0wLjAwOVY0NS4wNDVjLTMuNTYyLTAuNDc0LTE1Ljc4OC0xLjUzMy0zMC4wMTItMS41MzNjLTI5LjY5NSwwLTUwLjAyNSwxOC4xMjYtNTAuMDI1LDUxLjQxM3YyOC42ODRoLTMzLjU4NXYzOC44OTVoMzMuNTg1djk5LjgwM0gxODIuNDA5eiIvPjwvc3ZnPg%3D%3D)](https://www.facebook.com/sharer.php?u=https://virtocommerce.com)&nbsp;[![Tweet](https://img.shields.io/twitter/url/https/virtocommerce.com.svg?style=social)](https://twitter.com/intent/tweet?text=%23VirtoCommerce%20puts%20the%20best%20of%20MS%20Azure%20Cloud%2C%20open%20source%20.Net%20code%20and%20agile%20development%20in%20a%20single%20enterprise%20%23ecommerce%20platform.) [![Latest release](https://img.shields.io/github/release/VirtoCommerce/vc-module-core.svg)](https://github.com/VirtoCommerce/vc-module-core/releases/latest) [![Total downloads](https://img.shields.io/github/downloads/VirtoCommerce/vc-module-core/total.svg?colorB=007ec6)](https://github.com/VirtoCommerce/vc-module-core/releases) [![License](https://img.shields.io/badge/license-VC%20OSL-blue.svg)](https://virtocommerce.com/open-source-license)
+[![Build status](http://ci.virtocommerce.com/buildStatus/icon?job=vc-2-org/vc-module-core/master)](http://ci.virtocommerce.com/job/vc-2-org/job/vc-module-core/job/master/) [![Quality Gate](https://sonar.virtocommerce.com/api/badges/gate?key=vc-module-core%3Amaster&blinking=true)](https://sonar.virtocommerce.com/dashboard?id=vc-module-core%3Amaster) [![Lines of code](https://sonar.virtocommerce.com/api/badges/measure?key=vc-module-core%3Amaster&metric=ncloc)](https://sonar.virtocommerce.com/api/badges/measure?key=vc-module-core%3Amaster&metric=ncloc)&emsp;
+[![Documentation](https://img.shields.io/badge/docs-read-brightgreen.svg)](https://virtocommerce.com/docs/vc2devguide/extending-commerce/extending-domain-models)&nbsp;[![Ask question at https://stackoverflow.com/questions/tagged/virtocommerce](https://img.shields.io/badge/stackoverflow-ask%20question-orange.svg)](https://stackoverflow.com/questions/tagged/virtocommerce) [![Join the chat at https://gitter.im/VirtoCommerce/vc-community](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/VirtoCommerce/vc-community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Contributors](https://img.shields.io/github/contributors/VirtoCommerce/vc-module-core.svg)](https://github.com/VirtoCommerce/vc-module-core/graphs/contributors)
 
-# Generic export functionality
+Represents common eCommerce domain model and base abstractions, which can be used and implemented in derived modules.
+It also exposes some common eCommerce API for storefront security, SEO, fulfillments, payments and taxes evaluation.
 
-## Security Settings
+# Installation
+Installing the module:
+* Automatically: in VC Manager go to Configuration -> Modules -> Commerce core module -> Install
+* Manually: download module zip package from <a href="https://github.com/VirtoCommerce/vc-module-core/releases" target="_blank">vc-module-core/releases</a>. In VC Manager go to Configuration -> Modules -> Advanced -> upload module package -> Install.
 
-The access to Export functionality should be assigned to users by the admin. The admin should first create roles, assign permissions to the created roles and then assign the roles with permissions to the users.
+# Settings
+* **VirtoCommerce.Core.General.TaxTypes** -  manually defined tax categories which can be assigned to eligible objects (category, product, etc.)
+* **VirtoCommerce.Core.General.WeightUnits** - mass units available for physical goods weighting
+* **VirtoCommerce.Core.General.Languages** - supported  languages (culture names) (en-US, ru-RU, etc.)
+* **VirtoCommerce.Core.FixedRateShippingMethod.Rate** - amount (rate) for “Fixed rate” shipping method
+* **VirtoCommerce.Core.FixedTaxRateProvider.Rate** - percentage (rate) for “Fixed rate” tax provider
 
-The Export reader role is the role that should be assigned to the user who will be dealing with the Export functionality. Bellow we are giving an example of how the export role permissions are set in Pricing Module:
-
-### General Security Permissions
-
-1. **'Export access'** - this permission allows the user to access the 'Export new' tab;
-1. **'Export download'** - this permission allows the user to download exported data;
-1. **'Platform:export'** permission for v2 is needed to allow the download of exported data;
-1. **'Security call API'** allows the user to use API methods.
-
-### Pricing Specific Security Permissions
-
-1. **'Pricing export'** allows the user to export data to the selected provider;
-1. **'Pricing access'** allows the user to access Pricing tab;
-1. **'Pricing:read'** permission allows to read data from the database.
-
-In order to create a new user and role, the admin should open the Security tab and manage users and roles.
-
-![Roles](docs/media/screen-roles.png)
-
-![Permissions](docs/media/screen-permissions.png)
-
-![Security Permissions](docs/media/screen-security-permissions.png)
-
-## Export data
-
-Once the user gets access to Data Export functionality, he can access the 'Export new' tab for data export
-
-![Export New](docs/media/screen-export-new.png)
-
-In order to start the data export, the user should go through the following steps:
-
-1. Select Object type;
-1. Select Export Provider;
-1. Select data for export;
-1. Select properties;
-1. Start export;
-1. Download exported data file.
-
-### Select data Object
-
-The user is able to select one of the object types, which are grouped by some criteria.
-
-![Select Data Object](docs/media/screen-select-data-objects.png)
-
-### Select Export Provider
-
-Json and Csv providers are supported out-of-the-box.
-
-**Important** Tabular providers (e.g. Csv provider) are unavailable for exported types which do not support tabular export.
-
-![Select Provider](docs/media/screen-select-provider.png)
-
-### Select Data For Export
-
-The system allows to specify data for export, advanced filtering is available.
-
-![Select data for export](docs/media/screen-select-data-for-export.png)
-
-**Important** Use the [Advanced Filter](/docs/advanced-filter.md) to filter the set of data you need.
-
-### Select Properties
-
-The user can specify which properties he wants to select. There is a possibility to keep either ALL properties, which are selected by default  or  some specific ones simply by removing the properties that should not be included into the export file.
-
-![Properties](docs/media/screen-properties.png)
-
-### Start Export
-
-Once the data for export are specified, simply click the 'Start export' button. The system will start the data export, show the export progress and finally display the Export report.
-The export file will be available under the link that will be displayed when the export is completed.
-
-![Export Report](docs/media/screen-export-report.png)
-
-
-License
-Copyright (c) Virto Solutions LTD. All rights reserved.
-
-Licensed under the Virto Commerce Open Software License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-
-http://virtocommerce.com/opensourcelicense
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Available resources
+* eCommerce domain model and service interfaces as a <a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">NuGet package</a>
+* core eCommerce service implementations as a <a href="https://www.nuget.org/packages/VirtoCommerce.CoreModule.Data" target="_blank">NuGet package</a>
+* core eCommerce C# API client as a <a href="https://www.nuget.org/packages/VirtoCommerce.CoreModule.Client" target="_blank">NuGet package</a>
+* API client documentation http://demo.virtocommerce.com/admin/docs/ui/index#!/Commerce_core_module
