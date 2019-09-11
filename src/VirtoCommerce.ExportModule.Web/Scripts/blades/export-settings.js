@@ -46,7 +46,7 @@ angular.module('virtoCommerce.exportModule')
         }
 
         function resetPropertyInfo() {
-            blade.allPropertiesOfType = blade.selectedProvider.isTabular ? blade.selectedType.tabularMetaData.propertyInfos : blade.selectedType.metaData.propertyInfos;
+            blade.allPropertiesOfType = blade.selectedProvider.isTabular && blade.selectedType.tabularMetaData ? blade.selectedType.tabularMetaData.propertyInfos : blade.selectedType.metaData.propertyInfos;
             blade.exportDataRequest.dataQuery.includedProperties = blade.allPropertiesOfType;
             blade.isTabularExportSupported = blade.selectedType.isTabularExportSupported;
             blade.isExportedTypeSelected = typeof (blade.exportDataRequest.exportTypeName) !== 'undefined';
