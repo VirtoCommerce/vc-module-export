@@ -4,6 +4,7 @@
      <TargetFramework>netcoreapp2.2</TargetFramework>
      <GenerateDocumentationFile>true</GenerateDocumentationFile>
      <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
