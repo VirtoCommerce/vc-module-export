@@ -12,7 +12,7 @@ namespace VirtoCommerce.ExportModule.CsvProvider
 {
     /// <summary>
     /// Custom ClassMap implementation which includes type properties. Supports nested properties.
-    /// Does not map <see cref="IEnumerable<Entity>"/> as these are not representable in CSV structure in suitable manner.
+    /// Does not map <see cref="IEnumerable{Entity}"/> as these are not representable in CSV structure in suitable manner.
     /// </summary>
     /// <typeparam name="T">Mapped type.</typeparam>
     public class MetadataFilteredMap<T> : ClassMap<T>

@@ -19,7 +19,7 @@ namespace VirtoCommerce.ExportModule.Core.Services
         /// </summary>
         string ExportedFileExtension { get; }
         /// <summary>
-        /// Returns <see cref="true"/> if provider supports only plain tabular objects (without nested entities).
+        /// Returns true if provider supports only plain tabular objects (without nested entities).
         /// </summary>
         bool IsTabular { get; }
         /// <summary>

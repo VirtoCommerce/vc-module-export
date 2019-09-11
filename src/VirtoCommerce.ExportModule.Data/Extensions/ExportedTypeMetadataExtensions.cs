@@ -20,9 +20,9 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
         /// <summary>
         /// Returns metadata about exportable entity type.
         /// </summary>
-        /// <typeparam name="T">Type for getting metadata.</typeparam>
+        /// <param name="type"></param>
         /// <param name="propertyPathsToInclude">Property full paths to include to metadata</param>
-        /// <returns>Metadata for the T type, including all non-reference properties of types: T and corresponding to the passed properties.</returns>
+        /// <returns>Metadata for the type, including all non-reference properties of types: T and corresponding to the passed properties.</returns>
         public static ExportedTypeMetadata GetPropertyNames(this Type type, params string[] propertyPathsToInclude)
         {
             var result = new ExportedTypeMetadata
@@ -115,7 +115,7 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
         public static string GetDerivedName(this PropertyInfo pi, string baseName) => $"{baseName}{(baseName.IsNullOrEmpty() ? string.Empty : ".")}{pi.Name}";
 
         /// <summary>
-        /// Check if a type is IEnumerable<T> where T derived from <see cref="Entity"/>. If it is, returns T, otherwise source type.
+        /// Check if a type is <see cref="IEnumerable{T}"/> where T derived from <see cref="Entity"/>. If it is, returns T, otherwise source type.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>

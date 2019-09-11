@@ -34,7 +34,7 @@ namespace VirtoCommerce.ExportModule.Core.Model
         public string ExportDataQueryType { get; set; }
 
         /// <summary>
-        /// Returns <see cref="true"/> if tabular export supported, <see cref="TabularMetaData"/> is set .       
+        /// Returns true if tabular export supported, <see cref="TabularMetaData"/> is set .       
         /// </summary>
         public bool IsTabularExportSupported { get => TabularMetaData != null; }
 
