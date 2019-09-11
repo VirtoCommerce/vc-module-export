@@ -11,10 +11,7 @@
     </authors>
     <owners>
         <owner>Virto Commerce</owner>
-    </owners>
-    <projectUrl>https://virtocommerce.com/apps/extensions/virto-core-module</projectUrl>
-    <iconUrl>Modules/$(VirtoCommerce.Core)/Content/logoVC.png</iconUrl>
-    <releaseNotes>Third version.</releaseNotes>
+    </owners> 
     <copyright>Copyright © 2011-2019 Virto Commerce. All rights reserved</copyright>
     <tags>export</tags>
 
