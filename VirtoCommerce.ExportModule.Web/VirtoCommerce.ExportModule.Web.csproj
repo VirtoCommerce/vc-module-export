@@ -135,6 +135,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\logo.png" />
     <Content Include="Localizations\en.VirtoCommerce.Export.json" />
     <Content Include="Scripts\resources\exportApi.js" />
     <Content Include="Scripts\services\generic-viewer-item-service.js" />
