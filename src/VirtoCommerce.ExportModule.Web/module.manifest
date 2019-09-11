@@ -20,8 +20,4 @@
 
     <assemblyFile>VirtoCommerce.ExportModule.Web.dll</assemblyFile>
     <moduleType>VirtoCommerce.ExportModule.Web.Module, VirtoCommerce.ExportModule.Web</moduleType>
-
-    <scripts>
-        <directory virtualPath="$/Scripts" searchPattern="*.js" searchSubdirectories="true" />
-    </scripts>    
 </module>
