@@ -22,7 +22,7 @@ angular.module('virtoCommerce.exportModule')
                         function (item) { return item.id === blade.defaultProvider });
 
                     if (blade.isExportedTypeSelected) {
-                        getKnownTypes();
+                        getKnownTypes(fillProviders);
                     }
                 }
             });
@@ -30,7 +30,7 @@ angular.module('virtoCommerce.exportModule')
             blade.isLoading = false;
         }
 
-        function getKnownTypes() {
+        function getKnownTypes(callback) {
             exportApi.getKnownTypes(function (results) {
                 blade.knownTypes = results;
                 var selectedType = _.find(results,
@@ -41,6 +41,9 @@ angular.module('virtoCommerce.exportModule')
                     resetPropertyInfo();
                     getDataTotalCount();
                     getDataSelectedCount();
+                }
+                if (angular.isFunction(callback)) {
+                    callback();
                 }
             });
         }
