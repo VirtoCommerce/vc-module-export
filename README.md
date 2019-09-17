@@ -79,8 +79,11 @@ The export file will be available under the link that will be displayed when the
 
 ![Export Report](docs/media/screen-export-report.png)
 
+# Export implementation in Custom module
 
-License
+[Guidelines on generic export integration in Custom module](/docs/integration.md)
+
+# License
 Copyright (c) Virto Solutions LTD. All rights reserved.
 
 Licensed under the Virto Commerce Open Software License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
