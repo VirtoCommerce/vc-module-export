@@ -101,7 +101,7 @@ angular.module('virtoCommerce.exportModule')
             var dataQuery = angular.copy(blade.exportDataRequest.dataQuery);
             dataQuery.includedProperties = [];
 
-            if (!dataQuery.isAllSelected && !(dataQuery.objectIds && dataQuery.objectIds.length)) {
+            if (!dataQuery.isAllSelected && !(dataQuery.objectIds && dataQuery.objectIds.length) && !dataQuery.isAnyFilterApplied) {
                 blade.dataSelected = 0;
             }
             else {
