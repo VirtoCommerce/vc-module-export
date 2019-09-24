@@ -96,14 +96,25 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
                 return Unauthorized();
             }
 
-            var pagedDataSource = (exportedTypeDefinition.DataSourceFactory ?? throw new ArgumentNullException(nameof(ExportedTypeDefinition.DataSourceFactory))).Create(request.DataQuery);
+            var pagedDataSource = (exportedTypeDefinition.DataSourceFactory
+                ?? throw new InvalidOperationException($"No {nameof(ExportedTypeDefinition.DataSourceFactory)} was registered for \"{request.ExportTypeName}\" type."))
+                .Create(request.DataQuery);
 
-            pagedDataSource.Fetch();
+            if (pagedDataSource is ISupportPreview viewablePagedDataSource)
+            {
+                viewablePagedDataSource.FetchViewable();
+            }
+            else
+            {
+                pagedDataSource.Fetch();
+            }
+
             var queryResult = pagedDataSource.Items;
+
             var result = new ExportableSearchResult()
             {
                 TotalCount = pagedDataSource.GetTotalCount(),
-                Results = queryResult.ToList()
+                Results = queryResult?.ToList()
             };
 
             return Ok(result);

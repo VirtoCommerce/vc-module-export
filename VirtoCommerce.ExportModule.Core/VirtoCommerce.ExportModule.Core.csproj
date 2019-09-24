@@ -66,6 +66,7 @@
     <Compile Include="Models\IExportProviderConfiguration.cs" />
     <Compile Include="Models\IExportViewable.cs" />
     <Compile Include="Models\IPagedDataSource.cs" />
+    <Compile Include="Models\ISupportPreview.cs" />
     <Compile Include="Models\ITabularConvertible.cs" />
     <Compile Include="ModuleConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
