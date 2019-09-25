@@ -39,5 +39,9 @@ namespace VirtoCommerce.ExportModule.Core.Model
         /// Paging: records in one page
         /// </summary>
         public int? Take { get; set; }
+        /// <summary>
+        /// If TRUE we don't load binary data 
+        /// </summary>
+        public bool IsPreview { get; set; }
     }
 }
