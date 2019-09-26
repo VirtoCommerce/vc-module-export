@@ -40,7 +40,7 @@ namespace VirtoCommerce.ExportModule.Core.Model
         /// </summary>
         public int? Take { get; set; }
         /// <summary>
-        /// If TRUE we don't load binary data 
+        /// True means preview (lightweight) data is queried, false - full version requested 
         /// </summary>
         public bool IsPreview { get; set; }
     }

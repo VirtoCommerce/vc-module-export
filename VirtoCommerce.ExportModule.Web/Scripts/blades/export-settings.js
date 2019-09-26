@@ -131,6 +131,7 @@ angular.module('virtoCommerce.exportModule')
             blade.exportDataRequest.providerName = blade.selectedProvider.id;
             delete blade.exportDataRequest.dataQuery.skip;
             delete blade.exportDataRequest.dataQuery.take;
+            delete blade.exportDataRequest.dataQuery.IsPreview;
             blade.isExporting = true;
 
             var progressBlade = {
