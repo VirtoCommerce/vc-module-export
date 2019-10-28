@@ -15,6 +15,7 @@
 	<groups>
         <group>commerce</group>
     </groups>
+    <iconUrl>https://raw.githubusercontent.com/VirtoCommerce/vc-module-export/dev/VirtoCommerce.ExportModule.Web/Content/logo.png</iconUrl>
     <copyright>Copyright © 2011-2019 Virto Commerce. All rights reserved</copyright>
     <tags>export</tags>
 
