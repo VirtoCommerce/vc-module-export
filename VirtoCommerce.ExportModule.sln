@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B744C97A-036
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{328ABD22-57C8-4515-B3BB-C9187C9EA465}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.Platform.Core", "..\..\vc-platform\src\VirtoCommerce.Platform.Core\VirtoCommerce.Platform.Core.csproj", "{8A5A7EF0-8997-4885-9034-DBB99200A02B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{FABD3A64-A178-43CD-9D7E-7E8334F4E3F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FABD3A64-A178-43CD-9D7E-7E8334F4E3F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FABD3A64-A178-43CD-9D7E-7E8334F4E3F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A5A7EF0-8997-4885-9034-DBB99200A02B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A5A7EF0-8997-4885-9034-DBB99200A02B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A5A7EF0-8997-4885-9034-DBB99200A02B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A5A7EF0-8997-4885-9034-DBB99200A02B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
