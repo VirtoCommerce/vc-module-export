@@ -100,7 +100,7 @@ angular.module('virtoCommerce.exportModule')
             var dataQuery = angular.copy(blade.exportDataRequest.dataQuery);
             dataQuery.includedProperties = [];
 
-            if (!dataQuery.isAllSelected && !(dataQuery.objectIds && dataQuery.objectIds.length)) {
+            if (!dataQuery.isAllSelected && !(dataQuery.objectIds && dataQuery.objectIds.length) && !dataQuery.isAnyFilterApplied) {
                 blade.dataSelected = 0;
             }
             else {
@@ -130,6 +130,7 @@ angular.module('virtoCommerce.exportModule')
             blade.exportDataRequest.providerName = blade.selectedProvider.id;
             delete blade.exportDataRequest.dataQuery.skip;
             delete blade.exportDataRequest.dataQuery.take;
+            delete blade.exportDataRequest.dataQuery.IsPreview;
             blade.isExporting = true;
 
             var progressBlade = {

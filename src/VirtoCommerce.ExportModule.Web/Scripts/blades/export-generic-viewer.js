@@ -117,6 +117,7 @@ angular.module('virtoCommerce.exportModule')
         function getEmptyDataQuery() {
 
             var dataQuery = {
+                IsPreview: true,
                 exportTypeName: blade.exportDataRequest.dataQuery.exportTypeName,
                 includedProperties: blade.exportDataRequest.dataQuery.includedProperties,
                 sort: uiGridHelper.getSortExpression($scope)
