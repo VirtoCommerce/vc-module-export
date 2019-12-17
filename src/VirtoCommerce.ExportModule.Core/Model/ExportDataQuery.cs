@@ -39,5 +39,9 @@ namespace VirtoCommerce.ExportModule.Core.Model
         /// Paging: records in one page
         /// </summary>
         public int? Take { get; set; }
+        /// <summary>
+        /// True means preview (lightweight) data is queried, false - full version requested 
+        /// </summary>
+        public bool IsPreview { get; set; }
     }
 }
