@@ -1,18 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-     <TargetFramework>netcoreapp3.0</TargetFramework>
+     <TargetFramework>netcoreapp3.1</TargetFramework>
      <GenerateDocumentationFile>true</GenerateDocumentationFile>
      <IsPackable>True</IsPackable>
      <noWarn>1591</noWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CsvHelper" Version="12.1.3" />
-    <PackageReference Include="GitVersionTask" Version="5.0.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="CsvHelper" Version="12.2.2" />
   </ItemGroup>
 
   <ItemGroup>

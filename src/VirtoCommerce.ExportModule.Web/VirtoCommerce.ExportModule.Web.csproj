@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-     <TargetFramework>netcoreapp3.0</TargetFramework>
+     <TargetFramework>netcoreapp3.1</TargetFramework>
      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+     <IsPackable>False</IsPackable>
      <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
   </PropertyGroup>
 
@@ -24,12 +25,8 @@
 	
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.0.101" />
-    <PackageReference Include="GitVersionTask" Version="5.0.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Hangfire" Version="1.7.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
+    <PackageReference Include="Hangfire" Version="1.7.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
     <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.0.0-v3-feature-vp-7-0001" />
   </ItemGroup>
  <ItemGroup>
