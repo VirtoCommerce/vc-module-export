@@ -38,7 +38,7 @@ namespace VirtoCommerce.ExportModule.Web
                 configure.Filters.Add(typeof(AnyPolicyAuthorizationFilter));
             });
 
-            serviceCollection.Configure<MvcJsonOptions>(configure =>
+            serviceCollection.Configure<MvcNewtonsoftJsonOptions>(configure =>
             {
                 configure.SerializerSettings.Converters.Add(new PolymorphicExportDataQueryJsonConverter());
             });
