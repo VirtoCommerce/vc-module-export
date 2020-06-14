@@ -21,7 +21,7 @@
       <owner>Virto Commerce</owner>
     </owners>
     <projectUrl>https://virtocommerce.com/apps/extensions/virto-export-module</projectUrl>
-    <iconUrl>https://github.com/VirtoCommerce/vc-module-export/raw/master/VirtoCommerce.ExportModule.Web/Content/logo.png</iconUrl>
+    <iconUrl>Modules/$(VirtoCommerce.Export)/Content/logo.png</iconUrl>
 
     <releaseNotes>First version.</releaseNotes>
     <copyright>Copyright © 2011-2019 Virto Commerce. All rights reserved</copyright>
