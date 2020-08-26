@@ -10,8 +10,8 @@ The VC Export module provides the ability to export data from Catalog and Pricin
 
 ## Documentation
 
-[Generic Export Document](/docs/index.md)
-[View on GitHub](https://github.com/VirtoCommerce/vc-module-export)
+1. [Generic Export Document](/docs/index.md)
+1. [View on GitHub](https://github.com/VirtoCommerce/vc-module-export)
 
 ## References
 
