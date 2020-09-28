@@ -70,6 +70,7 @@ namespace VirtoCommerce.ExportModule.Data.Services
 
                 CurrentPageNumber++;
                 Items = data.Results;
+                TotalCount = data.TotalCount > 0 ? data.TotalCount : TotalCount;
 
                 hasData = data.Results.Any();
             }

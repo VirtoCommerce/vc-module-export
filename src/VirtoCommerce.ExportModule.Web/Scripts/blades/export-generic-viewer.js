@@ -38,8 +38,7 @@ angular.module('virtoCommerce.exportModule')
         function loadData(callback) {
             blade.isLoading = true;
 
-            angular.extend(blade.exportDataRequest.dataQuery, buildDataQuery());
-            var dataQuery = blade.exportDataRequest.dataQuery;
+            var dataQuery = buildDataQuery();
             var pagedDataQuery = {
                 skip: ($scope.pageSettings.currentPage - 1) * $scope.pageSettings.itemsPerPageCount,
                 take: $scope.pageSettings.itemsPerPageCount
@@ -248,6 +247,10 @@ angular.module('virtoCommerce.exportModule')
 
         filter.resetKeyword = function () {
             filter.keyword = undefined;
+
+            if (filter.current) {
+                filter.current.keyword = undefined;
+            }
 
             if (blade.exportDataRequest.dataQuery) {
                 blade.exportDataRequest.dataQuery.keyword = undefined;
