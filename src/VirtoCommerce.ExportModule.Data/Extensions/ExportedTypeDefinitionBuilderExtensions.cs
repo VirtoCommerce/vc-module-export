@@ -41,5 +41,11 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
             builder.ExportedTypeDefinition.ExportDataQueryType = exportDataQueryType;
             return builder;
         }
+
+        public static ExportedTypeDefinitionBuilder WithRestrictDataSelectivity(this ExportedTypeDefinitionBuilder builder)
+        {
+            builder.ExportedTypeDefinition.RestrictDataSelectivity = true;
+            return builder;
+        }
     }
 }

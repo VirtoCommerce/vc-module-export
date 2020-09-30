@@ -39,7 +39,8 @@ angular.module('virtoCommerce.exportModule')
                             dataQuery: {
                                 exportTypeName: selectedType.exportDataQueryType,
                                 isAllSelected: true
-                            }
+                            },
+                            restrictDataSelectivity: selectedType.restrictDataSelectivity
                         },
                         selectedType:selectedType
                     };
