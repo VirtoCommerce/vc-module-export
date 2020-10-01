@@ -45,7 +45,7 @@ namespace VirtoCommerce.ExportModule.Core.Model
         public IPagedDataSourceFactory DataSourceFactory { get; set; }
 
         /// <summary>
-        /// restrict access to select data for export
+        /// Restrict access to select data for export
         /// </summary>
         public bool RestrictDataSelectivity { get; set; }
     }
