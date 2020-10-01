@@ -43,5 +43,10 @@ namespace VirtoCommerce.ExportModule.Core.Model
         /// </summary>
         [JsonIgnore]
         public IPagedDataSourceFactory DataSourceFactory { get; set; }
+
+        /// <summary>
+        /// Restrict access to select data for export
+        /// </summary>
+        public bool RestrictDataSelectivity { get; set; }
     }
 }

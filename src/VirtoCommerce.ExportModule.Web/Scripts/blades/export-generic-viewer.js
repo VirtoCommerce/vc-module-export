@@ -272,6 +272,11 @@ angular.module('virtoCommerce.exportModule')
         $scope.setGridOptions = function (gridOptions) {
             bladeUtils.initializePagination($scope, true);
             $scope.pageSettings.itemsPerPageCount = 20;
+            gridOptions.enableRowSelection = gridOptions.enableSelectAll = !blade.exportDataRequest.restrictDataSelectivity;
+
+            gridOptions.isRowSelectable = function(row) {
+                return !blade.exportDataRequest.restrictDataSelectivity;
+            }
 
             uiGridHelper.initialize($scope, gridOptions, function (gridApi) {
                 //update gridApi for current grid

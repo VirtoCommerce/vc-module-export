@@ -57,7 +57,9 @@
                     "type": "Object type",
                     "name": "Name",
                     "code": "Code",
-                    "new-filter": "Add new filter"
+                    "new-filter": "Add new filter",
+                    "important": "Important!",  
+                    "important-description": "This data source does not support export of specific selected entities. Please use filter to limit the exported data set."
                 },
                 "placeholders": {
                     "select-filter": "Select filter…"
