@@ -29,7 +29,7 @@ angular.module(moduleName, ['ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.validate
             , function ($http, $compile, mainMenuService, widgetService, $state, authService) {
                 //Register module in main menu
                 var menuItem = {
-                    path: 'configuration/export',
+                    path: 'configuration/newexport',
                     icon: 'fa fa-database',
                     title: 'export.main-menu-title',
                     priority: 30,
