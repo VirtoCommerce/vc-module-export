@@ -82,7 +82,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         [HttpPost]
         [Route("data")]
         [Authorize(ModuleConstants.Security.Permissions.Access)]
-        public async Task<ActionResult<ExportableSearchResult>> GetData([FromBody]ExportDataRequest request)
+        public async Task<ActionResult<ExportableSearchResult>> GetData([FromBody] ExportDataRequest request)
         {
 
             var authorizationResult = await _authorizationService.AuthorizeAsync(User, request.DataQuery, request.ExportTypeName + "ExportDataPolicy");
@@ -113,7 +113,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         [HttpPost]
         [Route("run")]
         [Authorize(ModuleConstants.Security.Permissions.Access)]
-        public async Task<ActionResult<PlatformExportPushNotification>> RunExport([FromBody]ExportDataRequest request)
+        public async Task<ActionResult<PlatformExportPushNotification>> RunExport([FromBody] ExportDataRequest request)
         {
             var authorizationResult = await _authorizationService.AuthorizeAsync(User, request.DataQuery, request.ExportTypeName + "ExportDataPolicy");
             if (!authorizationResult.Succeeded)
@@ -121,10 +121,14 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
                 return Unauthorized();
             }
 
+            var typeTitle = request.ExportTypeName.LastIndexOf('.') > 0 ?
+                            request.ExportTypeName.Substring(request.ExportTypeName.LastIndexOf('.') + 1) : request.ExportTypeName;
+
             var notification = new ExportPushNotification(_userNameResolver.GetCurrentUserName())
             {
-                Title = $"{request.ExportTypeName} export task",
-                Description = "starting export...."
+                NotifyType = "PlatformExportPushNotification",
+                Title = $"{typeTitle} export",
+                Description = "Starting export task..."
             };
             _pushNotificationManager.Send(notification);
 
@@ -142,7 +146,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         [HttpPost]
         [Route("task/cancel")]
         [Authorize(ModuleConstants.Security.Permissions.Access)]
-        public ActionResult CancelExport([FromBody]ExportCancellationRequest cancellationRequest)
+        public ActionResult CancelExport([FromBody] ExportCancellationRequest cancellationRequest)
         {
             BackgroundJob.Delete(cancellationRequest.JobId);
             return Ok();
