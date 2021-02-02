@@ -3,7 +3,7 @@ angular.module('virtoCommerce.exportModule')
         var typeTree;
         var blade = $scope.blade;
         blade.title = 'export.blades.export-settings.labels.exported-type';
-        blade.headIcon = 'fa-folder';
+        blade.headIcon = 'fa fa-folder';
         blade.knownTypesTree = {};
 
         blade.refresh = function (disableOpenAnimation) {

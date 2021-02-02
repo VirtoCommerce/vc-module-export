@@ -6,7 +6,7 @@ angular.module('virtoCommerce.exportModule')
 
         function initializeBlade() {
             blade.title = 'export.blades.export-settings.labels.exported-properties';
-            blade.headIcon = 'fa-folder';
+            blade.headIcon = 'fa fa-folder';
 
             var allProperties = angular.copy(blade.allPropertiesOfType);
             allProperties = _.sortBy(allProperties, 'group', 'name');

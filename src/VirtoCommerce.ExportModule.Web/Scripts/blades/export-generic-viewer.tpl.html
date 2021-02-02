@@ -57,7 +57,7 @@
     <div class="ui-grid-cell-contents">
         <div class="product-img">
             <img class="image" fallback-src="{{ COL_FIELD }}" ng-src="{{ COL_FIELD | thumbnail: '_64x64' }}" ng-if="COL_FIELD">
-            <i class="table-ico fa" ng-class="row.entity.isContainer ? 'fa-folder' : 'fa-image'" ng-if="!COL_FIELD && row.entity.isContainer"></i>
+            <i class="table-ico" ng-class="row.entity.isContainer ? 'fa fa-folder' : 'fas fa-image'" ng-if="!COL_FIELD && row.entity.isContainer"></i>
         </div>
     </div>
 </script>
