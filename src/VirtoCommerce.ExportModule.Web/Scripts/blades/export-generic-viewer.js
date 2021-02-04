@@ -4,7 +4,7 @@ angular.module('virtoCommerce.exportModule')
             $scope.uiGridConstants = uiGridHelper.uiGridConstants;
             $scope.hasMore = true;
             $scope.items = [];
-            $scope.blade.headIcon = 'fa-upload';
+            $scope.blade.headIcon = 'fa fa-upload';
             $scope.exportSearchFilters = [];
             $scope.exportSearchFilterIds = [];
 
