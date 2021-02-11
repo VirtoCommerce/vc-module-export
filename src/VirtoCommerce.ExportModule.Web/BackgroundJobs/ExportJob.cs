@@ -69,6 +69,11 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
 
             try
             {
+                if (string.IsNullOrEmpty(_platformOptions.DefaultExportFolder))
+                {
+                    throw new ArgumentNullException(nameof(_platformOptions.DefaultExportFolder));
+                }
+
                 var fileName = string.Format(FileNameTemplate, DateTime.UtcNow);
 
                 // Do not like provider creation here to get file extension, maybe need to pass created provider to Exporter.
@@ -81,12 +86,12 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
                 }
 
                 //Import first to local tmp folder because Azure blob storage doesn't support some special file access mode
-                var url = UrlHelperExtensions.Combine(_platformOptions.DefaultExportFolder, fileName);
+                var url = _platformOptions.DefaultExportFolder + "/" + fileName;
                 using (var blobStream = _blobStorageProvider.OpenWrite(url))
                 {
                     _dataExporter.Export(blobStream, request, progressCallback, new JobCancellationTokenWrapper(cancellationToken));
+                    notification.DownloadUrl = _blobUrlResolver.GetAbsoluteUrl(url);
                 }
-                notification.DownloadUrl = _blobUrlResolver.GetAbsoluteUrl(url);
             }
             catch (JobAbortedException)
             {
