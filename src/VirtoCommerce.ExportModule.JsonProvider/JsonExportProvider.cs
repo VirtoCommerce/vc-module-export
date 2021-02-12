@@ -33,6 +33,7 @@ namespace VirtoCommerce.ExportModule.JsonProvider
             IncludedProperties = exportDataRequest.DataQuery?.IncludedProperties;
 
             var jsonSettings = jsonProviderConfiguration.Settings;
+            jsonSettings.Formatting = Formatting.None;
 
             _serializer = JsonSerializer.Create(jsonSettings);
 
