@@ -71,7 +71,7 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
             {
                 if (string.IsNullOrEmpty(_platformOptions.DefaultExportFolder))
                 {
-                    throw new ArgumentNullException(nameof(_platformOptions.DefaultExportFolder));
+                    throw new PlatformException($"{nameof(_platformOptions.DefaultExportFolder)} should be set.");
                 }
 
                 var fileName = string.Format(FileNameTemplate, DateTime.UtcNow);
