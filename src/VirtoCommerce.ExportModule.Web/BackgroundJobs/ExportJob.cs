@@ -8,7 +8,9 @@ using VirtoCommerce.ExportModule.Core;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Services;
 using VirtoCommerce.Platform.Core;
+using VirtoCommerce.Platform.Core.Assets;
 using VirtoCommerce.Platform.Core.Exceptions;
+using VirtoCommerce.Platform.Core.Extensions;
 using VirtoCommerce.Platform.Core.PushNotifications;
 using VirtoCommerce.Platform.Core.Settings;
 
@@ -21,6 +23,8 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
         private readonly IDataExporter _dataExporter;
         private readonly IExportProviderFactory _exportProviderFactory;
         private readonly ISettingsManager _settingsManager;
+        private readonly IBlobStorageProvider _blobStorageProvider;
+        private readonly IBlobUrlResolver _blobUrlResolver;
 
         private string fileNameTemplate;
 
@@ -28,13 +32,17 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
             IPushNotificationManager pushNotificationManager,
             IOptions<PlatformOptions> platformOptions,
             IExportProviderFactory exportProviderFactory,
-            ISettingsManager settingsManager)
+            ISettingsManager settingsManager,
+            IBlobStorageProvider blobStorageProvider,
+            IBlobUrlResolver blobUrlResolver)
         {
             _dataExporter = dataExporter;
             _pushNotificationManager = pushNotificationManager;
             _platformOptions = platformOptions.Value;
             _exportProviderFactory = exportProviderFactory;
             _settingsManager = settingsManager;
+            _blobStorageProvider = blobStorageProvider;
+            _blobUrlResolver = blobUrlResolver;
         }
 
         private string FileNameTemplate
@@ -61,7 +69,11 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
 
             try
             {
-                var localTmpFolder = Path.GetFullPath(Path.Combine(_platformOptions.DefaultExportFolder));
+                if (string.IsNullOrEmpty(_platformOptions.DefaultExportFolder))
+                {
+                    throw new PlatformException($"{nameof(_platformOptions.DefaultExportFolder)} should be set.");
+                }
+
                 var fileName = string.Format(FileNameTemplate, DateTime.UtcNow);
 
                 // Do not like provider creation here to get file extension, maybe need to pass created provider to Exporter.
@@ -73,24 +85,22 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
                     fileName = Path.ChangeExtension(fileName, provider.ExportedFileExtension);
                 }
 
-                var localTmpPath = Path.Combine(localTmpFolder, fileName);
-
-                if (!Directory.Exists(localTmpFolder))
+                byte[] bytes;
+                using (var memoryStream = new MemoryStream())
                 {
-                    Directory.CreateDirectory(localTmpFolder);
+                    _dataExporter.Export(memoryStream, request, progressCallback, new JobCancellationTokenWrapper(cancellationToken));
+                    bytes = memoryStream.ToArray();
                 }
 
-                if (File.Exists(localTmpPath))
+                progressCallback(new ExportProgressInfo { Description = "Export data to the memory" });
+
+                var url = UrlHelperExtensions.Combine(_platformOptions.DefaultExportFolder, fileName);
+                using (var blobStream = _blobStorageProvider.OpenWrite(url))
                 {
-                    File.Delete(localTmpPath);
+                    await blobStream.WriteAsync(bytes);
                 }
 
-                //Import first to local tmp folder because Azure blob storage doesn't support some special file access mode 
-                using (var stream = File.OpenWrite(localTmpPath))
-                {
-                    _dataExporter.Export(stream, request, progressCallback, new JobCancellationTokenWrapper(cancellationToken));
-                    notification.DownloadUrl = $"api/export/download/{fileName}";
-                }
+                notification.DownloadUrl = _blobUrlResolver.GetAbsoluteUrl(url);
             }
             catch (JobAbortedException)
             {
