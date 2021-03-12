@@ -41,6 +41,7 @@ namespace VirtoCommerce.ExportModule.Web
             serviceCollection.Configure<MvcNewtonsoftJsonOptions>(configure =>
             {
                 configure.SerializerSettings.Converters.Add(new PolymorphicExportDataQueryJsonConverter());
+                configure.SerializerSettings.Converters.Add(new ExportDataRequestCsvProviderConfigJsonConverter());
             });
 
         }
