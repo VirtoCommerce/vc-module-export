@@ -30,7 +30,10 @@ namespace VirtoCommerce.ExportModule.CsvProvider
             Configuration = exportDataRequest.ProviderConfig as CsvProviderConfiguration ?? new CsvProviderConfiguration();
 
             // Workaround to set custom delimiter
-            ((CsvProviderConfiguration)Configuration).Configuration.Delimiter = ((CsvProviderConfiguration)Configuration).Delimiter;
+            if (Configuration is CsvProviderConfiguration csvProviderConfiguration && !string.IsNullOrEmpty(csvProviderConfiguration.Delimiter))
+            {
+                csvProviderConfiguration.Configuration.Delimiter = csvProviderConfiguration.Delimiter;
+            }
 
             IncludedProperties = exportDataRequest.DataQuery?.IncludedProperties;
         }
