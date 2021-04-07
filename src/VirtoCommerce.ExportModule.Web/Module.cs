@@ -10,7 +10,8 @@ using VirtoCommerce.ExportModule.CsvProvider;
 using VirtoCommerce.ExportModule.Data.Security;
 using VirtoCommerce.ExportModule.Data.Services;
 using VirtoCommerce.ExportModule.JsonProvider;
-using VirtoCommerce.ExportModule.Web.JsonConverters;
+using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.Platform.Core.JsonConverters;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
@@ -37,12 +38,6 @@ namespace VirtoCommerce.ExportModule.Web
             {
                 configure.Filters.Add(typeof(AnyPolicyAuthorizationFilter));
             });
-
-            serviceCollection.Configure<MvcNewtonsoftJsonOptions>(configure =>
-            {
-                configure.SerializerSettings.Converters.Add(new PolymorphicExportDataQueryJsonConverter());
-            });
-
         }
 
         public void PostInitialize(IApplicationBuilder appBuilder)
@@ -53,6 +48,13 @@ namespace VirtoCommerce.ExportModule.Web
             //Register module permissions
             var permissionsProvider = appBuilder.ApplicationServices.GetRequiredService<IPermissionsRegistrar>();
             permissionsProvider.RegisterPermissions(ModuleConstants.Security.Permissions.AllPermissions.Select(x => new Permission() { GroupName = "Export", Name = x }).ToArray());
+
+            PolymorphJsonConverter.RegisterTypeForDiscriminator(typeof(ExportDataQuery), nameof(ExportDataQuery.ExportTypeName));
+
+            AbstractTypeFactory<IExportProviderConfiguration>.RegisterType<JsonProviderConfiguration>();
+            AbstractTypeFactory<IExportProviderConfiguration>.RegisterType<CsvProviderConfiguration>();
+
+            PolymorphJsonConverter.RegisterTypeForDiscriminator(typeof(IExportProviderConfiguration), nameof(IExportProviderConfiguration.Type));
         }
 
         public void Uninstall()
