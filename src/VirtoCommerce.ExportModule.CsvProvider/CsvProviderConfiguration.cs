@@ -5,7 +5,7 @@ using VirtoCommerce.ExportModule.Core.Model;
 
 namespace VirtoCommerce.ExportModule.CsvProvider
 {
-    public class CsvProviderConfiguration : BasicProviderConfiguration
+    public class CsvProviderConfiguration : ExportProviderConfigurationBase
     {
         [JsonIgnore]
         public Configuration Configuration { get; set; } = new Configuration(cultureInfo: CultureInfo.InvariantCulture);

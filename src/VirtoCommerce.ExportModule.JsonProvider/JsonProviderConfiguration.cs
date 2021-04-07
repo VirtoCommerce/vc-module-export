@@ -3,7 +3,7 @@ using VirtoCommerce.ExportModule.Core.Model;
 
 namespace VirtoCommerce.ExportModule.JsonProvider
 {
-    public class JsonProviderConfiguration : BasicProviderConfiguration
+    public class JsonProviderConfiguration : ExportProviderConfigurationBase
     {
         public JsonSerializerSettings Settings { get; set; } = new JsonSerializerSettings()
         {
