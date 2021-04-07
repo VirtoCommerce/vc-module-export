@@ -32,7 +32,4 @@
     <ProjectReference Include="..\VirtoCommerce.ExportModule.Data\VirtoCommerce.ExportModule.Data.csproj" />
     <ProjectReference Include="..\VirtoCommerce.ExportModule.JsonProvider\VirtoCommerce.ExportModule.JsonProvider.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="JsonConverters\" />
-  </ItemGroup>
 </Project>
