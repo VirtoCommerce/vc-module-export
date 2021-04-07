@@ -5,6 +5,9 @@ namespace VirtoCommerce.ExportModule.Core.Model
     /// </summary>
     public abstract class ExportProviderConfigurationBase : IExportProviderConfiguration
     {
+        /// <summary>
+        /// Default protected constructor 
+        /// </summary>
         protected ExportProviderConfigurationBase()
         {
             Type = GetType().Name;
