@@ -1,4 +1,3 @@
-using System.Text;
 using VirtoCommerce.ExportModule.Core.Model;
 
 namespace VirtoCommerce.ExportModule.CsvProvider
