@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using System.IO;
+using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Newtonsoft.Json;
@@ -15,7 +17,6 @@ namespace VirtoCommerce.ExportModule.CsvProvider
         public string ExportedFileExtension => "csv";
         public bool IsTabular => true;
         [JsonIgnore]
-        // TODO: Temporary, before config rework - need to store only specific properties, not whole huge provider specific configs
         public IExportProviderConfiguration Configuration { get; }
 
         private CsvWriter _csvWriter;
@@ -51,7 +52,14 @@ namespace VirtoCommerce.ExportModule.CsvProvider
         {
             if (_csvWriter == null)
             {
-                _csvWriter = new CsvWriter(textWriter, ((CsvProviderConfiguration)Configuration).Configuration, true);
+                var csvProviderConfiguration = (Configuration as CsvProviderConfiguration);
+                var csvConfiguration = new Configuration(cultureInfo: CultureInfo.InvariantCulture)
+                {
+                    Delimiter = csvProviderConfiguration.Delimiter,
+                    Encoding = Encoding.GetEncoding(csvProviderConfiguration.Encoding)
+                };
+
+                _csvWriter = new CsvWriter(textWriter, csvConfiguration, true);
             }
         }
 

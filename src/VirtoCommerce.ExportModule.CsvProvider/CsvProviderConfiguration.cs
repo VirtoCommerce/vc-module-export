@@ -1,25 +1,22 @@
-using System.Globalization;
-using CsvHelper.Configuration;
-using Newtonsoft.Json;
+using System.Text;
 using VirtoCommerce.ExportModule.Core.Model;
 
 namespace VirtoCommerce.ExportModule.CsvProvider
 {
+    /// <summary>
+    /// Configuration for comma separated values export provider
+    /// </summary>
     public class CsvProviderConfiguration : ExportProviderConfigurationBase
     {
-        [JsonIgnore]
-        public Configuration Configuration { get; set; } = new Configuration(cultureInfo: CultureInfo.InvariantCulture);
+        /// <summary>
+        /// Delimiter of fields
+        /// </summary>
+        public string Delimiter { get; set; } = ",";
 
-        public string Delimiter
-        {
-            get
-            {
-                return Configuration.Delimiter;
-            }
-            set
-            {
-                Configuration.Delimiter = value;
-            }
-        }
+        /// <summary>
+        /// Name of the codepage should be used.  
+        /// Full list of codepages can be found at https://docs.microsoft.com/en-US/dotnet/api/system.text.encoding?view=netcore-3.1
+        /// </summary>
+        public string Encoding { get; set; } = "utf-8";
     }
 }

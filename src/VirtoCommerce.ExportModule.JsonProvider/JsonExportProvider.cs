@@ -32,8 +32,13 @@ namespace VirtoCommerce.ExportModule.JsonProvider
             Configuration = jsonProviderConfiguration;
             IncludedProperties = exportDataRequest.DataQuery?.IncludedProperties;
 
-            var jsonSettings = jsonProviderConfiguration.Settings;
-            jsonSettings.Formatting = Formatting.None;
+            var jsonSettings = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                Formatting = jsonProviderConfiguration.Indented ? Formatting.Indented : Formatting.None
+            };
 
             _serializer = JsonSerializer.Create(jsonSettings);
 
