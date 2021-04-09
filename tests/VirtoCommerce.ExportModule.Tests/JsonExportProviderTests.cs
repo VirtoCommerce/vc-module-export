@@ -127,7 +127,7 @@ namespace VirtoCommerce.ExportModule.Tests
             var exportDataRequest = new ExportDataRequest()
             {
                 ProviderName = nameof(JsonExportProvider),
-                ProviderConfig = new JsonProviderConfiguration() { Settings = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore } },
+                ProviderConfig = new JsonProviderConfiguration(),
             };
 
             using (var stream = new MemoryStream())

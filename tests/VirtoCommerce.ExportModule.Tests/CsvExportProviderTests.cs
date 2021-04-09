@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -324,71 +323,6 @@ namespace VirtoCommerce.ExportModule.Tests
             return Task.CompletedTask;
         }
 
-
-        [Fact]
-        public Task ExportPricelists_UseCustomMap()
-        {
-            var pricelists = CreatePricelists();
-
-            var propertyInfos = new[]
-            {
-                new ExportedTypePropertyInfo()
-                {
-                    FullName = nameof(Pricelist.Id),
-                    DisplayName = nameof(Pricelist.Id),
-                },
-                new ExportedTypePropertyInfo()
-                {
-                    FullName = nameof(Pricelist.Name),
-                    DisplayName = nameof(Pricelist.Name),
-                },
-                new ExportedTypePropertyInfo()
-                {
-                    FullName = nameof(Pricelist.Currency),
-                    DisplayName = nameof(Pricelist.Name),
-                },
-                new ExportedTypePropertyInfo()
-                {
-                    FullName = $"{nameof(Pricelist.ActiveAssignment)}.{nameof(PricelistAssignment.Id)}",
-                    DisplayName = $"{nameof(Pricelist.ActiveAssignment)}.{nameof(PricelistAssignment.Id)}",
-                },
-                new ExportedTypePropertyInfo()
-                {
-                    FullName = $"{nameof(Pricelist.ActiveAssignment)}.{nameof(PricelistAssignment.Name)}",
-                    DisplayName = $"{nameof(Pricelist.ActiveAssignment)}.{nameof(PricelistAssignment.Name)}",
-                },
-                new ExportedTypePropertyInfo()
-                {
-                    FullName = $"{nameof(Pricelist.ActiveAssignment)}.{nameof(PricelistAssignment.Priority)}",
-                    DisplayName = $"{nameof(Pricelist.ActiveAssignment)}.{nameof(PricelistAssignment.Priority)}",
-                },
-                new ExportedTypePropertyInfo()
-                {
-                    FullName = $"{nameof(Pricelist.Prices)}.{nameof(Price.Id)}",
-                    DisplayName = $"{nameof(Pricelist.Prices)}.{nameof(Price.Id)}",
-                },
-                new ExportedTypePropertyInfo()
-                {
-                    FullName = $"{nameof(Pricelist.Prices)}.{nameof(Price.List)}",
-                    DisplayName = $"{nameof(Pricelist.Prices)}.{nameof(Price.List)}",
-                },
-            };
-            var dataQuery = new PricelistExportDataQuery() { IncludedProperties = propertyInfos };
-
-            var configuration = new Configuration(cultureInfo: CultureInfo.InvariantCulture);
-            configuration.RegisterClassMap<PricelistTestMapping>();
-
-            var exportDataRequest = CreatExportDataRequest(dataQuery, new CsvProviderConfiguration() { Configuration = configuration });
-
-            //Act
-            var filteredPricesString = SerializeAndRead(exportDataRequest, pricelists);
-
-            //Assets
-            Assert.Equal("Id,Name,Currency,ActiveAssignment.Id,ActiveAssignment.Name\r\nPL1,Pricelist 1,USD,PA1_1,PA1_1 Name\r\nPL2,Pricelist 2,EUR,PA2_1,PA2_1 Name\r\n", filteredPricesString);
-
-            return Task.CompletedTask;
-        }
-
         [Fact]
         public Task ExportPricelists_SameTypePropertiesMapping()
         {
@@ -601,8 +535,6 @@ namespace VirtoCommerce.ExportModule.Tests
             Map(x => x.Currency).Index(2);
             Map(x => x.ActiveAssignment.Id).Name("ActiveAssignment.Id").Index(3);
             Map(x => x.ActiveAssignment.Name).Name("ActiveAssignment.Name").Index(4);
-            // Equals to following, but without indexes set explicitly
-            // ReferenceMaps.Add(new MemberReferenceMap(typeof(Pricelist).GetProperty(nameof(Pricelist.ActiveAssignment)), new PricelistAssignmentTestMapping(nameof(Pricelist.ActiveAssignment))));
         }
     }
 

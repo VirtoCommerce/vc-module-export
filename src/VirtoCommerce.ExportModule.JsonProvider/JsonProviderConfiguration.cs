@@ -1,18 +1,16 @@
-using Newtonsoft.Json;
 using VirtoCommerce.ExportModule.Core.Model;
 
 namespace VirtoCommerce.ExportModule.JsonProvider
 {
-    public class JsonProviderConfiguration : IExportProviderConfiguration
+    /// <summary>
+    /// Configuration for json export provider
+    /// </summary>
+    public class JsonProviderConfiguration : ExportProviderConfigurationBase
     {
-        public JsonSerializerSettings Settings { get; set; } = new JsonSerializerSettings()
-        {
-            NullValueHandling = NullValueHandling.Ignore,
-            DefaultValueHandling = DefaultValueHandling.Ignore,
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-#if DEBUG
-            Formatting = Formatting.Indented,
-#endif
-        };
+
+        /// <summary>
+        /// Causes child objects to be indented
+        /// </summary>
+        public bool Indented { get; set; } = false;
     }
 }
