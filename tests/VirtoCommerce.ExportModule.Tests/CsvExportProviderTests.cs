@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -536,8 +535,6 @@ namespace VirtoCommerce.ExportModule.Tests
             Map(x => x.Currency).Index(2);
             Map(x => x.ActiveAssignment.Id).Name("ActiveAssignment.Id").Index(3);
             Map(x => x.ActiveAssignment.Name).Name("ActiveAssignment.Name").Index(4);
-            // Equals to following, but without indexes set explicitly
-            // ReferenceMaps.Add(new MemberReferenceMap(typeof(Pricelist).GetProperty(nameof(Pricelist.ActiveAssignment)), new PricelistAssignmentTestMapping(nameof(Pricelist.ActiveAssignment))));
         }
     }
 
