@@ -21,5 +21,11 @@ namespace VirtoCommerce.ExportModule.Core.Model
         /// Selected export provider name
         /// </summary>
         public string ProviderName { get; set; }
+
+        /// <summary>
+        /// Export file name pattern
+        /// example: export_{0:yyyyMMddHHmmss}
+        /// </summary>
+        public string ExportFileNameTemplate { get; set; }
     }
 }

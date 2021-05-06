@@ -10,6 +10,6 @@ namespace VirtoCommerce.ExportModule.Core.Services
     /// </summary>
     public interface IDataExporter
     {
-        void Export(Stream stream, ExportDataRequest request, Action<ExportProgressInfo> progressCallback, ICancellationToken token);
+        void Export(ExportDataRequest request, Action<ExportProgressInfo> progressCallback, ICancellationToken token);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using VirtoCommerce.Platform.Core.Common;
 
@@ -14,6 +15,7 @@ namespace VirtoCommerce.ExportModule.Core.Model
         public ExportProgressInfo()
         {
             Errors = new List<string>();
+            PartitionUrls = new List<string>();
         }
 
         public string Description { get; set; }
@@ -27,5 +29,9 @@ namespace VirtoCommerce.ExportModule.Core.Model
                 return Errors?.Count ?? 0;
             }
         }
+        public DateTime? Finished { get; set; }
+
+        public string DownloadUrl { get; set; }
+        public List<string> PartitionUrls { get; set; }
     }
 }

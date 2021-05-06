@@ -30,5 +30,7 @@ namespace VirtoCommerce.ExportModule.Core.Model
         public ICollection<string> Errors { get; set; }
         [JsonProperty("downloadUrl")]
         public string DownloadUrl { get; set; }
+        [JsonProperty("partitionUrls")]
+        public List<string> PartitionUrls { get; set; }
     }
 }

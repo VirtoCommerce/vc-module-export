@@ -8,6 +8,8 @@ namespace VirtoCommerce.ExportModule.Core.Model
             target.Errors = source.Errors;
             target.ProcessedCount = source.ProcessedCount;
             target.TotalCount = source.TotalCount;
+            target.DownloadUrl = source.DownloadUrl;
+            target.PartitionUrls = source.PartitionUrls;
         }
     }
 }
