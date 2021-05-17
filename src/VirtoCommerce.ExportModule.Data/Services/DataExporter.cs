@@ -73,89 +73,88 @@ namespace VirtoCommerce.ExportModule.Data.Services
             {
                 exportProgress.Description = "Creating provider…";
                 progressCallback(exportProgress);
-                             
-                using (var exportProvider = _exportProviderFactory.CreateProvider(request))
+
+                using var exportProvider = _exportProviderFactory.CreateProvider(request);
+                mainExportFilePath = GetExportFilePath(request.ExportFileNameTemplate, exportProvider.ExportedFileExtension);
+                var mainFileStream = _blobStorageProvider.OpenWrite(mainExportFilePath);
+                using (var writer = new StreamWriter(mainFileStream, Encoding.UTF8, 1024, true) { AutoFlush = true })
                 {
-                    mainExportFilePath = GetExportFilePath(request.ExportFileNameTemplate, exportProvider.ExportedFileExtension);
-                    using (var writer = new StreamWriter(_blobStorageProvider.OpenWrite(mainExportFilePath), Encoding.UTF8, 1024, true) { AutoFlush = true })
+                    var needTabularData = exportProvider.IsTabular;
+
+                    if (needTabularData && !exportedTypeDefinition.IsTabularExportSupported)
                     {
-                        var needTabularData = exportProvider.IsTabular;
+                        throw new NotSupportedException($"Provider \"{exportProvider.TypeName}\" does not support tabular export.");
+                    }
 
-                        if (needTabularData && !exportedTypeDefinition.IsTabularExportSupported)
+                    exportProgress.Description = "Fetching…";
+                    progressCallback(exportProgress);
+
+                    while (pagedDataSource.Fetch())
+                    {
+                        token.ThrowIfCancellationRequested();
+
+                        var objectBatch = pagedDataSource.Items;
+
+                        foreach (var obj in objectBatch)
                         {
-                            throw new NotSupportedException($"Provider \"{exportProvider.TypeName}\" does not support tabular export.");
-                        }
-
-                        exportProgress.Description = "Fetching…";
-                        progressCallback(exportProgress);
-
-                        while (pagedDataSource.Fetch())
-                        {
-                            token.ThrowIfCancellationRequested();
-
-                            var objectBatch = pagedDataSource.Items;
-
-                            foreach (var obj in objectBatch)
+                            try
                             {
-                                try
+                                var preparedObject = obj.Clone() as IExportable;
+
+                                request.DataQuery.FilterProperties(preparedObject);
+
+                                if (needTabularData)
                                 {
-                                    var preparedObject = obj.Clone() as IExportable;
+                                    preparedObject = (preparedObject as ITabularConvertible)?.ToTabular() ??
+                                                     throw new NotSupportedException($"Object should be {nameof(ITabularConvertible)} to be exported using tabular provider.");
+                                }
+                                //TODO: Find out why exportProvider  doesn't work with streams that return from a blob provider
+                                exportProvider.WriteRecord(writer, preparedObject);
 
-                                    request.DataQuery.FilterProperties(preparedObject);
-
-                                    if (needTabularData)
+                                //process an exported object's partitions
+                                //TODO: refactor
+                                if (obj is IHasPartitions hasPartitions)
+                                {
+                                    var partitions = hasPartitions.GetPartitions();
+                                    foreach (var partition in partitions.Where(x => !x.Items.IsNullOrEmpty()))
                                     {
-                                        preparedObject = (preparedObject as ITabularConvertible)?.ToTabular() ??
-                                                         throw new NotSupportedException($"Object should be {nameof(ITabularConvertible)} to be exported using tabular provider.");
-                                    }
-                                    //TODO: Find out why exportProvider  doesn't work with streams that return from a blob provider
-                                    exportProvider.WriteRecord(writer, preparedObject);
-
-                                    //process an exported object's partitions
-                                    //TODO: refactor
-                                    if (obj is IHasPartitions hasPartitions)
-                                    {
-                                        var partitions = hasPartitions.GetPartitions();
-                                        foreach (var partition in partitions.Where(x => !x.Items.IsNullOrEmpty()))
+                                        //TODO: refactor
+                                        var partitionFilePath = GetExportFilePath(partition.PartitionName, exportProvider.ExportedFileExtension);
+                                        var partitionWriter = openedStreamWritersDict[partitionFilePath];
+                                        if (partitionWriter == null)
                                         {
-                                            //TODO: refactor
-                                            var partitionFilePath = GetExportFilePath(partition.PartitionName, exportProvider.ExportedFileExtension);
-                                            var partitionWriter = openedStreamWritersDict[partitionFilePath];
-                                            if (partitionWriter == null)
-                                            {
-                                                partitionWriter = new StreamWriter(_blobStorageProvider.OpenWrite(partitionFilePath), Encoding.UTF8, 1024, true) { AutoFlush = true };
-                                                openedStreamWritersDict[partitionFilePath] = partitionWriter;
-                                            }
+                                            partitionWriter = new StreamWriter(_blobStorageProvider.OpenWrite(partitionFilePath), Encoding.UTF8, 1024, true) { AutoFlush = true };
+                                            openedStreamWritersDict[partitionFilePath] = partitionWriter;
+                                        }
 
-                                            foreach (var partitionItem in partition.Items)
-                                            {
-                                                var partitionExportedItem = partitionItem.Clone() as IExportable;
+                                        foreach (var partitionItem in partition.Items)
+                                        {
+                                            var partitionExportedItem = partitionItem.Clone() as IExportable;
 
-                                                if (needTabularData)
-                                                {
-                                                    partitionExportedItem = (partitionExportedItem as ITabularConvertible)?.ToTabular() ??
-                                                                     throw new NotSupportedException($"Object should be {nameof(ITabularConvertible)} to be exported using tabular provider.");
-                                                }
-                                                exportProvider.WriteRecord(partitionWriter, partitionExportedItem);
+                                            if (needTabularData)
+                                            {
+                                                partitionExportedItem = (partitionExportedItem as ITabularConvertible)?.ToTabular() ??
+                                                                 throw new NotSupportedException($"Object should be {nameof(ITabularConvertible)} to be exported using tabular provider.");
                                             }
+                                            exportProvider.WriteRecord(partitionWriter, partitionExportedItem);
                                         }
                                     }
                                 }
-                                catch (Exception e)
-                                {
-                                    exportProgress.Errors.Add(e.Message);
-                                    progressCallback(exportProgress);
-                                }
-                                exportedCount++;
                             }
-
-                            exportProgress.ProcessedCount = exportedCount;
-
-                            if (exportedCount != totalCount)
+                            catch (Exception e)
                             {
-                                exportProgress.Description = $"{exportedCount} out of {totalCount} have been exported.";
+                                exportProgress.Errors.Add(e.Message);
                                 progressCallback(exportProgress);
                             }
+                            exportedCount++;
+                        }
+
+                        exportProgress.ProcessedCount = exportedCount;
+
+                        if (exportedCount != totalCount)
+                        {
+                            exportProgress.Description = $"{exportedCount} out of {totalCount} have been exported.";
+                            progressCallback(exportProgress);
                         }
                     }
                 }

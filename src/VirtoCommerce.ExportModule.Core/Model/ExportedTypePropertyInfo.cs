@@ -22,5 +22,9 @@ namespace VirtoCommerce.ExportModule.Core.Model
         /// * Reserved for future use
         /// </summary>
         public bool IsRequired { get; set; }
+        /// <summary>
+        /// Mean that is property. Mapping entity should implement IHasProperties
+        /// </summary>
+        public bool IsProperty { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using CsvHelper.Configuration;
+using VirtoCommerce.CatalogModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Data.Extensions;
 using VirtoCommerce.Platform.Core.Common;
@@ -23,14 +24,18 @@ namespace VirtoCommerce.ExportModule.CsvProvider
         public MetadataFilteredMap(ExportedTypePropertyInfo[] includedProperties)
         {
             var exportedType = typeof(T);
-            var includedPropertiesInfo = includedProperties ?? exportedType.GetPropertyNames().PropertyInfos;
+            var dynamicPropertiesInfos = includedProperties.Where(x => x.IsProperty).ToArray();
+            var usualProperties = includedProperties.Except(dynamicPropertiesInfos).ToArray();
+            var includedPropertiesInfo = usualProperties ?? exportedType.GetPropertyNames().PropertyInfos;
             var columnIndex = 0;
+
+            ClassMap currentClassMap = null;
 
             foreach (var includedPropertyInfo in includedPropertiesInfo)
             {
                 var propertyNames = includedPropertyInfo.FullName.Split('.');
                 var currentType = exportedType;
-                ClassMap currentClassMap = this;
+                currentClassMap = this;
 
                 for (int i = 0; i < propertyNames.Length; i++)
                 {
@@ -73,6 +78,56 @@ namespace VirtoCommerce.ExportModule.CsvProvider
 
                         currentClassMap = referenceMap.Data.Mapping;
                     }
+
+                }
+            }
+
+
+            // For Dyn properties
+            if (dynamicPropertiesInfos.Any() && IsIHasProperties(exportedType))
+            {
+                currentClassMap = this;
+
+                // Exporting multiple csv fields from the same property (which is a collection)
+                foreach (var propertyCsvColumn in dynamicPropertiesInfos)
+                {
+                    // create CsvPropertyMap manually, because this.Map(x =>...) does not allow
+                    // to export multiple entries for the same property
+
+                    var propertyValuesInfo = exportedType.GetProperty(nameof(IHasProperties.Properties));
+                    var csvPropertyMap = MemberMap.CreateGeneric(exportedType, propertyValuesInfo);
+                    csvPropertyMap.Name(propertyCsvColumn.FullName);
+
+                    csvPropertyMap.Data.Index = ++columnIndex;
+
+                    // create custom converter instance which will get the required record from the collection
+                    csvPropertyMap.UsingExpression<ICollection<Property>>(null, properties =>
+                    {
+                        var property = properties.FirstOrDefault(x => x.Name == propertyCsvColumn.FullName && x.Values.Any());
+                        var propertyValues = Array.Empty<string>();
+                        if (property != null)
+                        {
+                            if (property.Dictionary)
+                            {
+                                propertyValues = property.Values
+                                    ?.Where(x => !string.IsNullOrEmpty(x.Alias))
+                                    .Select(x => x.Alias)
+                                    .Distinct()
+                                    .ToArray();
+                            }
+                            else
+                            {
+                                propertyValues = property.Values
+                                    ?.Where(x => x.Value != null || x.Alias != null)
+                                    .Select(x => x.Alias ?? x.Value.ToString())
+                                    .ToArray();
+                            }
+                        }
+
+                        return string.Join(',', propertyValues);
+                    });
+
+                    currentClassMap.MemberMaps.Add(csvPropertyMap);
                 }
             }
         }
@@ -86,6 +141,11 @@ namespace VirtoCommerce.ExportModule.CsvProvider
                 x.IsGenericType
                 && x.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                 && type.GetGenericArguments().Any(x => x.IsSubclassOf(typeof(Entity)));
+        }
+
+        private static bool IsIHasProperties(Type type)
+        {
+            return type.GetInterfaces().Contains(typeof(IHasProperties));
         }
 
         private static MemberMap CreateMemberMap(Type currentType, PropertyInfo propertyInfo, string columnName, ref int columnIndex)
