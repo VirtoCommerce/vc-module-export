@@ -11,7 +11,7 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
         public static void FilterProperties(this ExportDataQuery dataQuery, object obj, string baseMemberName = null)
         {
             var type = obj.GetType();
-            var includedProperties = dataQuery.IncludedProperties;
+            var includedProperties = dataQuery.IncludedProperties.Where(x => !x.IsProperty).ToArray();
 
             if (!includedProperties.IsNullOrEmpty())
             {
