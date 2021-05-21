@@ -127,13 +127,6 @@ angular.module('virtoCommerce.exportModule')
                 return;
             }
 
-            var csvProviderConfig = {
-                type: 'CsvProviderConfiguration',
-                delimiter: '^'
-            }
-
-            blade.exportDataRequest.providerConfig = csvProviderConfig;
-
             blade.exportDataRequest.providerName = blade.selectedProvider.id;
             delete blade.exportDataRequest.dataQuery.skip;
             delete blade.exportDataRequest.dataQuery.take;
