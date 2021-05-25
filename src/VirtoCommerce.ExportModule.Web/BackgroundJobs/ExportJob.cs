@@ -13,7 +13,6 @@ using VirtoCommerce.Platform.Core.Exceptions;
 using VirtoCommerce.Platform.Core.Extensions;
 using VirtoCommerce.Platform.Core.PushNotifications;
 using VirtoCommerce.Platform.Core.Settings;
-using VirtoCommerce.Platform.Hangfire;
 
 namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
 {
