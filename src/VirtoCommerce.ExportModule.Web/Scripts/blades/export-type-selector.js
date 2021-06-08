@@ -145,7 +145,7 @@ angular.module('virtoCommerce.exportModule')
 
         blade.breadcrumbs = [{
             id: null,
-            name: "platform.navigation.bread-crumb-top",
+            name: "export.blades.export-type-selector.bread-crumb-top",
             navigate: function () {
                 $scope.selectNode({ groupName: null, children: typeTree });
             }
