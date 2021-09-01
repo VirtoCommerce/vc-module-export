@@ -86,19 +86,10 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
                     fileName = Path.ChangeExtension(fileName, provider.ExportedFileExtension);
                 }
 
-                byte[] bytes;
-                using (var memoryStream = new MemoryStream())
-                {
-                    _dataExporter.Export(memoryStream, request, progressCallback, new JobCancellationTokenWrapper(cancellationToken));
-                    bytes = memoryStream.ToArray();
-                }
-
-                progressCallback(new ExportProgressInfo { Description = "Export data to the memory" });
-
                 var url = UrlHelperExtensions.Combine(_platformOptions.DefaultExportFolder, fileName);
                 using (var blobStream = _blobStorageProvider.OpenWrite(url))
                 {
-                    await blobStream.WriteAsync(bytes);
+                    _dataExporter.Export(blobStream, request, progressCallback, new JobCancellationTokenWrapper(cancellationToken));
                 }
 
                 notification.DownloadUrl = _blobUrlResolver.GetAbsoluteUrl(url);

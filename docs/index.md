@@ -72,7 +72,7 @@ The system allows to specify data for export, advanced filtering is available.
 
 ![Select data for export](media/screen-select-data-for-export.png)
 
-**Important** Use the [Advanced Filter](/advanced-filter.md) to filter the set of data you need.
+**Important** Use the [Advanced Filter](advanced-filter.md) to filter the set of data you need.
 
 ### Select Properties
 
