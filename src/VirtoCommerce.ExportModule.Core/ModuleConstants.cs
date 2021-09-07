@@ -24,7 +24,7 @@ namespace VirtoCommerce.ExportModule.Core
                 {
                     Name = "Export.FileNameTemplate",
                     ValueType = SettingValueType.ShortText,
-                    GroupName = "Export|General",
+                    GroupName = "Generic Export|General",
                     DefaultValue = "export_{0:yyyyMMddHHmmss}"
                 };
 
