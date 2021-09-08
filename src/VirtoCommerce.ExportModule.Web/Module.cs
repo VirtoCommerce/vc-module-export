@@ -47,7 +47,7 @@ namespace VirtoCommerce.ExportModule.Web
 
             //Register module permissions
             var permissionsProvider = appBuilder.ApplicationServices.GetRequiredService<IPermissionsRegistrar>();
-            permissionsProvider.RegisterPermissions(ModuleConstants.Security.Permissions.AllPermissions.Select(x => new Permission() { GroupName = "Export", Name = x }).ToArray());
+            permissionsProvider.RegisterPermissions(ModuleConstants.Security.Permissions.AllPermissions.Select(x => new Permission() { GroupName = "Generic Export", Name = x }).ToArray());
 
             PolymorphJsonConverter.RegisterTypeForDiscriminator(typeof(ExportDataQuery), nameof(ExportDataQuery.ExportTypeName));
 

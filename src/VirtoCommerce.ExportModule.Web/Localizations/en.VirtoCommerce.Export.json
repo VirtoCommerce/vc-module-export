@@ -1,6 +1,6 @@
 {
   "export": {
-    "main-menu-title": "Export New",
+    "main-menu-title": "Generic Export",
     "commands": {
       "pick-all": "Pick all"
     },
