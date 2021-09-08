@@ -8,7 +8,7 @@ if (AppDependencies !== undefined) {
 angular.module(moduleName, ['ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.validate'])
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('workspace.exportModule', {
-            url: '/exportNew',
+            url: '/generic-export',
             templateUrl: '$(Platform)/Scripts/common/templates/home.tpl.html',
             controller: ['$scope', 'platformWebApp.bladeNavigationService', function ($scope, bladeNavigationService) {
                 var newBlade = {
@@ -29,7 +29,7 @@ angular.module(moduleName, ['ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.validate
             , function ($http, $compile, mainMenuService, widgetService, $state, authService) {
                 //Register module in main menu
                 var menuItem = {
-                    path: 'configuration/newexport',
+                    path: 'configuration/generic-export',
                     icon: 'fa fa-database',
                     title: 'export.main-menu-title',
                     priority: 30,
