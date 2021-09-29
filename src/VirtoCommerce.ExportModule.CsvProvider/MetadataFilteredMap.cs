@@ -93,7 +93,7 @@ namespace VirtoCommerce.ExportModule.CsvProvider
             var memberMap = MemberMap.CreateGeneric(currentType, propertyInfo);
 
             memberMap.Data.TypeConverterOptions.CultureInfo = CultureInfo.InvariantCulture;
-            memberMap.Data.TypeConverterOptions.NumberStyle = NumberStyles.Any;
+            memberMap.Data.TypeConverterOptions.NumberStyles = NumberStyles.Any;
             memberMap.Data.TypeConverterOptions.BooleanTrueValues.AddRange(new List<string>() { "yes", "true" });
             memberMap.Data.TypeConverterOptions.BooleanFalseValues.AddRange(new List<string>() { "false", "no" });
             memberMap.Data.Names.Add(columnName);
