@@ -53,20 +53,21 @@ namespace VirtoCommerce.ExportModule.CsvProvider
             if (_csvWriter == null)
             {
                 var csvProviderConfiguration = (Configuration as CsvProviderConfiguration);
-                var csvConfiguration = new Configuration(cultureInfo: CultureInfo.InvariantCulture)
+                var csvConfiguration = new CsvConfiguration(cultureInfo: CultureInfo.InvariantCulture)
                 {
                     Delimiter = csvProviderConfiguration.Delimiter,
-                    Encoding = Encoding.GetEncoding(csvProviderConfiguration.Encoding)
+                    Encoding = Encoding.GetEncoding(csvProviderConfiguration.Encoding),
+                    LeaveOpen = true
                 };
 
-                _csvWriter = new CsvWriter(textWriter, csvConfiguration, true);
+                _csvWriter = new CsvWriter(textWriter, csvConfiguration);
             }
         }
 
         private void AddClassMap(Type objectType)
         {
-            var csvConfiguration = _csvWriter.Configuration;
-            var mapForType = csvConfiguration.Maps[objectType];
+            var csvContext = _csvWriter.Context;
+            var mapForType = csvContext.Maps[objectType];
 
             if (mapForType == null)
             {
@@ -75,7 +76,7 @@ namespace VirtoCommerce.ExportModule.CsvProvider
                     : Array.Empty<Type>());
                 var classMap = (ClassMap)constructor.Invoke(IncludedProperties != null ? new[] { IncludedProperties } : null);
 
-                csvConfiguration.RegisterClassMap(classMap);
+                _csvWriter.Context.RegisterClassMap(classMap);
             }
         }
     }
