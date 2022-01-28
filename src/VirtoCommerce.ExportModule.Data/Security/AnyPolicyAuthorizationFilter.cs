@@ -27,9 +27,9 @@ namespace VirtoCommerce.ExportModule.Data.Security
             Authorize(context).GetAwaiter().GetResult();
         }
 
-        public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
+        public Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
-            await Authorize(context);
+            return Authorize(context);
         }
 
         private async Task Authorize(AuthorizationFilterContext context)
@@ -51,9 +51,9 @@ namespace VirtoCommerce.ExportModule.Data.Security
         /// <returns></returns>
         private string[] GetActionPolicies(AuthorizationFilterContext context)
         {
-            var result = new string[] { };
-            var controllerActionDescriptor = (ControllerActionDescriptor)context.ActionDescriptor;
-            var authorizeAnyAttribute = controllerActionDescriptor.MethodInfo.GetCustomAttributes(typeof(AuthorizeAnyAttribute), true).Cast<AuthorizeAnyAttribute>().FirstOrDefault();
+            var result = System.Array.Empty<string>();
+            var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor; // For controller actions only. Everything else (like, for example, CompiledPageActionDescriptor) should be skipped.
+            var authorizeAnyAttribute = controllerActionDescriptor?.MethodInfo.GetCustomAttributes(typeof(AuthorizeAnyAttribute), true).Cast<AuthorizeAnyAttribute>().FirstOrDefault();
             if (authorizeAnyAttribute != null)
             {
                 result = authorizeAnyAttribute.Policies;
