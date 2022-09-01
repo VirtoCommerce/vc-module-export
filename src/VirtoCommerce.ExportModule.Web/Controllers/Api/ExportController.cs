@@ -1,20 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.Extensions.Options;
 using VirtoCommerce.ExportModule.Core;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Services;
-using VirtoCommerce.ExportModule.Data.Security;
 using VirtoCommerce.ExportModule.Web.BackgroundJobs;
 using VirtoCommerce.ExportModule.Web.Model;
-using VirtoCommerce.Platform.Core;
 using VirtoCommerce.Platform.Core.ExportImport.PushNotifications;
 using VirtoCommerce.Platform.Core.PushNotifications;
 using VirtoCommerce.Platform.Core.Security;
@@ -28,7 +23,6 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         private readonly IKnownExportTypesRegistrar _knownExportTypesRegistrar;
         private readonly IUserNameResolver _userNameResolver;
         private readonly IPushNotificationManager _pushNotificationManager;
-        private readonly PlatformOptions _platformOptions;
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
         private readonly IAuthorizationService _authorizationService;
 
@@ -37,7 +31,6 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             IKnownExportTypesRegistrar knownExportTypesRegistrar,
             IUserNameResolver userNameResolver,
             IPushNotificationManager pushNotificationManager,
-            IOptions<PlatformOptions> platformOptions,
             IKnownExportTypesResolver knownExportTypesResolver,
             IAuthorizationService authorizationService)
         {
@@ -45,7 +38,6 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             _knownExportTypesRegistrar = knownExportTypesRegistrar;
             _userNameResolver = userNameResolver;
             _pushNotificationManager = pushNotificationManager;
-            _platformOptions = platformOptions.Value;
             _knownExportTypesResolver = knownExportTypesResolver;
             _authorizationService = authorizationService;
         }
@@ -150,31 +142,6 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         {
             BackgroundJob.Delete(cancellationRequest.JobId);
             return Ok();
-        }
-
-        /// <summary>
-        /// Downloads file by its name
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("download/{fileName}")]
-        [AuthorizeAny(PlatformConstants.Security.Permissions.PlatformExport, ModuleConstants.Security.Permissions.Download)]
-        public ActionResult DownloadExportFile([FromRoute] string fileName)
-        {
-            var localTmpFolder = Path.GetFullPath(Path.Combine(_platformOptions.DefaultExportFolder));
-            var localPath = Path.Combine(localTmpFolder, Path.GetFileName(fileName));
-
-            //Load source data only from local file system 
-            using (var stream = System.IO.File.Open(localPath, FileMode.Open))
-            {
-                var provider = new FileExtensionContentTypeProvider();
-                if (!provider.TryGetContentType(localPath, out var contentType))
-                {
-                    contentType = "application/octet-stream";
-                }
-                return PhysicalFile(localPath, contentType);
-            }
         }
     }
 }
