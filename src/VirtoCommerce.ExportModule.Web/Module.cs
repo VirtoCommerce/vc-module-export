@@ -33,6 +33,7 @@ namespace VirtoCommerce.ExportModule.Web
             serviceCollection.AddTransient<IExportProviderFactory, ExportProviderFactory>();
 
             serviceCollection.AddTransient<IDataExporter, DataExporter>();
+            serviceCollection.AddTransient<IExportFileStorage, ExportFileStorage>();
 
             serviceCollection.Configure<MvcOptions>(configure =>
             {
