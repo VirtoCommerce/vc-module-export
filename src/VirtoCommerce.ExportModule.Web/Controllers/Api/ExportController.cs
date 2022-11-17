@@ -88,7 +88,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
 
             pagedDataSource.Fetch();
             var queryResult = pagedDataSource.Items;
-            var result = new ExportableSearchResult()
+            var result = new ExportableSearchResult
             {
                 TotalCount = pagedDataSource.GetTotalCount(),
                 Results = queryResult.ToList()
@@ -122,7 +122,8 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
                 Title = $"{typeTitle} export",
                 Description = "Starting export task..."
             };
-            _pushNotificationManager.Send(notification);
+
+            await _pushNotificationManager.SendAsync(notification);
 
             var jobId = BackgroundJob.Enqueue<ExportJob>(x => x.ExportBackgroundAsync(request, notification, JobCancellationToken.Null, null));
             notification.JobId = jobId;

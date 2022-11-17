@@ -27,7 +27,7 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
         private readonly IBlobStorageProvider _blobStorageProvider;
         private readonly IBlobUrlResolver _blobUrlResolver;
 
-        private string fileNameTemplate;
+        private string _fileNameTemplate;
 
         public ExportJob(IDataExporter dataExporter,
             IPushNotificationManager pushNotificationManager,
@@ -50,18 +50,15 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
         {
             get
             {
-                if (fileNameTemplate == null)
-                {
-                    fileNameTemplate = _settingsManager.GetValue(ModuleConstants.Settings.General.ExportFileNameTemplate.Name, ModuleConstants.Settings.General.ExportFileNameTemplate.DefaultValue.ToString());
-                }
+                var setting = ModuleConstants.Settings.General.ExportFileNameTemplate;
 
-                return fileNameTemplate;
+                return _fileNameTemplate ??= _settingsManager.GetValue(setting.Name, setting.DefaultValue?.ToString());
             }
         }
 
         public async Task ExportBackgroundAsync(ExportDataRequest request, ExportPushNotification notification, IJobCancellationToken cancellationToken, PerformContext context)
         {
-            void progressCallback(ExportProgressInfo x)
+            void ProgressCallback(ExportProgressInfo x)
             {
                 notification.Patch(x);
                 notification.JobId = context.BackgroundJob.Id;
@@ -78,7 +75,7 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
                 var fileName = string.Format(FileNameTemplate, DateTime.UtcNow);
 
                 // Do not like provider creation here to get file extension, maybe need to pass created provider to Exporter.
-                // Create stream inside Exporter is not good as it is not Exporter resposibility to decide where to write.
+                // Create stream inside Exporter is not good as it is not Exporter responsibility to decide where to write.
                 var provider = _exportProviderFactory.CreateProvider(request);
 
                 if (!string.IsNullOrEmpty(provider.ExportedFileExtension))
@@ -87,9 +84,10 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
                 }
 
                 var url = UrlHelperExtensions.Combine(_platformOptions.DefaultExportFolder, fileName);
-                using (var blobStream = _blobStorageProvider.OpenWrite(url))
+
+                await using (var blobStream = await _blobStorageProvider.OpenWriteAsync(url))
                 {
-                    _dataExporter.Export(blobStream, request, progressCallback, new JobCancellationTokenWrapper(cancellationToken));
+                    _dataExporter.Export(blobStream, request, ProgressCallback, new JobCancellationTokenWrapper(cancellationToken));
                 }
 
                 notification.DownloadUrl = _blobUrlResolver.GetAbsoluteUrl(url);
