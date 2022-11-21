@@ -28,11 +28,12 @@ namespace VirtoCommerce.ExportModule.Web
             serviceCollection.AddSingleton<IKnownExportTypesRegistrar>(serviceProvider => serviceProvider.GetRequiredService<KnownExportTypesService>());
             serviceCollection.AddSingleton<IKnownExportTypesResolver>(serviceProvider => serviceProvider.GetRequiredService<KnownExportTypesService>());
 
-            serviceCollection.AddTransient<Func<ExportDataRequest, IExportProvider>>(serviceProvider => (request) => new JsonExportProvider(request));
-            serviceCollection.AddTransient<Func<ExportDataRequest, IExportProvider>>(serviceProvider => (request) => new CsvExportProvider(request));
+            serviceCollection.AddTransient<Func<ExportDataRequest, IExportProvider>>(serviceProvider => request => new JsonExportProvider(request));
+            serviceCollection.AddTransient<Func<ExportDataRequest, IExportProvider>>(serviceProvider => request => new CsvExportProvider(request));
             serviceCollection.AddTransient<IExportProviderFactory, ExportProviderFactory>();
 
             serviceCollection.AddTransient<IDataExporter, DataExporter>();
+            serviceCollection.AddTransient<IExportFileStorage, ExportFileStorage>();
 
             serviceCollection.Configure<MvcOptions>(configure =>
             {
@@ -47,7 +48,7 @@ namespace VirtoCommerce.ExportModule.Web
 
             //Register module permissions
             var permissionsProvider = appBuilder.ApplicationServices.GetRequiredService<IPermissionsRegistrar>();
-            permissionsProvider.RegisterPermissions(ModuleConstants.Security.Permissions.AllPermissions.Select(x => new Permission() { GroupName = "Generic Export", Name = x }).ToArray());
+            permissionsProvider.RegisterPermissions(ModuleConstants.Security.Permissions.AllPermissions.Select(x => new Permission { GroupName = "Generic Export", Name = x }).ToArray());
 
             PolymorphJsonConverter.RegisterTypeForDiscriminator(typeof(ExportDataQuery), nameof(ExportDataQuery.ExportTypeName));
 

@@ -8,8 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using VirtoCommerce.ExportModule.Core;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Services;
+using VirtoCommerce.ExportModule.Data.Security;
 using VirtoCommerce.ExportModule.Web.BackgroundJobs;
 using VirtoCommerce.ExportModule.Web.Model;
+using VirtoCommerce.Platform.Core;
+using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport.PushNotifications;
 using VirtoCommerce.Platform.Core.PushNotifications;
 using VirtoCommerce.Platform.Core.Security;
@@ -25,6 +28,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         private readonly IPushNotificationManager _pushNotificationManager;
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IExportFileStorage _exportFileStorage;
 
         public ExportController(
             IEnumerable<Func<ExportDataRequest, IExportProvider>> exportProviderFactories,
@@ -32,7 +36,8 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             IUserNameResolver userNameResolver,
             IPushNotificationManager pushNotificationManager,
             IKnownExportTypesResolver knownExportTypesResolver,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService,
+            IExportFileStorage exportFileStorage)
         {
             _exportProviderFactories = exportProviderFactories;
             _knownExportTypesRegistrar = knownExportTypesRegistrar;
@@ -40,6 +45,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             _pushNotificationManager = pushNotificationManager;
             _knownExportTypesResolver = knownExportTypesResolver;
             _authorizationService = authorizationService;
+            _exportFileStorage = exportFileStorage;
         }
 
         /// <summary>
@@ -88,7 +94,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
 
             pagedDataSource.Fetch();
             var queryResult = pagedDataSource.Items;
-            var result = new ExportableSearchResult()
+            var result = new ExportableSearchResult
             {
                 TotalCount = pagedDataSource.GetTotalCount(),
                 Results = queryResult.ToList()
@@ -122,7 +128,8 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
                 Title = $"{typeTitle} export",
                 Description = "Starting export task..."
             };
-            _pushNotificationManager.Send(notification);
+
+            await _pushNotificationManager.SendAsync(notification);
 
             var jobId = BackgroundJob.Enqueue<ExportJob>(x => x.ExportBackgroundAsync(request, notification, JobCancellationToken.Null, null));
             notification.JobId = jobId;
@@ -142,6 +149,22 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         {
             BackgroundJob.Delete(cancellationRequest.JobId);
             return Ok();
+        }
+
+        /// <summary>
+        /// Downloads file by its name
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("download/{fileName}")]
+        [AuthorizeAny(PlatformConstants.Security.Permissions.PlatformExport, ModuleConstants.Security.Permissions.Download)]
+        public async Task<ActionResult> DownloadExportFile([FromRoute] string fileName)
+        {
+            var contentType = MimeTypeResolver.ResolveContentType(fileName);
+            var stream = await _exportFileStorage.OpenReadAsync(fileName);
+
+            return File(stream, contentType, fileName);
         }
     }
 }
