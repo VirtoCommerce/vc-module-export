@@ -1,0 +1,98 @@
+{
+  "export": {
+    "main-menu-title": "Универсальный экспорт",
+    "commands": {
+      "pick-all": "Выбрать все"
+    },
+    "provider-names": {
+      "JsonExportProvider": "Провайдер экспорта в JSON",
+      "CsvExportProvider": "Провайдер экспорта в CSV"
+    },
+    "blades": {
+      "export-settings": {
+        "title": "Настройк экспорта",
+        "subtitle": "Укажите настройки экспорта",
+        "labels": {
+          "provider": "Выберите провайдера",
+          "template": "Выберите шаблон экспорта",
+          "property-selected": "Выберите свойство",
+          "row-selected": "Выберите записи",
+          "total": "Общее количество",
+          "processed": "Количество обработано",
+          "errors-count": "Количество ошибок",
+          "edit": "Редактировать",
+          "delete": "Удалить",
+          "save": "Сохранить",
+          "exported-type": "Выберите тип объекта",
+          "select": "Выберите",
+          "none": "Отсутствует",
+          "exported-data": "Выберите данные для экспорта",
+          "exported-properties": "Выберите свойства",
+          "exported-properties-group": "Выберите свойства в этой группе",
+          "all": "Все",
+          "provider-description": "Табличные провайдеры (например, провайдер Csv) недоступны для экспортируемых типов, которые не поддерживают табличный экспорт.",
+          "exported-properties-description": "Выберите свойства.",
+          "exported-data-description": "Выберите диапазон данных.",
+          "exported-type-description": "Выберите тип данных.",
+          "selected": "{{ count }} из {{total}} выбраны ",
+          "allFiltered": "Все (указанный фильтр)"
+        },
+        "placeholders": {
+          "provider": "Выберите провайдера для экспорта",
+          "template": "Выберите шаблон экспорта"
+        }
+      },
+      "export-progress": {
+        "title": "Прогресс экспорта"
+      },
+      "export-type-selector": {
+        "title": "Выбрать экспортируемый тип",
+        "subtitle": "Выберите тип данных для экспорта",
+        "bread-crumb-top": "Все типы"
+      },
+      "export-generic-viewer": {
+        "title": "Выберите данные для экспорта",
+        "subtitle": "Выберите данные, которые вы хотите экспортирова",
+        "labels": {
+          "picture": "Рис",
+          "type": "Тип объекта",
+          "name": "Наименование",
+          "code": "Код",
+          "new-filter": "Добавить новый фильтр",
+          "important": "Важный!",
+          "important-description": "Этот источник данных не поддерживает экспорт определенных выбранных сущностей. Пожалуйста, используйте фильтр, чтобы ограничить набор экспортируемых данных."
+        },
+        "placeholders": {
+          "select-filter": "Выберите фильтр…"
+        },
+        "commands": {
+          "select": "Выберите"
+        }
+      },
+      "generic-filter": {
+        "new-title": "Безымянный фильтр",
+        "new-subtitle": "Редактировать фильтр",
+        "subtitle": "Редактировать фильтр",
+        "labels": {
+          "criteria": "Критерии фильтра",
+          "filter-name": "Имя фильтра",
+          "unnamed-filter": "Безымянный фильтр"
+        },
+        "placeholders": {
+          "filter-name": "Как вы назовете этот фильтр?"
+        },
+        "commands": {
+          "apply": "Принять"
+        }
+      }
+    }
+  },
+  "settings": {
+    "Export": {
+      "FileNameTemplate": {
+        "description": "Шаблон (паттерн), который будет использоваться для генерации имени экспортируемого файла. Параметры: 0 - дата (время генерации файла UTC).",
+        "title": "Экспорт шаблона имени файла"
+      }
+    }
+  }
+}
