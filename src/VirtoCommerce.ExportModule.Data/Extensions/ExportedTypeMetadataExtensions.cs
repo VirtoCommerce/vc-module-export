@@ -66,12 +66,14 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
             {
                 var propertyType = propertyInfo.PropertyType;
                 var isNested = propertyType.IsNested();
+                var isReference = propertyType.IsReference();
 
                 var memberName = propertyInfo.GetDerivedName(baseMemberName);
 
-                if (!isNested)
+                //May include collections of non-entity types
+                if (!isReference && (!isNested || propertyPathsToInclude.Contains(memberName)))
                 {
-                    result.Add(new ExportTypePropertyInfoEx()
+                    result.Add(new ExportTypePropertyInfoEx
                     {
                         ExportedPropertyInfo = new ExportedTypePropertyInfo
                         {
@@ -80,7 +82,7 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
                             Group = groupName,
                         },
                         PropertyInfo = propertyInfo,
-                        IsReference = isNested,
+                        IsReference = false
                     });
                 }
             }
@@ -97,14 +99,24 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
             return result.ToArray();
         }
 
-        public static bool IsNested(this Type propertyType)
-        {
+        /// <summary>
+        /// Check if the property type is an entity or a collection
+        /// </summary>
+        public static bool IsNested(this Type propertyType) =>
+            propertyType.IsSubclassOf(typeof(Entity))
+            || propertyType.IsSubclassOf(typeof(IEnumerable))
+            || propertyType.GetInterfaces().Any(x =>
+                x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                                && !x.GetGenericArguments()[0].IsSubclassOf(typeof(ValueType)));
 
-            return propertyType.IsSubclassOf(typeof(Entity))
-                   || propertyType.IsSubclassOf(typeof(IEnumerable))
-                   || propertyType.GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                                                                            && x.GetGenericArguments().Any(y => !y.IsSubclassOf(typeof(ValueType))));
-        }
+        /// <summary>
+        /// Check if the property type is an entity or a collection of entities
+        /// </summary>
+        public static bool IsReference(this Type propertyType) =>
+            propertyType.IsSubclassOf(typeof(Entity))
+            || propertyType.GetInterfaces().Any(x =>
+                x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                                && x.GetGenericArguments()[0].IsSubclassOf(typeof(Entity)));
 
         /// <summary>
         /// Adds baseName as a prefixe to the property name (i.e. "{baseName}.{Name}")
