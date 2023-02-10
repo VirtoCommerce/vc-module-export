@@ -20,7 +20,7 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
                     var propertyName = property.GetDerivedName(baseMemberName);
 
                     // Entity or a collection of entities
-                    if (property.PropertyType.IsReference())
+                    if (property.PropertyType.IsEntityReference())
                     {
                         if (!includedProperties.Any(x => x.FullName.StartsWith($"{propertyName}.", StringComparison.InvariantCultureIgnoreCase)))
                         {

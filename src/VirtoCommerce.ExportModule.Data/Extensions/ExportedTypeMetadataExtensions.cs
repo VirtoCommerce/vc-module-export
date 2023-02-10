@@ -66,12 +66,12 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
             {
                 var propertyType = propertyInfo.PropertyType;
                 var isNested = propertyType.IsNested();
-                var isReference = propertyType.IsReference();
+                var isEntityReference = propertyType.IsEntityReference();
 
                 var memberName = propertyInfo.GetDerivedName(baseMemberName);
 
                 //May include collections of non-entity types
-                if (!isReference && (!isNested || propertyPathsToInclude.Contains(memberName)))
+                if (!isEntityReference && (!isNested || propertyPathsToInclude.Contains(memberName)))
                 {
                     result.Add(new ExportTypePropertyInfoEx
                     {
@@ -112,7 +112,7 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
         /// <summary>
         /// Check if the property type is an entity or a collection of entities
         /// </summary>
-        public static bool IsReference(this Type propertyType) =>
+        public static bool IsEntityReference(this Type propertyType) =>
             propertyType.IsSubclassOf(typeof(Entity))
             || propertyType.GetInterfaces().Any(x =>
                 x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IEnumerable<>)
