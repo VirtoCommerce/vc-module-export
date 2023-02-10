@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using VirtoCommerce.ExportModule.Core.Model;
@@ -61,27 +62,49 @@ namespace VirtoCommerce.ExportModule.Data.Services
                     exportProgress.Description = "Fetching…";
                     progressCallback(exportProgress);
 
+                    void WriteRecord(IExportable exportable)
+                    {
+                        if (needTabularData)
+                        {
+                            var tabular = exportable as ITabularConvertible;
+                            if (tabular == null)
+                            {
+                                throw new NotSupportedException(
+                                    $"Object should be {nameof(ITabularConvertible)} to be exported using tabular provider.");
+                            }
+
+                            exportable = tabular.ToTabular();
+                            request.DataQuery.FilterProperties(exportable);
+                        }
+                        else
+                        {
+                            request.DataQuery.FilterProperties(exportable);
+                        }
+
+                        exportProvider.WriteRecord(writer, exportable);
+                    }
+
                     while (pagedDataSource.Fetch())
                     {
                         token.ThrowIfCancellationRequested();
 
-                        var objectBatch = pagedDataSource.Items;
-
-                        foreach (var obj in objectBatch)
+                        foreach (var obj in pagedDataSource.Items)
                         {
                             try
                             {
-                                var preparedObject = obj.Clone() as IExportable;
+                                var preparedObject = obj.CloneTyped();
 
-                                request.DataQuery.FilterProperties(preparedObject);
-
-                                if (needTabularData)
+                                if (preparedObject is IEnumerable<IExportable> enumerable)
                                 {
-                                    preparedObject = (preparedObject as ITabularConvertible)?.ToTabular() ??
-                                                     throw new NotSupportedException($"Object should be {nameof(ITabularConvertible)} to be exported using tabular provider.");
+                                    foreach (var exportable in enumerable)
+                                    {
+                                        WriteRecord(exportable);
+                                    }
                                 }
-
-                                exportProvider.WriteRecord(writer, preparedObject);
+                                else
+                                {
+                                    WriteRecord(preparedObject);
+                                }
                             }
                             catch (Exception e)
                             {
