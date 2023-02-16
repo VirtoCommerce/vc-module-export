@@ -82,7 +82,7 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
                             Group = groupName,
                         },
                         PropertyInfo = propertyInfo,
-                        IsReference = false
+                        IsReference = false,
                     });
                 }
             }
@@ -103,7 +103,7 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
         /// Check if the property type is an entity or a collection
         /// </summary>
         public static bool IsNested(this Type propertyType) =>
-            propertyType.IsSubclassOf(typeof(Entity))
+            propertyType.IsAssignableTo(typeof(IEntity))
             || propertyType.IsSubclassOf(typeof(IEnumerable))
             || propertyType.GetInterfaces().Any(x =>
                 x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IEnumerable<>)
@@ -113,10 +113,10 @@ namespace VirtoCommerce.ExportModule.Data.Extensions
         /// Check if the property type is an entity or a collection of entities
         /// </summary>
         public static bool IsEntityReference(this Type propertyType) =>
-            propertyType.IsSubclassOf(typeof(Entity))
+            propertyType.IsAssignableTo(typeof(IEntity))
             || propertyType.GetInterfaces().Any(x =>
                 x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                                && x.GetGenericArguments()[0].IsSubclassOf(typeof(Entity)));
+                                && x.GetGenericArguments()[0].IsAssignableTo(typeof(IEntity)));
 
         /// <summary>
         /// Adds baseName as a prefixe to the property name (i.e. "{baseName}.{Name}")
