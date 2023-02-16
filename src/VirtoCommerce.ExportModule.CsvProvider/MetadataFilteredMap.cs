@@ -84,7 +84,7 @@ namespace VirtoCommerce.ExportModule.CsvProvider
 
             return type.GetInterfaces().Any(x =>
                    x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IEnumerable<>)
-                                   && type.GetGenericArguments()[0].IsAssignableTo(typeof(IEntity)));
+                                   && x.GetGenericArguments()[0].IsAssignableTo(typeof(IEntity)));
         }
 
         private static MemberMap CreateMemberMap(Type currentType, PropertyInfo propertyInfo, string columnName, ref int columnIndex)
