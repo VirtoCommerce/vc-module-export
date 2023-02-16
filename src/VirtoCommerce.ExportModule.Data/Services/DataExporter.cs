@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using VirtoCommerce.ExportModule.Core.Model;
@@ -31,16 +32,15 @@ namespace VirtoCommerce.ExportModule.Data.Services
             var exportedTypeDefinition = _exportTypesResolver.ResolveExportedTypeDefinition(request.ExportTypeName);
             var pagedDataSource = (exportedTypeDefinition.DataSourceFactory ?? throw new ArgumentNullException(nameof(ExportedTypeDefinition.DataSourceFactory))).Create(request.DataQuery);
 
-            var completedMessage = $"Export completed";
+            var completedMessage = "Export completed";
             var totalCount = pagedDataSource.GetTotalCount();
             var exportedCount = 0;
-            var exportProgress = new ExportProgressInfo()
+            var exportProgress = new ExportProgressInfo
             {
                 ProcessedCount = 0,
                 TotalCount = totalCount,
                 Description = "Export has started",
             };
-
             progressCallback(exportProgress);
 
             try
@@ -48,56 +48,53 @@ namespace VirtoCommerce.ExportModule.Data.Services
                 exportProgress.Description = "Creating provider…";
                 progressCallback(exportProgress);
 
-                using (var writer = new StreamWriter(stream, Encoding.UTF8, 1024, true) { AutoFlush = true })
-                using (var exportProvider = _exportProviderFactory.CreateProvider(request))
+                using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, true) { AutoFlush = true };
+                using var exportProvider = _exportProviderFactory.CreateProvider(request);
+
+                var needTabularData = exportProvider.IsTabular;
+                if (needTabularData && !exportedTypeDefinition.IsTabularExportSupported)
                 {
-                    var needTabularData = exportProvider.IsTabular;
+                    throw new NotSupportedException($"Provider \"{exportProvider.TypeName}\" does not support tabular export.");
+                }
 
-                    if (needTabularData && !exportedTypeDefinition.IsTabularExportSupported)
+                exportProgress.Description = "Fetching…";
+                progressCallback(exportProgress);
+
+                while (pagedDataSource.Fetch())
+                {
+                    token.ThrowIfCancellationRequested();
+                    foreach (var obj in pagedDataSource.Items)
                     {
-                        throw new NotSupportedException($"Provider \"{exportProvider.TypeName}\" does not support tabular export.");
-                    }
-
-                    exportProgress.Description = "Fetching…";
-                    progressCallback(exportProgress);
-
-                    while (pagedDataSource.Fetch())
-                    {
-                        token.ThrowIfCancellationRequested();
-
-                        var objectBatch = pagedDataSource.Items;
-
-                        foreach (var obj in objectBatch)
+                        try
                         {
-                            try
+                            var preparedObject = obj.CloneTyped();
+
+                            if (preparedObject is IEnumerable<IExportable> enumerable)
                             {
-                                var preparedObject = obj.Clone() as IExportable;
-
-                                request.DataQuery.FilterProperties(preparedObject);
-
-                                if (needTabularData)
+                                foreach (var exportable in enumerable)
                                 {
-                                    preparedObject = (preparedObject as ITabularConvertible)?.ToTabular() ??
-                                                     throw new NotSupportedException($"Object should be {nameof(ITabularConvertible)} to be exported using tabular provider.");
+                                    WriteRecord(exportProvider, writer, request, exportable, needTabularData);
                                 }
-
-                                exportProvider.WriteRecord(writer, preparedObject);
                             }
-                            catch (Exception e)
+                            else
                             {
-                                exportProgress.Errors.Add(e.Message);
-                                progressCallback(exportProgress);
+                                WriteRecord(exportProvider, writer, request, preparedObject, needTabularData);
                             }
-                            exportedCount++;
                         }
-
-                        exportProgress.ProcessedCount = exportedCount;
-
-                        if (exportedCount != totalCount)
+                        catch (Exception e)
                         {
-                            exportProgress.Description = $"{exportedCount} out of {totalCount} have been exported.";
+                            exportProgress.Errors.Add(e.Message);
                             progressCallback(exportProgress);
                         }
+                        exportedCount++;
+                    }
+
+                    exportProgress.ProcessedCount = exportedCount;
+
+                    if (exportedCount != totalCount)
+                    {
+                        exportProgress.Description = $"{exportedCount} out of {totalCount} have been exported.";
+                        progressCallback(exportProgress);
                     }
                 }
             }
@@ -109,12 +106,26 @@ namespace VirtoCommerce.ExportModule.Data.Services
             {
                 if (exportProgress.Errors.Count > 0)
                 {
-                    completedMessage = $"Export completed with errors";
+                    completedMessage = "Export completed with errors";
                 }
 
                 exportProgress.Description = $"{completedMessage}: {exportedCount} out of {totalCount} have been exported.";
                 progressCallback(exportProgress);
             }
+        }
+
+
+        private static void WriteRecord(IExportProvider exportProvider, TextWriter writer, ExportDataRequest request, IExportable exportable, bool needTabularData)
+        {
+            if (needTabularData)
+            {
+                var tabular = exportable as ITabularConvertible ??
+                              throw new NotSupportedException($"Object should be {nameof(ITabularConvertible)} to be exported using tabular provider.");
+                exportable = tabular.ToTabular();
+            }
+
+            request.DataQuery.FilterProperties(exportable);
+            exportProvider.WriteRecord(writer, exportable);
         }
     }
 }
