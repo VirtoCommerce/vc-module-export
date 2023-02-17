@@ -19,8 +19,8 @@ namespace VirtoCommerce.ExportModule.Data.Services
         }
 
         /// <summary>
-        /// Creates <see cref="ExportedTypeDefinitionBuilder"/> with definition with <typeparamref name="TExportable"/> type <see cref="Type.FullName"/> as <see cref="ExportedTypeDefinition.TypeName"/>,
-        /// <see cref="Type.Namespace"/> as <see cref="ExportedTypeDefinition.Group"/> and ExportDataQuery type name as <see cref="ExportedTypeDefinition.ExportDataQueryType"/>.
+        /// Creates <see cref="ExportedTypeDefinitionBuilder"/> with definition with <typeparamref name="TExportable"/> type <see cref="Type.FullName"/> as <see cref="Core.Model.ExportedTypeDefinition.TypeName"/>,
+        /// <see cref="Type.Namespace"/> as <see cref="Core.Model.ExportedTypeDefinition.Group"/> and ExportDataQuery type name as <see cref="Core.Model.ExportedTypeDefinition.ExportDataQueryType"/>.
         /// </summary>
         /// <typeparam name="TExportable">Exportable entity type.</typeparam>
         /// <typeparam name="TDataQuery">Type to query entities.</typeparam>
