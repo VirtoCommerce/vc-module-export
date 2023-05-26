@@ -86,7 +86,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             var authorizationResult = await _authorizationService.AuthorizeAsync(User, request.DataQuery, request.ExportTypeName + "ExportDataPolicy");
             if (!authorizationResult.Succeeded)
             {
-                return Unauthorized();
+                return Forbid();
             }
 
             var exportedTypeDefinition = _knownExportTypesResolver.ResolveExportedTypeDefinition(request.ExportTypeName);
@@ -116,7 +116,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             var authorizationResult = await _authorizationService.AuthorizeAsync(User, request.DataQuery, request.ExportTypeName + "ExportDataPolicy");
             if (!authorizationResult.Succeeded)
             {
-                return Unauthorized();
+                return Forbid();
             }
 
             var typeTitle = request.ExportTypeName.LastIndexOf('.') > 0 ?
