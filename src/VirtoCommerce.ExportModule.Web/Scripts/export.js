@@ -5,7 +5,7 @@ if (AppDependencies !== undefined) {
     AppDependencies.push(moduleName);
 }
 
-angular.module(moduleName, ['ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.validate'])
+angular.module(moduleName, ['ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.validate', 'angular-toArrayFilter'])
     .config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('workspace.exportModule', {
             url: '/generic-export',
