@@ -16,6 +16,7 @@ namespace VirtoCommerce.ExportModule.CsvProvider
         public ExportedTypePropertyInfo[] IncludedProperties { get; private set; }
         public string ExportedFileExtension => "csv";
         public bool IsTabular => true;
+
         [JsonIgnore]
         public IExportProviderConfiguration Configuration { get; }
 
@@ -25,7 +26,7 @@ namespace VirtoCommerce.ExportModule.CsvProvider
         {
             if (exportDataRequest == null)
             {
-                throw new ArgumentNullException(nameof(exportDataRequest));
+                ArgumentNullException.ThrowIfNull(nameof(exportDataRequest));
             }
 
             Configuration = exportDataRequest.ProviderConfig as CsvProviderConfiguration ?? new CsvProviderConfiguration();
@@ -71,7 +72,7 @@ namespace VirtoCommerce.ExportModule.CsvProvider
             if (mapForType == null)
             {
                 var constructor = typeof(MetadataFilteredMap<>).MakeGenericType(objectType).GetConstructor(IncludedProperties != null
-                    ? new[] { typeof(ExportedTypePropertyInfo[]) }
+                    ? [typeof(ExportedTypePropertyInfo[])]
                     : Array.Empty<Type>());
                 var classMap = (ClassMap)constructor.Invoke(IncludedProperties != null ? new[] { IncludedProperties } : null);
 
