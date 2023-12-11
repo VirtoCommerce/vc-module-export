@@ -24,7 +24,7 @@ namespace VirtoCommerce.ExportModule.CsvProvider
 
         public CsvExportProvider(ExportDataRequest exportDataRequest)
         {
-            ArgumentNullException.ThrowIfNull(exportDataRequest, nameof(exportDataRequest));
+            ArgumentNullException.ThrowIfNull(exportDataRequest);
 
             Configuration = exportDataRequest.ProviderConfig as CsvProviderConfiguration ?? new CsvProviderConfiguration();
             IncludedProperties = exportDataRequest.DataQuery?.IncludedProperties;
