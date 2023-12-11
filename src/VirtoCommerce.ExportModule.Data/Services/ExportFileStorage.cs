@@ -31,7 +31,7 @@ public class ExportFileStorage : IExportFileStorage
     public string GenerateFileName(DateTime timestamp, string fileExtension)
     {
         var setting = ModuleConstants.Settings.General.ExportFileNameTemplate;
-        var fileNameTemplate = _settingsManager.GetValue(setting.Name, setting.DefaultValue?.ToString());
+        var fileNameTemplate = _settingsManager.GetValue<string>(setting);
 
         if (string.IsNullOrEmpty(fileNameTemplate))
         {

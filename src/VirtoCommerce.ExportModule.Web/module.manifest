@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <id>VirtoCommerce.Export</id>
-  <version>3.207.0</version>
+  <version>3.800.0</version>
   <version-tag />
-  <platformVersion>3.210.0</platformVersion>
+  <platformVersion>3.800.0</platformVersion>
   <title>Generic Export</title>
   <description>Generic export functionality</description>
   <authors>
@@ -14,12 +14,12 @@
   </owners>
   <iconUrl>Modules/$(VirtoCommerce.Export)/Content/logo.png</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
-  <copyright>Copyright © 2011-2023 Virto Commerce. All rights reserved</copyright>
+  <copyright>Copyright © 2011-2024 Virto Commerce. All rights reserved</copyright>
   <tags>export</tags>
   <assemblyFile>VirtoCommerce.ExportModule.Web.dll</assemblyFile>
   <moduleType>VirtoCommerce.ExportModule.Web.Module, VirtoCommerce.ExportModule.Web</moduleType>
   <dependencies>
-    <dependency id="VirtoCommerce.Assets" version="3.200.0" />
+    <dependency id="VirtoCommerce.Assets" version="3.800.0" />
   </dependencies>
   <groups>
     <group>commerce</group>

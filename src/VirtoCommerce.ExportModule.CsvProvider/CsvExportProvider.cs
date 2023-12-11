@@ -57,10 +57,9 @@ namespace VirtoCommerce.ExportModule.CsvProvider
                 {
                     Delimiter = csvProviderConfiguration.Delimiter,
                     Encoding = Encoding.GetEncoding(csvProviderConfiguration.Encoding),
-                    LeaveOpen = true
                 };
 
-                _csvWriter = new CsvWriter(textWriter, csvConfiguration);
+                _csvWriter = new CsvWriter(textWriter, csvConfiguration, leaveOpen: true);
             }
         }
 
