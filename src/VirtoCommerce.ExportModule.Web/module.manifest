@@ -3,7 +3,7 @@
   <id>VirtoCommerce.Export</id>
   <version>3.800.0</version>
   <version-tag />
-  <platformVersion>3.800.0</platformVersion>
+  <platformVersion>3.800.0-alpha.12824-net8</platformVersion>
   <title>Generic Export</title>
   <description>Generic export functionality</description>
   <authors>
