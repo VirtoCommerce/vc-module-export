@@ -23,7 +23,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.8.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
-    <PackageReference Include="VirtoCommerce.Platform.Hangfire" Version="3.800.0-alpha.12831-net8" />
+    <PackageReference Include="VirtoCommerce.Platform.Hangfire" Version="3.800.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.ExportModule.Core\VirtoCommerce.ExportModule.Core.csproj" />
