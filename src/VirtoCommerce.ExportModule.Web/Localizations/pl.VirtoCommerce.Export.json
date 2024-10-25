@@ -1,0 +1,98 @@
+{
+  "export": {
+    "main-menu-title": "Eksport ogólny",
+    "commands": {
+      "pick-all": "Wybierz wszystko"
+    },
+    "provider-names": {
+      "JsonExportProvider": "Dostawca eksportu JSON",
+      "CsvExportProvider": "Dostawca eksportu CSV"
+    },
+    "blades": {
+      "export-settings": {
+        "title": "Ustawienia eksportu",
+        "subtitle": "Określ ustawienia eksportu",
+        "labels": {
+          "provider": "Wybierz dostawcę",
+          "template": "Wybierz szablon eksportu",
+          "property-selected": "Wybierz właściwość",
+          "row-selected": "Wybierz rekordy",
+          "total": "Całkowita liczba",
+          "processed": "Liczba przetworzonych",
+          "errors-count": "Liczba błędów",
+          "edit": "Edytuj",
+          "delete": "Usuń",
+          "save": "Zapisz",
+          "exported-type": "Wybierz typ obiektu",
+          "select": "Wybierz",
+          "none": "Brak",
+          "exported-data": "Wybierz dane do eksportu",
+          "exported-properties": "Wybierz właściwości",
+          "exported-properties-group": "Wybierz właściwości w tej grupie",
+          "all": "Wszystkie",
+          "provider-description": "Dostawcy tabelaryczni (np. dostawca CSV) nie są dostępni dla eksportowanych typów, które nie obsługują eksportu tabelarycznego",
+          "exported-properties-description": "Wybierz właściwości",
+          "exported-data-description": "Wybierz zakres danych",
+          "exported-type-description": "Wybierz typ danych",
+          "selected": "Wybrano {{ count }} z {{total}}",
+          "allFiltered": "Wszystkie (określony filtr)"
+        },
+        "placeholders": {
+          "provider": "Wybierz dostawcę do eksportu",
+          "template": "Wybierz szablon eksportu"
+        }
+      },
+      "export-progress": {
+        "title": "Postęp eksportu"
+      },
+      "export-type-selector": {
+        "title": "Wybierz typ eksportu",
+        "subtitle": "Wybierz typ danych, które chcesz wyeksportować",
+        "bread-crumb-top": "Wszystkie typy"
+      },
+      "export-generic-viewer": {
+        "title": "Wybierz dane do eksportu",
+        "subtitle": "Wybierz dane, które chcesz wyeksportować",
+        "labels": {
+          "picture": "Obraz",
+          "type": "Typ obiektu",
+          "name": "Nazwa",
+          "code": "Kod",
+          "new-filter": "Dodaj nowy filtr",
+          "important": "Ważne!",
+          "important-description": "To źródło danych nie obsługuje eksportu konkretnych wybranych encji. Proszę użyć filtra, aby ograniczyć eksportowany zestaw danych"
+        },
+        "placeholders": {
+          "select-filter": "Wybierz filtr..."
+        },
+        "commands": {
+          "select": "Wybierz"
+        }
+      },
+      "generic-filter": {
+        "new-title": "Nienazwany filtr",
+        "new-subtitle": "Edytuj filtr",
+        "subtitle": "Edytuj filtr",
+        "labels": {
+          "criteria": "Kryteria filtrowania",
+          "filter-name": "Nazwa filtra",
+          "unnamed-filter": "Nienazwany filtr"
+        },
+        "placeholders": {
+          "filter-name": "Nazwij ten filtr"
+        },
+        "commands": {
+          "apply": "Zastosuj"
+        }
+      }
+    }
+  },
+  "settings": {
+    "Export": {
+      "FileNameTemplate": {
+        "description": "Szablon (wzorzec), który będzie używany do generowania nazwy eksportowanego pliku. Parametry: 0 - data (czas UTC generowania pliku)",
+        "title": "Szablon nazwy pliku eksportu"
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "export": {
+    "main-menu-title": "Allgemeiner Export",
+    "commands": {
+      "pick-all": "Alle auswählen"
+    },
+    "provider-names": {
+      "JsonExportProvider": "JSON-Exportanbieter",
+      "CsvExportProvider": "CSV-Exportanbieter"
+    },
+    "blades": {
+      "export-settings": {
+        "title": "Exporteinstellungen",
+        "subtitle": "Exporteinstellungen festlegen",
+        "labels": {
+          "provider": "Anbieter auswählen",
+          "template": "Exportvorlage auswählen",
+          "property-selected": "Eigenschaft auswählen",
+          "row-selected": "Datensätze auswählen",
+          "total": "Gesamtanzahl",
+          "processed": "Verarbeitete Anzahl",
+          "errors-count": "Fehleranzahl",
+          "edit": "Bearbeiten",
+          "delete": "Löschen",
+          "save": "Speichern",
+          "exported-type": "Objekttyp auswählen",
+          "select": "Auswählen",
+          "none": "Keine",
+          "exported-data": "Daten für Export auswählen",
+          "exported-properties": "Eigenschaften auswählen",
+          "exported-properties-group": "Eigenschaften in dieser Gruppe auswählen",
+          "all": "Alle",
+          "provider-description": "Tabellarische Anbieter (z.B. CSV-Anbieter) sind für exportierte Typen, die keinen tabellarischen Export unterstützen, nicht verfügbar",
+          "exported-properties-description": "Eigenschaften auswählen",
+          "exported-data-description": "Datenbereich auswählen",
+          "exported-type-description": "Datentyp auswählen",
+          "selected": "{{ count }} von {{total}} ausgewählt",
+          "allFiltered": "Alle (Filter angegeben)"
+        },
+        "placeholders": {
+          "provider": "Anbieter für Export auswählen",
+          "template": "Exportvorlage auswählen"
+        }
+      },
+      "export-progress": {
+        "title": "Exportfortschritt"
+      },
+      "export-type-selector": {
+        "title": "Exportierten Typ auswählen",
+        "subtitle": "Wählen Sie den Datentyp aus, den Sie exportieren möchten",
+        "bread-crumb-top": "Alle Typen"
+      },
+      "export-generic-viewer": {
+        "title": "Zu exportierende Daten auswählen",
+        "subtitle": "Wählen Sie die Daten aus, die Sie exportieren möchten",
+        "labels": {
+          "picture": "Bild",
+          "type": "Objekttyp",
+          "name": "Name",
+          "code": "Code",
+          "new-filter": "Neuen Filter hinzufügen",
+          "important": "Wichtig!",
+          "important-description": "Diese Datenquelle unterstützt keinen Export spezifisch ausgewählter Entitäten. Bitte verwenden Sie den Filter, um den exportierten Datensatz einzuschränken"
+        },
+        "placeholders": {
+          "select-filter": "Filter auswählen..."
+        },
+        "commands": {
+          "select": "Auswählen"
+        }
+      },
+      "generic-filter": {
+        "new-title": "Unbenannter Filter",
+        "new-subtitle": "Filter bearbeiten",
+        "subtitle": "Filter bearbeiten",
+        "labels": {
+          "criteria": "Filterkriterien",
+          "filter-name": "Filtername",
+          "unnamed-filter": "Unbenannter Filter"
+        },
+        "placeholders": {
+          "filter-name": "Diesen Filter benennen"
+        },
+        "commands": {
+          "apply": "Anwenden"
+        }
+      }
+    }
+  },
+  "settings": {
+    "Export": {
+      "FileNameTemplate": {
+        "description": "Die Vorlage (Muster), die zur Generierung des exportierten Dateinamens verwendet wird. Parameter: 0 - Datum (UTC-Zeit der Dateierstellung)",
+        "title": "Vorlage für Exportdateinamen"
+      }
+    }
+  }
+}

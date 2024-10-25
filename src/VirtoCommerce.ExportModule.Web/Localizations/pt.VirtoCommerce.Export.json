@@ -1,0 +1,98 @@
+{
+  "export": {
+    "main-menu-title": "Exportação genérica",
+    "commands": {
+      "pick-all": "Selecionar tudo"
+    },
+    "provider-names": {
+      "JsonExportProvider": "Provedor de exportação JSON",
+      "CsvExportProvider": "Provedor de exportação CSV"
+    },
+    "blades": {
+      "export-settings": {
+        "title": "Configurações de exportação",
+        "subtitle": "Especificar configurações de exportação",
+        "labels": {
+          "provider": "Selecionar provedor",
+          "template": "Selecionar modelo de exportação",
+          "property-selected": "Selecionar propriedade",
+          "row-selected": "Selecionar registros",
+          "total": "Contagem total",
+          "processed": "Contagem processada",
+          "errors-count": "Contagem de erros",
+          "edit": "Editar",
+          "delete": "Excluir",
+          "save": "Salvar",
+          "exported-type": "Selecionar tipo de objeto",
+          "select": "Selecionar",
+          "none": "Nenhum",
+          "exported-data": "Selecionar dados para exportação",
+          "exported-properties": "Selecionar propriedades",
+          "exported-properties-group": "Selecionar propriedades neste grupo",
+          "all": "Todos",
+          "provider-description": "Provedores tabulares (por exemplo, provedor CSV) não estão disponíveis para tipos exportados que não suportam exportação tabular",
+          "exported-properties-description": "Selecionar propriedades",
+          "exported-data-description": "Selecionar intervalo de dados",
+          "exported-type-description": "Selecionar tipo de dados",
+          "selected": "{{ count }} de {{total}} selecionados",
+          "allFiltered": "Todos (filtro especificado)"
+        },
+        "placeholders": {
+          "provider": "Selecionar provedor para exportação",
+          "template": "Selecionar modelo de exportação"
+        }
+      },
+      "export-progress": {
+        "title": "Progresso da exportação"
+      },
+      "export-type-selector": {
+        "title": "Selecionar tipo exportado",
+        "subtitle": "Selecione o tipo de dados que deseja exportar",
+        "bread-crumb-top": "Todos os tipos"
+      },
+      "export-generic-viewer": {
+        "title": "Selecionar dados para exportar",
+        "subtitle": "Selecione os dados que deseja exportar",
+        "labels": {
+          "picture": "Imagem",
+          "type": "Tipo de objeto",
+          "name": "Nome",
+          "code": "Código",
+          "new-filter": "Adicionar novo filtro",
+          "important": "Importante!",
+          "important-description": "Esta fonte de dados não suporta a exportação de entidades específicas selecionadas. Por favor, use o filtro para limitar o conjunto de dados exportados"
+        },
+        "placeholders": {
+          "select-filter": "Selecionar filtro..."
+        },
+        "commands": {
+          "select": "Selecionar"
+        }
+      },
+      "generic-filter": {
+        "new-title": "Filtro sem nome",
+        "new-subtitle": "Editar filtro",
+        "subtitle": "Editar filtro",
+        "labels": {
+          "criteria": "Critérios de filtro",
+          "filter-name": "Nome do filtro",
+          "unnamed-filter": "Filtro sem nome"
+        },
+        "placeholders": {
+          "filter-name": "Nomear este filtro"
+        },
+        "commands": {
+          "apply": "Aplicar"
+        }
+      }
+    }
+  },
+  "settings": {
+    "Export": {
+      "FileNameTemplate": {
+        "description": "O modelo (padrão) que será usado para gerar o nome do arquivo exportado. Parâmetros: 0 - data (o tempo UTC de geração do arquivo)",
+        "title": "Modelo de nome de arquivo de exportação"
+      }
+    }
+  }
+}
