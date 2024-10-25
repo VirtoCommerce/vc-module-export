@@ -1,6 +1,6 @@
 {
   "export": {
-    "main-menu-title": "Generic Export",
+    "main-menu-title": "Generic export",
     "commands": {
       "pick-all": "Pick all"
     },
@@ -30,11 +30,11 @@
           "exported-properties": "Select properties",
           "exported-properties-group": "Select properties in this group",
           "all": "All",
-          "provider-description": "Tabular providers (e.g. Csv provider) are unavailable for exported types which do not support tabular export.",
-          "exported-properties-description": "Please select properties.",
-          "exported-data-description": "Please select data range.",
-          "exported-type-description": "Please select data type.",
-          "selected": "{{ count }} of {{total}} selected ",
+          "provider-description": "Tabular providers (e.g. CSV provider) are unavailable for exported types which do not support tabular export",
+          "exported-properties-description": "Select properties",
+          "exported-data-description": "Select data range",
+          "exported-type-description": "Select data type",
+          "selected": "{{ count }} of {{total}} selected",
           "allFiltered": "All (filter specified)"
         },
         "placeholders": {
@@ -60,10 +60,10 @@
           "code": "Code",
           "new-filter": "Add new filter",
           "important": "Important!",
-          "important-description": "This data source does not support export of specific selected entities. Please use filter to limit the exported data set."
+          "important-description": "This data source does not support export of specific selected entities. Use filter to limit the exported data set"
         },
         "placeholders": {
-          "select-filter": "Select filter…"
+          "select-filter": "Select filter..."
         },
         "commands": {
           "select": "Select"
@@ -79,7 +79,7 @@
           "unnamed-filter": "Unnamed filter"
         },
         "placeholders": {
-          "filter-name": "How will you call this filter?"
+          "filter-name": "Name this filter"
         },
         "commands": {
           "apply": "Apply"
@@ -90,7 +90,7 @@
   "settings": {
     "Export": {
       "FileNameTemplate": {
-        "description": "The template (pattern) that will be used to generate exported file name. Parameters: 0 - date (the UTC time of file generation).",
+        "description": "The template (pattern) that will be used to generate exported file name. Parameters: 0 - date (the UTC time of file generation)",
         "title": "Export file name template"
       }
     }

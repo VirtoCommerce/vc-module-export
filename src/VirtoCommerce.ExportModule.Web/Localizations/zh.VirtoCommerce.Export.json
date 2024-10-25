@@ -1,0 +1,98 @@
+{
+  "export": {
+    "main-menu-title": "通用导出",
+    "commands": {
+      "pick-all": "全选"
+    },
+    "provider-names": {
+      "JsonExportProvider": "JSON导出提供程序",
+      "CsvExportProvider": "CSV导出提供程序"
+    },
+    "blades": {
+      "export-settings": {
+        "title": "导出设置",
+        "subtitle": "指定导出设置",
+        "labels": {
+          "provider": "选择提供程序",
+          "template": "选择导出模板",
+          "property-selected": "选择属性",
+          "row-selected": "选择记录",
+          "total": "总计",
+          "processed": "已处理数量",
+          "errors-count": "错误数量",
+          "edit": "编辑",
+          "delete": "删除",
+          "save": "保存",
+          "exported-type": "选择对象类型",
+          "select": "选择",
+          "none": "无",
+          "exported-data": "选择要导出的数据",
+          "exported-properties": "选择属性",
+          "exported-properties-group": "选择此组中的属性",
+          "all": "全部",
+          "provider-description": "表格提供程序（如CSV提供程序）不适用于不支持表格导出的导出类型",
+          "exported-properties-description": "选择属性",
+          "exported-data-description": "选择数据范围",
+          "exported-type-description": "选择数据类型",
+          "selected": "已选择 {{ count }} 项，共 {{total}} 项",
+          "allFiltered": "全部（已指定筛选器）"
+        },
+        "placeholders": {
+          "provider": "选择导出提供程序",
+          "template": "选择导出模板"
+        }
+      },
+      "export-progress": {
+        "title": "导出进度"
+      },
+      "export-type-selector": {
+        "title": "选择导出类型",
+        "subtitle": "选择要导出的数据类型",
+        "bread-crumb-top": "所有类型"
+      },
+      "export-generic-viewer": {
+        "title": "选择要导出的数据",
+        "subtitle": "选择您想要导出的数据",
+        "labels": {
+          "picture": "图片",
+          "type": "对象类型",
+          "name": "名称",
+          "code": "代码",
+          "new-filter": "添加新筛选器",
+          "important": "重要！",
+          "important-description": "此数据源不支持导出特定选择的实体。请使用筛选器来限制导出的数据集"
+        },
+        "placeholders": {
+          "select-filter": "选择筛选器..."
+        },
+        "commands": {
+          "select": "选择"
+        }
+      },
+      "generic-filter": {
+        "new-title": "未命名筛选器",
+        "new-subtitle": "编辑筛选器",
+        "subtitle": "编辑筛选器",
+        "labels": {
+          "criteria": "筛选条件",
+          "filter-name": "筛选器名称",
+          "unnamed-filter": "未命名筛选器"
+        },
+        "placeholders": {
+          "filter-name": "为此筛选器命名"
+        },
+        "commands": {
+          "apply": "应用"
+        }
+      }
+    }
+  },
+  "settings": {
+    "Export": {
+      "FileNameTemplate": {
+        "description": "用于生成导出文件名的模板（模式）。参数：0 - 日期（文件生成的UTC时间）",
+        "title": "导出文件名模板"
+      }
+    }
+  }
+}
