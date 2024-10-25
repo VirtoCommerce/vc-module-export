@@ -1,0 +1,98 @@
+{
+  "export": {
+    "main-menu-title": "一般エクスポート",
+    "commands": {
+      "pick-all": "すべて選択"
+    },
+    "provider-names": {
+      "JsonExportProvider": "JSONエクスポートプロバイダー",
+      "CsvExportProvider": "CSVエクスポートプロバイダー"
+    },
+    "blades": {
+      "export-settings": {
+        "title": "エクスポート設定",
+        "subtitle": "エクスポート設定を指定",
+        "labels": {
+          "provider": "プロバイダーを選択",
+          "template": "エクスポートテンプレートを選択",
+          "property-selected": "プロパティを選択",
+          "row-selected": "レコードを選択",
+          "total": "合計数",
+          "processed": "処理済み数",
+          "errors-count": "エラー数",
+          "edit": "編集",
+          "delete": "削除",
+          "save": "保存",
+          "exported-type": "オブジェクトタイプを選択",
+          "select": "選択",
+          "none": "なし",
+          "exported-data": "エクスポートするデータを選択",
+          "exported-properties": "プロパティを選択",
+          "exported-properties-group": "このグループのプロパティを選択",
+          "all": "すべて",
+          "provider-description": "表形式のエクスポートをサポートしていないエクスポートタイプには、表形式プロバイダー（例：CSVプロバイダー）は利用できません",
+          "exported-properties-description": "プロパティを選択",
+          "exported-data-description": "データ範囲を選択",
+          "exported-type-description": "データタイプを選択",
+          "selected": "{{total}}中{{ count }}個選択済み",
+          "allFiltered": "すべて（フィルター指定）"
+        },
+        "placeholders": {
+          "provider": "エクスポート用のプロバイダーを選択",
+          "template": "エクスポートテンプレートを選択"
+        }
+      },
+      "export-progress": {
+        "title": "エクスポートの進捗"
+      },
+      "export-type-selector": {
+        "title": "エクスポートタイプを選択",
+        "subtitle": "エクスポートしたいデータタイプを選択してください",
+        "bread-crumb-top": "すべてのタイプ"
+      },
+      "export-generic-viewer": {
+        "title": "エクスポートするデータを選択",
+        "subtitle": "エクスポートしたいデータを選択してください",
+        "labels": {
+          "picture": "画像",
+          "type": "オブジェクトタイプ",
+          "name": "名前",
+          "code": "コード",
+          "new-filter": "新しいフィルターを追加",
+          "important": "重要！",
+          "important-description": "このデータソースは、選択された特定のエンティティのエクスポートをサポートしていません。エクスポートするデータセットを制限するにはフィルターを使用してください"
+        },
+        "placeholders": {
+          "select-filter": "フィルターを選択..."
+        },
+        "commands": {
+          "select": "選択"
+        }
+      },
+      "generic-filter": {
+        "new-title": "名称未設定のフィルター",
+        "new-subtitle": "フィルターを編集",
+        "subtitle": "フィルターを編集",
+        "labels": {
+          "criteria": "フィルター条件",
+          "filter-name": "フィルター名",
+          "unnamed-filter": "名称未設定のフィルター"
+        },
+        "placeholders": {
+          "filter-name": "このフィルターに名前を付ける"
+        },
+        "commands": {
+          "apply": "適用"
+        }
+      }
+    }
+  },
+  "settings": {
+    "Export": {
+      "FileNameTemplate": {
+        "description": "エクスポートされるファイル名の生成に使用されるテンプレート（パターン）。パラメータ：0 - 日付（ファイル生成のUTC時間）",
+        "title": "エクスポートファイル名テンプレート"
+      }
+    }
+  }
+}
