@@ -57,8 +57,6 @@ namespace VirtoCommerce.ExportModule.Data.Services
             if (hasObjectIds)
             {
                 searchCriteria.ObjectIds = searchCriteria.ObjectIds.Skip(searchCriteria.Skip).Take(searchCriteria.Take).ToArray();
-                searchCriteria.Skip = 0;
-                searchCriteria.Take = searchCriteria.ObjectIds.Count < searchCriteria.Take ? searchCriteria.ObjectIds.Count : searchCriteria.Take;
             }
 
             if (hasObjectIds && searchCriteria.ObjectIds.IsNullOrEmpty())
@@ -68,7 +66,14 @@ namespace VirtoCommerce.ExportModule.Data.Services
 
             if (hasData)
             {
-                var data = FetchData(searchCriteria);
+                var fetchDataSearchCriteria = searchCriteria.CloneTyped();
+                if (hasObjectIds)
+                {
+                    fetchDataSearchCriteria.Skip = 0;
+                    fetchDataSearchCriteria.Take = searchCriteria.ObjectIds.Count < searchCriteria.Take ? searchCriteria.ObjectIds.Count : searchCriteria.Take;
+                }
+
+                var data = FetchData(fetchDataSearchCriteria);
 
                 CurrentPageNumber++;
                 Items = data.Results;
