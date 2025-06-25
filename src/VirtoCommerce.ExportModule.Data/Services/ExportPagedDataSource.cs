@@ -57,6 +57,8 @@ namespace VirtoCommerce.ExportModule.Data.Services
             if (hasObjectIds)
             {
                 searchCriteria.ObjectIds = searchCriteria.ObjectIds.Skip(searchCriteria.Skip).Take(searchCriteria.Take).ToArray();
+                searchCriteria.Skip = 0;
+                searchCriteria.Take = searchCriteria.ObjectIds.Count < searchCriteria.Take ? searchCriteria.ObjectIds.Count : searchCriteria.Take;
             }
 
             if (hasObjectIds && searchCriteria.ObjectIds.IsNullOrEmpty())
