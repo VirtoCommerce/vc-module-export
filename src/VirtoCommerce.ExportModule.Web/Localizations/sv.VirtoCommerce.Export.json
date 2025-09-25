@@ -1,0 +1,98 @@
+{
+  "export": {
+    "main-menu-title": "Generisk export",
+    "commands": {
+      "pick-all": "Välj alla"
+    },
+    "provider-names": {
+      "JsonExportProvider": "JSON-exportleverantör",
+      "CsvExportProvider": "CSV-exportleverantör"
+    },
+    "blades": {
+      "export-settings": {
+        "title": "Exportinställningar",
+        "subtitle": "Ange exportinställningar",
+        "labels": {
+          "provider": "Välj leverantör",
+          "template": "Välj exportmall",
+          "property-selected": "Välj egenskap",
+          "row-selected": "Välj poster",
+          "total": "Totalt antal",
+          "processed": "Bearbetat antal",
+          "errors-count": "Antal fel",
+          "edit": "Redigera",
+          "delete": "Radera",
+          "save": "Spara",
+          "exported-type": "Välj objekttyp",
+          "select": "Välj",
+          "none": "Ingen",
+          "exported-data": "Välj data för export",
+          "exported-properties": "Välj egenskaper",
+          "exported-properties-group": "Välj egenskaper i denna grupp",
+          "all": "Alla",
+          "provider-description": "Tabellbaserade leverantörer (t.ex. CSV-leverantör) är inte tillgängliga för exporterade typer som inte stöder tabellbaserad export",
+          "exported-properties-description": "Välj egenskaper",
+          "exported-data-description": "Välj dataområde",
+          "exported-type-description": "Välj datatyp",
+          "selected": "{{ count }} av {{total}} valda",
+          "allFiltered": "Alla (filter angivet)"
+        },
+        "placeholders": {
+          "provider": "Välj leverantör för export",
+          "template": "Välj exportmall"
+        }
+      },
+      "export-progress": {
+        "title": "Exportförlopp"
+      },
+      "export-type-selector": {
+        "title": "Välj exporterad typ",
+        "subtitle": "Välj datatyp du vill exportera",
+        "bread-crumb-top": "Alla typer"
+      },
+      "export-generic-viewer": {
+        "title": "Välj data att exportera",
+        "subtitle": "Välj data du vill exportera",
+        "labels": {
+          "picture": "Bild",
+          "type": "Objekttyp",
+          "name": "Namn",
+          "code": "Kod",
+          "new-filter": "Lägg till nytt filter",
+          "important": "Viktigt!",
+          "important-description": "Denna datakälla stöder inte export av specifikt valda enheter. Använd filter för att begränsa det exporterade datasettet"
+        },
+        "placeholders": {
+          "select-filter": "Välj filter..."
+        },
+        "commands": {
+          "select": "Välj"
+        }
+      },
+      "generic-filter": {
+        "new-title": "Namnlöst filter",
+        "new-subtitle": "Redigera filter",
+        "subtitle": "Redigera filter",
+        "labels": {
+          "criteria": "Filterkriterier",
+          "filter-name": "Filternamn",
+          "unnamed-filter": "Namnlöst filter"
+        },
+        "placeholders": {
+          "filter-name": "Namnge detta filter"
+        },
+        "commands": {
+          "apply": "Tillämpa"
+        }
+      }
+    }
+  },
+  "settings": {
+    "Export": {
+      "FileNameTemplate": {
+        "description": "Mallen (mönstret) som kommer att användas för att generera exporterat filnamn. Parametrar: 0 - datum (UTC-tiden för filgenerering)",
+        "title": "Mall för exportfilnamn"
+      }
+    }
+  }
+}
