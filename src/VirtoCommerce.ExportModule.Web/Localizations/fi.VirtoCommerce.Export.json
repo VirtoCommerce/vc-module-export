@@ -1,0 +1,98 @@
+{
+  "export": {
+    "main-menu-title": "Yleinen vienti",
+    "commands": {
+      "pick-all": "Valitse kaikki"
+    },
+    "provider-names": {
+      "JsonExportProvider": "JSON-vientipalveluntarjoaja",
+      "CsvExportProvider": "CSV-vientipalveluntarjoaja"
+    },
+    "blades": {
+      "export-settings": {
+        "title": "Vientiasetukset",
+        "subtitle": "Määritä vientiasetukset",
+        "labels": {
+          "provider": "Valitse palveluntarjoaja",
+          "template": "Valitse vientimalli",
+          "property-selected": "Valitse ominaisuus",
+          "row-selected": "Valitse tietueet",
+          "total": "Kokonaismäärä",
+          "processed": "Käsitelty määrä",
+          "errors-count": "Virheiden määrä",
+          "edit": "Muokkaa",
+          "delete": "Poista",
+          "save": "Tallenna",
+          "exported-type": "Valitse objektityyppi",
+          "select": "Valitse",
+          "none": "Ei mitään",
+          "exported-data": "Valitse vietävät tiedot",
+          "exported-properties": "Valitse ominaisuudet",
+          "exported-properties-group": "Valitse tämän ryhmän ominaisuudet",
+          "all": "Kaikki",
+          "provider-description": "Taulukkomuotoiset palveluntarjoajat (esim. CSV-palveluntarjoaja) eivät ole käytettävissä vientityypeille, jotka eivät tue taulukkovientiä",
+          "exported-properties-description": "Valitse ominaisuudet",
+          "exported-data-description": "Valitse tietoväli",
+          "exported-type-description": "Valitse tietotyyppi",
+          "selected": "{{ count }} / {{total}} valittu",
+          "allFiltered": "Kaikki (suodatin määritetty)"
+        },
+        "placeholders": {
+          "provider": "Valitse vientipalveluntarjoaja",
+          "template": "Valitse vientimalli"
+        }
+      },
+      "export-progress": {
+        "title": "Vientiedistyminen"
+      },
+      "export-type-selector": {
+        "title": "Valitse vietävä tyyppi",
+        "subtitle": "Valitse tietotyyppi, jonka haluat viedä",
+        "bread-crumb-top": "Kaikki tyypit"
+      },
+      "export-generic-viewer": {
+        "title": "Valitse vietävät tiedot",
+        "subtitle": "Valitse tiedot, jotka haluat viedä",
+        "labels": {
+          "picture": "Kuva",
+          "type": "Objektityyppi",
+          "name": "Nimi",
+          "code": "Koodi",
+          "new-filter": "Lisää uusi suodatin",
+          "important": "Tärkeää!",
+          "important-description": "Tämä tietolähde ei tue yksittäisten valittujen kohteiden vientiä. Käytä suodatinta rajoittaaksesi vietyä tietojoukkoa"
+        },
+        "placeholders": {
+          "select-filter": "Valitse suodatin..."
+        },
+        "commands": {
+          "select": "Valitse"
+        }
+      },
+      "generic-filter": {
+        "new-title": "Nimetön suodatin",
+        "new-subtitle": "Muokkaa suodatinta",
+        "subtitle": "Muokkaa suodatinta",
+        "labels": {
+          "criteria": "Suodatuskriteerit",
+          "filter-name": "Suodattimen nimi",
+          "unnamed-filter": "Nimetön suodatin"
+        },
+        "placeholders": {
+          "filter-name": "Nimeä tämä suodatin"
+        },
+        "commands": {
+          "apply": "Käytä"
+        }
+      }
+    }
+  },
+  "settings": {
+    "Export": {
+      "FileNameTemplate": {
+        "description": "Malli (kaava), jota käytetään viedyn tiedoston nimen luomiseen. Parametrit: 0 - päivämäärä (tiedoston luonnin UTC-aika)",
+        "title": "Vientitiedoston nimen malli"
+      }
+    }
+  }
+}

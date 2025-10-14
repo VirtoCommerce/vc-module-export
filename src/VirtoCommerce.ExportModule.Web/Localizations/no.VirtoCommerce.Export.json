@@ -1,0 +1,98 @@
+{
+  "export": {
+    "main-menu-title": "Generisk eksport",
+    "commands": {
+      "pick-all": "Velg alle"
+    },
+    "provider-names": {
+      "JsonExportProvider": "JSON-eksportleverandør",
+      "CsvExportProvider": "CSV-eksportleverandør"
+    },
+    "blades": {
+      "export-settings": {
+        "title": "Eksportinnstillinger",
+        "subtitle": "Angi eksportinnstillinger",
+        "labels": {
+          "provider": "Velg leverandør",
+          "template": "Velg eksportmal",
+          "property-selected": "Velg egenskap",
+          "row-selected": "Velg poster",
+          "total": "Totalt antall",
+          "processed": "Behandlet antall",
+          "errors-count": "Antall feil",
+          "edit": "Rediger",
+          "delete": "Slett",
+          "save": "Lagre",
+          "exported-type": "Velg objekttype",
+          "select": "Velg",
+          "none": "Ingen",
+          "exported-data": "Velg data for eksport",
+          "exported-properties": "Velg egenskaper",
+          "exported-properties-group": "Velg egenskaper i denne gruppen",
+          "all": "Alle",
+          "provider-description": "Tabellbaserte leverandører (f.eks. CSV-leverandør) er utilgjengelige for eksporterte typer som ikke støtter tabellbasert eksport",
+          "exported-properties-description": "Velg egenskaper",
+          "exported-data-description": "Velg dataområde",
+          "exported-type-description": "Velg datatype",
+          "selected": "{{ count }} av {{total}} valgt",
+          "allFiltered": "Alle (filter spesifisert)"
+        },
+        "placeholders": {
+          "provider": "Velg leverandør for eksport",
+          "template": "Velg eksportmal"
+        }
+      },
+      "export-progress": {
+        "title": "Eksportfremdrift"
+      },
+      "export-type-selector": {
+        "title": "Velg eksportert type",
+        "subtitle": "Velg datatype du ønsker å eksportere",
+        "bread-crumb-top": "Alle typer"
+      },
+      "export-generic-viewer": {
+        "title": "Velg data å eksportere",
+        "subtitle": "Velg data du ønsker å eksportere",
+        "labels": {
+          "picture": "Bilde",
+          "type": "Objekttype",
+          "name": "Navn",
+          "code": "Kode",
+          "new-filter": "Legg til nytt filter",
+          "important": "Viktig!",
+          "important-description": "Denne datakilden støtter ikke eksport av spesifikt valgte enheter. Bruk filter for å begrense det eksporterte datasettet"
+        },
+        "placeholders": {
+          "select-filter": "Velg filter..."
+        },
+        "commands": {
+          "select": "Velg"
+        }
+      },
+      "generic-filter": {
+        "new-title": "Navnløst filter",
+        "new-subtitle": "Rediger filter",
+        "subtitle": "Rediger filter",
+        "labels": {
+          "criteria": "Filterkriterier",
+          "filter-name": "Filternavn",
+          "unnamed-filter": "Navnløst filter"
+        },
+        "placeholders": {
+          "filter-name": "Gi dette filteret et navn"
+        },
+        "commands": {
+          "apply": "Bruk"
+        }
+      }
+    }
+  },
+  "settings": {
+    "Export": {
+      "FileNameTemplate": {
+        "description": "Malen (mønsteret) som vil bli brukt til å generere eksportert filnavn. Parametere: 0 - dato (UTC-tiden for filgenerering)",
+        "title": "Mal for eksportfilnavn"
+      }
+    }
+  }
+}
