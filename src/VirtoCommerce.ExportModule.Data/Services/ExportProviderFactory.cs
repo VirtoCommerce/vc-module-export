@@ -23,7 +23,7 @@ namespace VirtoCommerce.ExportModule.Data.Services
                 throw new ArgumentNullException(nameof(exportDataRequest));
             }
 
-            var result = _providerFactories.FirstOrDefault(x => x(exportDataRequest).TypeName.EqualsInvariant(exportDataRequest.ProviderName));
+            var result = _providerFactories.FirstOrDefault(x => x(exportDataRequest).TypeName.EqualsIgnoreCase(exportDataRequest.ProviderName));
 
             return result != null ? result(exportDataRequest) : null;
         }
