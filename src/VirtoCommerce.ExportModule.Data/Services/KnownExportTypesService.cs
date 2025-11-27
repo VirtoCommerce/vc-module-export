@@ -29,7 +29,7 @@ namespace VirtoCommerce.ExportModule.Data.Services
 
         public ExportedTypeDefinition ResolveExportedTypeDefinition(string typeName)
         {
-            return _knownExportTypes.Values.FirstOrDefault(x => x.TypeName.EqualsInvariant(typeName));
+            return _knownExportTypes.Values.FirstOrDefault(x => x.TypeName.EqualsIgnoreCase(typeName));
         }
     }
 }
