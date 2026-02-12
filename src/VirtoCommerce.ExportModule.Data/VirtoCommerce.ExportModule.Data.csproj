@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>True</IsPackable>
     <OutputType>Library</OutputType>
@@ -14,8 +14,8 @@
     <NoWarn>1701;1702;1705;1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="VirtoCommerce.AssetsModule.Core" Version="3.814.0" />
+    
+    <PackageReference Include="VirtoCommerce.AssetsModule.Core" Version="3.1000.0" />
     <ProjectReference Include="..\VirtoCommerce.ExportModule.Core\VirtoCommerce.ExportModule.Core.csproj" />
   </ItemGroup>
 </Project>
