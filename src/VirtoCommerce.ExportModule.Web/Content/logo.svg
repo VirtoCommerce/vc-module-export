@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Export">
+  <title>Export</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="92%" y2="100%">
+      <stop offset="0%" stop-color="#5FC8F5"/>
+      <stop offset="100%" stop-color="#265FC6"/>
+    </linearGradient>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#0B3F66" flood-opacity="0.30"/>
+    </filter>
+  </defs>
+
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+
+  <g transform="translate(64,64)" filter="url(#lift)">
+    <!-- Container box -->
+    <path d="M-32,10 L32,10 L26,42 L-26,42 Z" fill="#ffffff"/>
+    <ellipse cx="0" cy="10" rx="32" ry="7.5" fill="#D7EAFB"/>
+
+    <!-- Export arrow (up & out) -->
+    <rect x="-8" y="-16" width="16" height="24" fill="#2FA85A"/>
+    <polygon points="-20,-12 20,-12 0,-40" fill="#2FA85A"/>
+  </g>
+</svg>
