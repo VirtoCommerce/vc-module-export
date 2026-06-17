@@ -1,6 +1,6 @@
 <div class="blade-static" ng-style="blade.exportDataRequest.restrictDataSelectivity && {'height': '140px'}" ng-if="blade.isExpanded">
-    <div class="inner-block">
-        <p ng-if="blade.exportDataRequest.restrictDataSelectivity" class="text __note"><span>{{ 'export.blades.export-generic-viewer.labels.important' | translate }}</span> {{ 'export.blades.export-generic-viewer.labels.important-description' | translate }}</p>
+    <div class="inner-block" ng-if="blade.exportDataRequest.restrictDataSelectivity">
+        <p class="text __note"><span>{{ 'export.blades.export-generic-viewer.labels.important' | translate }}</span> {{ 'export.blades.export-generic-viewer.labels.important-description' | translate }}</p>
     </div>
     <div class="form-group searchrow">
         <div class="form-input column-half">
