@@ -3,11 +3,9 @@
         <div class="inner-block">
             <p ng-if="blade.exportDataRequest.restrictDataSelectivity" class="text __note"><span>{{ 'export.blades.export-generic-viewer.labels.important' | translate }}</span> {{ 'export.blades.export-generic-viewer.labels.important-description' | translate }}</p>
         </div>
-        <div class="form-input __search column-half">
+        <div class="form-input column-half">
             <input placeholder="{{'platform.placeholders.search-keyword' | translate}}" ng-model="filter.keyword" ng-keyup="$event.which === 13 && filter.criteriaChanged()">
-            <button class="btn __other" style="position: relative;right: 45px;">
-                <i class="btn-ico fa fa-remove" title="Clear" ng-click="filter.resetKeyword();filter.criteriaChanged()"></i>
-            </button>
+            <button class="btn" title="Clear" ng-click="filter.resetKeyword();filter.criteriaChanged()"></button>
         </div>
         <ui-select ng-model="filter.current" ng-change="filter.change()" class="column-half">
             <ui-select-match allow-clear="true" placeholder="{{'export.blades.export-generic-viewer.placeholders.select-filter' | translate}}">{{$select.selected.name | translate}}</ui-select-match>
@@ -15,7 +13,7 @@
                 <span ng-bind-html="x.name | translate | highlight: $select.search"></span>
             </ui-select-choices>
         </ui-select>
-        <a href="" ng-click="filter.edit()" class="form-edit"><i class="form-ico fa fa-pencil"></i></a>
+        <a href="" ng-click="filter.edit()" class="filter-edit"><i class="fa fa-pencil"></i></a>
     </div>
 </div>
 <div class="blade-static __bottom" ng-include="'$(Platform)/Scripts/common/templates/ok-cancel.tpl.html'"></div>
