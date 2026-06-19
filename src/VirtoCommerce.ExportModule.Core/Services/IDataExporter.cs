@@ -1,4 +1,5 @@
-using System;
+using System;
+using System.Threading;
 using System.IO;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.Platform.Core.Common;
@@ -10,6 +11,6 @@ namespace VirtoCommerce.ExportModule.Core.Services
     /// </summary>
     public interface IDataExporter
     {
-        void Export(Stream stream, ExportDataRequest request, Action<ExportProgressInfo> progressCallback, ICancellationToken token);
+        void Export(Stream stream, ExportDataRequest request, Action<ExportProgressInfo> progressCallback, CancellationToken token);
     }
 }
