@@ -1,4 +1,4 @@
-using System;
+using System;
 using System.Threading;
 using System.Collections.Generic;
 using System.IO;
@@ -66,27 +66,7 @@ namespace VirtoCommerce.ExportModule.Data.Services
                     token.ThrowIfCancellationRequested();
                     foreach (var obj in pagedDataSource.Items)
                     {
-                        try
-                        {
-                            var preparedObject = obj.CloneTyped();
-
-                            if (preparedObject is IEnumerable<IExportable> enumerable)
-                            {
-                                foreach (var exportable in enumerable)
-                                {
-                                    WriteRecord(exportProvider, writer, request, exportable, needTabularData);
-                                }
-                            }
-                            else
-                            {
-                                WriteRecord(exportProvider, writer, request, preparedObject, needTabularData);
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            exportProgress.Errors.Add(e.Message);
-                            progressCallback(exportProgress);
-                        }
+                        ExportObject(exportProvider, writer, request, obj, needTabularData, exportProgress, progressCallback);
                         exportedCount++;
                     }
 
@@ -115,6 +95,31 @@ namespace VirtoCommerce.ExportModule.Data.Services
             }
         }
 
+
+        private static void ExportObject(IExportProvider exportProvider, TextWriter writer, ExportDataRequest request, IExportable obj, bool needTabularData, ExportProgressInfo exportProgress, Action<ExportProgressInfo> progressCallback)
+        {
+            try
+            {
+                var preparedObject = obj.CloneTyped();
+
+                if (preparedObject is IEnumerable<IExportable> enumerable)
+                {
+                    foreach (var exportable in enumerable)
+                    {
+                        WriteRecord(exportProvider, writer, request, exportable, needTabularData);
+                    }
+                }
+                else
+                {
+                    WriteRecord(exportProvider, writer, request, preparedObject, needTabularData);
+                }
+            }
+            catch (Exception e)
+            {
+                exportProgress.Errors.Add(e.Message);
+                progressCallback(exportProgress);
+            }
+        }
 
         private static void WriteRecord(IExportProvider exportProvider, TextWriter writer, ExportDataRequest request, IExportable exportable, bool needTabularData)
         {
