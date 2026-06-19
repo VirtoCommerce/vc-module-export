@@ -158,7 +158,11 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("download/{fileName}")]
+        // VC0015: PlatformExport permission was moved to the BackupRestore module but the platform keeps
+        // the constant for backward compatibility; keep using it here to avoid an Export->BackupRestore dependency.
+#pragma warning disable VC0015
         [AuthorizeAny(PlatformConstants.Security.Permissions.PlatformExport, ModuleConstants.Security.Permissions.Download)]
+#pragma warning restore VC0015
         public async Task<ActionResult> DownloadExportFile([FromRoute] string fileName)
         {
             var contentType = MimeTypeResolver.ResolveContentType(fileName);

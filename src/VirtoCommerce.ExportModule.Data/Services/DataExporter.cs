@@ -1,4 +1,5 @@
-using System;
+using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -20,7 +21,7 @@ namespace VirtoCommerce.ExportModule.Data.Services
             _exportProviderFactory = exportProviderFactory;
         }
 
-        public void Export(Stream stream, ExportDataRequest request, Action<ExportProgressInfo> progressCallback, ICancellationToken token)
+        public void Export(Stream stream, ExportDataRequest request, Action<ExportProgressInfo> progressCallback, CancellationToken token)
         {
             if (request == null)
             {
