@@ -48,7 +48,7 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
 
                 await using (var stream = await _exportFileStorage.OpenWriteAsync(fileName))
                 {
-                    _dataExporter.Export(stream, request, ProgressCallback, new JobCancellationTokenWrapper(cancellationToken));
+                    _dataExporter.Export(stream, request, ProgressCallback, cancellationToken.ShutdownToken);
                 }
 
                 notification.DownloadUrl = $"/api/export/download/{fileName}";
