@@ -10,7 +10,9 @@ using VirtoCommerce.ExportModule.CsvProvider;
 using VirtoCommerce.ExportModule.Data.Security;
 using VirtoCommerce.ExportModule.Data.Services;
 using VirtoCommerce.ExportModule.JsonProvider;
+using VirtoCommerce.ExportModule.Web.BackgroundJobs;
 using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.Platform.Core.Jobs;
 using VirtoCommerce.Platform.Core.JsonConverters;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
@@ -34,6 +36,8 @@ namespace VirtoCommerce.ExportModule.Web
 
             serviceCollection.AddTransient<IDataExporter, DataExporter>();
             serviceCollection.AddTransient<IExportFileStorage, ExportFileStorage>();
+
+            serviceCollection.AddBackgroundJob<ExportJob>();
 
             serviceCollection.Configure<MvcOptions>(configure =>
             {
