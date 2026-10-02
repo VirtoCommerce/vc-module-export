@@ -1,59 +1,60 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
-using Hangfire;
-using Hangfire.Server;
 using VirtoCommerce.ExportModule.Core.Model;
 using VirtoCommerce.ExportModule.Core.Services;
 using VirtoCommerce.Platform.Core.Exceptions;
+using VirtoCommerce.Platform.Core.Jobs;
 using VirtoCommerce.Platform.Core.PushNotifications;
-using VirtoCommerce.Platform.Hangfire;
 
 namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
 {
-    public class ExportJob
+    public class ExportJobPayload
     {
-        private readonly IDataExporter _dataExporter;
-        private readonly IExportFileStorage _exportFileStorage;
-        private readonly IPushNotificationManager _pushNotificationManager;
-        private readonly IExportProviderFactory _exportProviderFactory;
+        public ExportDataRequest Request { get; set; }
+        public ExportPushNotification Notification { get; set; }
+    }
 
-        public ExportJob(
-            IDataExporter dataExporter,
-            IExportFileStorage exportFileStorage,
-            IPushNotificationManager pushNotificationManager,
-            IExportProviderFactory exportProviderFactory)
+    /// <summary>
+    /// Engine-agnostic export job. Replaces the former Hangfire job that used
+    /// <c>PerformContext</c>/<c>IJobCancellationToken</c>: progress still flows through the module's own
+    /// push-notification manager; the job id comes from <see cref="IJobExecutionContext.JobId"/> and
+    /// cancellation from the handler's <see cref="CancellationToken"/>.
+    /// </summary>
+    public class ExportJob(
+        IDataExporter dataExporter,
+        IExportFileStorage exportFileStorage,
+        IPushNotificationManager pushNotificationManager,
+        IExportProviderFactory exportProviderFactory) : IBackgroundJobHandler<ExportJobPayload>
+    {
+        public async Task Execute(ExportJobPayload payload, IJobExecutionContext context, CancellationToken cancellationToken = default)
         {
-            _dataExporter = dataExporter;
-            _exportFileStorage = exportFileStorage;
-            _pushNotificationManager = pushNotificationManager;
-            _exportProviderFactory = exportProviderFactory;
-        }
+            var request = payload.Request;
+            var notification = payload.Notification;
 
-        public async Task ExportBackgroundAsync(ExportDataRequest request, ExportPushNotification notification, IJobCancellationToken cancellationToken, PerformContext context)
-        {
             void ProgressCallback(ExportProgressInfo x)
             {
                 notification.Patch(x);
-                notification.JobId = context.BackgroundJob.Id;
-                _pushNotificationManager.Send(notification);
+                notification.JobId = context.JobId;
+                pushNotificationManager.Send(notification);
             }
 
             try
             {
                 // Do not like provider creation here to get file extension, maybe need to pass created provider to Exporter.
                 // Create stream inside Exporter is not good as it is not Exporter responsibility to decide where to write.
-                var provider = _exportProviderFactory.CreateProvider(request);
+                var provider = exportProviderFactory.CreateProvider(request);
 
-                var fileName = _exportFileStorage.GenerateFileName(DateTime.UtcNow, provider.ExportedFileExtension);
+                var fileName = exportFileStorage.GenerateFileName(DateTime.UtcNow, provider.ExportedFileExtension);
 
-                await using (var stream = await _exportFileStorage.OpenWriteAsync(fileName))
+                await using (var stream = await exportFileStorage.OpenWriteAsync(fileName))
                 {
-                    _dataExporter.Export(stream, request, ProgressCallback, cancellationToken.ShutdownToken);
+                    dataExporter.Export(stream, request, ProgressCallback, cancellationToken);
                 }
 
                 notification.DownloadUrl = $"/api/export/download/{fileName}";
             }
-            catch (JobAbortedException)
+            catch (OperationCanceledException)
             {
                 //do nothing
             }
@@ -65,7 +66,7 @@ namespace VirtoCommerce.ExportModule.Web.BackgroundJobs
             {
                 notification.Description = "Export finished";
                 notification.Finished = DateTime.UtcNow;
-                await _pushNotificationManager.SendAsync(notification);
+                await pushNotificationManager.SendAsync(notification);
             }
         }
     }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VirtoCommerce.ExportModule.Core;
@@ -14,6 +13,7 @@ using VirtoCommerce.ExportModule.Web.Model;
 using VirtoCommerce.Platform.Core;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport.PushNotifications;
+using VirtoCommerce.Platform.Core.Jobs;
 using VirtoCommerce.Platform.Core.PushNotifications;
 using VirtoCommerce.Platform.Core.Security;
 
@@ -29,6 +29,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         private readonly IKnownExportTypesResolver _knownExportTypesResolver;
         private readonly IAuthorizationService _authorizationService;
         private readonly IExportFileStorage _exportFileStorage;
+        private readonly IBackgroundJob _backgroundJob;
 
         public ExportController(
             IEnumerable<Func<ExportDataRequest, IExportProvider>> exportProviderFactories,
@@ -37,7 +38,8 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             IPushNotificationManager pushNotificationManager,
             IKnownExportTypesResolver knownExportTypesResolver,
             IAuthorizationService authorizationService,
-            IExportFileStorage exportFileStorage)
+            IExportFileStorage exportFileStorage,
+            IBackgroundJob backgroundJob)
         {
             _exportProviderFactories = exportProviderFactories;
             _knownExportTypesRegistrar = knownExportTypesRegistrar;
@@ -46,6 +48,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
             _knownExportTypesResolver = knownExportTypesResolver;
             _authorizationService = authorizationService;
             _exportFileStorage = exportFileStorage;
+            _backgroundJob = backgroundJob;
         }
 
         /// <summary>
@@ -131,7 +134,7 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
 
             await _pushNotificationManager.SendAsync(notification);
 
-            var jobId = BackgroundJob.Enqueue<ExportJob>(x => x.ExportBackgroundAsync(request, notification, JobCancellationToken.Null, null));
+            var jobId = await _backgroundJob.Enqueue<ExportJob>(new ExportJobPayload { Request = request, Notification = notification });
             notification.JobId = jobId;
 
             return Ok(notification);
@@ -145,9 +148,9 @@ namespace VirtoCommerce.ExportModule.Web.Controllers
         [HttpPost]
         [Route("task/cancel")]
         [Authorize(ModuleConstants.Security.Permissions.Access)]
-        public ActionResult CancelExport([FromBody] ExportCancellationRequest cancellationRequest)
+        public async Task<ActionResult> CancelExport([FromBody] ExportCancellationRequest cancellationRequest)
         {
-            BackgroundJob.Delete(cancellationRequest.JobId);
+            await _backgroundJob.Cancel(cancellationRequest.JobId);
             return Ok();
         }
 
