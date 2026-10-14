@@ -1,6 +1,6 @@
 <template>
   <VcBlade
-    :title="options?.title ? $t(options.title) : $t('EXPORT.PAGES.SETTINGS.TITLE')"
+    :title="options?.title ? $t(options.title) : $t('EXPORT.MENU.TITLE')"
     :subtitle="options?.subtitle ? $t(options.subtitle) : undefined"
     :toolbar-items="bladeToolbar"
     :loading="loading"

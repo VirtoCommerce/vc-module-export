@@ -5,7 +5,6 @@
     },
     "PAGES": {
       "SETTINGS": {
-        "TITLE": "Generic Export",
         "TYPE": "Data type",
         "TYPE_HINT": "The kind of data to export",
         "PROVIDER": "Format",
