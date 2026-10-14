@@ -1,0 +1,18 @@
+{
+  // Generic export admin UI for the Admin Shell host (Module Federation remote)
+  "remote": { "name": "export_admin", "exposed": "./Module" },
+  "contributions": {
+    "menu": [
+      {
+        "id": "generic-export",
+        "sectionId": "configuration",
+        "title": "Generic export",
+        "icon": "lucide-database",
+        "route": "/generic-export",
+        "permission": "export:access",
+        "priority": 90,
+        "replaces": "legacy.genericExport"
+      }
+    ]
+  }
+}

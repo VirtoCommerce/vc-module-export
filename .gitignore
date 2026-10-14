@@ -272,3 +272,4 @@ __pycache__/
 dist/
 **/Properties/launchSettings.json
 /.nuke
+src/VirtoCommerce.ExportModule.Web/plugins/

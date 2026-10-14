@@ -1,0 +1,84 @@
+{
+  "EXPORT": {
+    "MENU": {
+      "TITLE": "Generic export"
+    },
+    "PAGES": {
+      "SETTINGS": {
+        "TITLE": "Generic export",
+        "TYPE": "Data type",
+        "TYPE_HINT": "The kind of data to export",
+        "PROVIDER": "Format",
+        "PROVIDER_HINT": "JSON keeps the full structure; CSV is a flat table",
+        "DATA": "Exported data",
+        "PROPERTIES": "Exported properties",
+        "SELECTED": "{count} of {total} selected",
+        "CHOOSE": "Choose",
+        "TOOLBAR": {
+          "START": "Start export"
+        },
+        "TYPE_LOCKED": "Set by the screen the export was started from",
+        "FILTERED": "Filter: {name}"
+      },
+      "DATA": {
+        "TITLE": "Choose data",
+        "EMPTY": "No data",
+        "RESTRICTED": "This data type is exported as a whole: items can't be picked one by one.",
+        "HINT": "Select items to export only them; with nothing selected, everything matching the search is exported.",
+        "COLUMNS": {
+          "IMAGE": "Image",
+          "NAME": "Name",
+          "CODE": "Code",
+          "PARENT": "Parent",
+          "TYPE": "Type"
+        },
+        "TOOLBAR": {
+          "APPLY": "Apply",
+          "REFRESH": "Refresh"
+        },
+        "FILTER": "Filter",
+        "FILTER_NONE": "No filter",
+        "NEW_FILTER": "New filter",
+        "EDIT_FILTER": "Edit filter"
+      },
+      "PROPERTIES": {
+        "TITLE": "Choose properties",
+        "COLUMNS": {
+          "NAME": "Property",
+          "GROUP": "Group"
+        },
+        "TOOLBAR": {
+          "APPLY": "Apply",
+          "ALL": "Select all"
+        }
+      },
+      "PROGRESS": {
+        "TITLE": "Export",
+        "DOWNLOAD": "Download file",
+        "TOOLBAR": {
+          "CANCEL": "Cancel"
+        }
+      },
+      "FILTER": {
+        "NEW": "New filter",
+        "NAME": "Filter name",
+        "NAME_PLACEHOLDER": "Enter a name to save the filter",
+        "NO_FIELDS": "No filter fields are available for this data type yet: the module that owns it adds them.",
+        "DELETE_CONFIRMATION": "Delete the filter \"{name}\"?",
+        "TOOLBAR": {
+          "APPLY": "Apply",
+          "SAVE": "Save and apply",
+          "RESET": "Reset",
+          "DELETE": "Delete"
+        }
+      }
+    },
+    "JOB": {
+      "STARTED": "Started",
+      "FINISHED": "Finished",
+      "ELAPSED": "Elapsed",
+      "PROCESSED": "Processed",
+      "ERRORS": "Errors"
+    }
+  }
+}
