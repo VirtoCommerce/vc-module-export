@@ -20,7 +20,9 @@ let legacyLoad: Promise<void> | undefined;
 export function loadLegacyNames() {
   legacyLoad ??= fetch("/api/platform/localization?lang=en")
     .then((r) => (r.ok ? r.json() : {}))
-    .then((x: { export?: LegacyNames }) => void (legacy.value = x.export ?? {}))
+    .then((x: { export?: LegacyNames }) => {
+      legacy.value = x.export ?? {};
+    })
     .catch(() => undefined);
   return legacyLoad;
 }

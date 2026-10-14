@@ -175,13 +175,15 @@ async function count(query: ExportDataRequest["dataQuery"]) {
 async function countSelected() {
   if (!type.value) return;
   const { objectIds, isAllSelected, filter, keyword } = selection.value;
-  dataSelected.value = objectIds?.length
-    ? objectIds.length
-    : isAllSelected === false
-      ? 0
-      : !filter && !keyword && !Object.keys(base).length
-        ? dataTotal.value // everything, unfiltered: the total
-        : await count(dataQuery({ objectIds: undefined, includedProperties: [], skip: 0, take: 0 }));
+  if (objectIds?.length) {
+    dataSelected.value = objectIds.length;
+  } else if (isAllSelected === false) {
+    dataSelected.value = 0;
+  } else if (!filter && !keyword && !Object.keys(base).length) {
+    dataSelected.value = dataTotal.value; // everything, unfiltered: the total
+  } else {
+    dataSelected.value = await count(dataQuery({ objectIds: undefined, includedProperties: [], skip: 0, take: 0 }));
+  }
 }
 
 async function recount() {
