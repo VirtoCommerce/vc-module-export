@@ -1,11 +1,11 @@
 {
   "EXPORT": {
     "MENU": {
-      "TITLE": "Generic export"
+      "TITLE": "Generic Export"
     },
     "PAGES": {
       "SETTINGS": {
-        "TITLE": "Generic export",
+        "TITLE": "Generic Export",
         "TYPE": "Data type",
         "TYPE_HINT": "The kind of data to export",
         "PROVIDER": "Format",

@@ -5,7 +5,7 @@
       {
         "id": "generic-export",
         "sectionId": "configuration",
-        "title": "Generic export",
+        "title": "Generic Export",
         "icon": "lucide-database",
         "route": "/generic-export",
         "permission": "export:access",
