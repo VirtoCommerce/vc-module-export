@@ -1,0 +1,17 @@
+{
+  "remote": { "name": "export_admin", "exposed": "./Module" },
+  "contributions": {
+    "menu": [
+      {
+        "id": "generic-export",
+        "sectionId": "configuration",
+        "title": "Generic Export",
+        "icon": "lucide-database",
+        "route": "/generic-export",
+        "permission": "export:access",
+        "priority": 90,
+        "replaces": "legacy.genericExport"
+      }
+    ]
+  }
+}
