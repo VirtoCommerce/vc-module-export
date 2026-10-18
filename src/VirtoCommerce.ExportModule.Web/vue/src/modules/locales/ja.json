@@ -1,0 +1,83 @@
+{
+  "EXPORT": {
+    "MENU": {
+      "TITLE": "一般エクスポート"
+    },
+    "PAGES": {
+      "SETTINGS": {
+        "TYPE": "データタイプ",
+        "TYPE_HINT": "エクスポートするデータの種類",
+        "PROVIDER": "フォーマット",
+        "PROVIDER_HINT": "JSON は完全な構造を保持し、CSV はフラットな表になります",
+        "DATA": "エクスポートするデータ",
+        "PROPERTIES": "エクスポートするプロパティ",
+        "SELECTED": "{count} / {total} 件を選択済み",
+        "CHOOSE": "選択",
+        "TOOLBAR": {
+          "START": "エクスポートを開始"
+        },
+        "TYPE_LOCKED": "エクスポートを開始した画面によって設定されます",
+        "FILTERED": "フィルター: {name}"
+      },
+      "DATA": {
+        "TITLE": "データを選択",
+        "EMPTY": "データがありません",
+        "RESTRICTED": "このデータタイプは一括でエクスポートされます。項目を個別に選択することはできません。",
+        "HINT": "項目を選択するとそれらのみがエクスポートされます。何も選択しない場合は、検索条件に一致するすべてがエクスポートされます。",
+        "COLUMNS": {
+          "IMAGE": "画像",
+          "NAME": "名前",
+          "CODE": "コード",
+          "PARENT": "親",
+          "TYPE": "タイプ"
+        },
+        "TOOLBAR": {
+          "APPLY": "適用",
+          "REFRESH": "更新"
+        },
+        "FILTER": "フィルター",
+        "FILTER_NONE": "フィルターなし",
+        "NEW_FILTER": "新しいフィルター",
+        "EDIT_FILTER": "フィルターを編集"
+      },
+      "PROPERTIES": {
+        "TITLE": "プロパティを選択",
+        "COLUMNS": {
+          "NAME": "プロパティ",
+          "GROUP": "グループ"
+        },
+        "TOOLBAR": {
+          "APPLY": "適用",
+          "ALL": "すべて選択"
+        }
+      },
+      "PROGRESS": {
+        "TITLE": "エクスポート",
+        "DOWNLOAD": "ファイルをダウンロード",
+        "TOOLBAR": {
+          "CANCEL": "キャンセル"
+        }
+      },
+      "FILTER": {
+        "NEW": "新しいフィルター",
+        "NAME": "フィルター名",
+        "NAME_PLACEHOLDER": "フィルターを保存するには名前を入力してください",
+        "NO_FIELDS": "このデータタイプで使用できるフィルター項目はまだありません。項目はデータタイプを所有するモジュールによって追加されます。",
+        "DELETE_CONFIRMATION": "フィルター \"{name}\" を削除しますか？",
+        "TOOLBAR": {
+          "APPLY": "適用",
+          "SAVE": "保存して適用",
+          "RESET": "リセット",
+          "DELETE": "削除"
+        }
+      }
+    },
+    "JOB": {
+      "STARTED": "開始",
+      "FINISHED": "終了",
+      "ELAPSED": "経過時間",
+      "PROCESSED": "処理済み",
+      "ERRORS": "エラー"
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "EXPORT": {
+    "MENU": {
+      "TITLE": "Generisk export"
+    },
+    "PAGES": {
+      "SETTINGS": {
+        "TYPE": "Datatyp",
+        "TYPE_HINT": "Typen av data som ska exporteras",
+        "PROVIDER": "Format",
+        "PROVIDER_HINT": "JSON behåller hela strukturen; CSV är en platt tabell",
+        "DATA": "Exporterade data",
+        "PROPERTIES": "Exporterade egenskaper",
+        "SELECTED": "{count} av {total} valda",
+        "CHOOSE": "Välj",
+        "TOOLBAR": {
+          "START": "Starta export"
+        },
+        "TYPE_LOCKED": "Angiven av vyn som exporten startades från",
+        "FILTERED": "Filter: {name}"
+      },
+      "DATA": {
+        "TITLE": "Välj data",
+        "EMPTY": "Inga data",
+        "RESTRICTED": "Den här datatypen exporteras i sin helhet: objekt kan inte väljas ett och ett.",
+        "HINT": "Välj objekt för att bara exportera dem; om inget är valt exporteras allt som matchar sökningen.",
+        "COLUMNS": {
+          "IMAGE": "Bild",
+          "NAME": "Namn",
+          "CODE": "Kod",
+          "PARENT": "Överordnad",
+          "TYPE": "Typ"
+        },
+        "TOOLBAR": {
+          "APPLY": "Tillämpa",
+          "REFRESH": "Uppdatera"
+        },
+        "FILTER": "Filter",
+        "FILTER_NONE": "Inget filter",
+        "NEW_FILTER": "Nytt filter",
+        "EDIT_FILTER": "Redigera filter"
+      },
+      "PROPERTIES": {
+        "TITLE": "Välj egenskaper",
+        "COLUMNS": {
+          "NAME": "Egenskap",
+          "GROUP": "Grupp"
+        },
+        "TOOLBAR": {
+          "APPLY": "Tillämpa",
+          "ALL": "Välj alla"
+        }
+      },
+      "PROGRESS": {
+        "TITLE": "Export",
+        "DOWNLOAD": "Ladda ner fil",
+        "TOOLBAR": {
+          "CANCEL": "Avbryt"
+        }
+      },
+      "FILTER": {
+        "NEW": "Nytt filter",
+        "NAME": "Filternamn",
+        "NAME_PLACEHOLDER": "Ange ett namn för att spara filtret",
+        "NO_FIELDS": "Inga filterfält är tillgängliga för den här datatypen ännu: modulen som äger den lägger till dem.",
+        "DELETE_CONFIRMATION": "Radera filtret \"{name}\"?",
+        "TOOLBAR": {
+          "APPLY": "Tillämpa",
+          "SAVE": "Spara och tillämpa",
+          "RESET": "Återställ",
+          "DELETE": "Radera"
+        }
+      }
+    },
+    "JOB": {
+      "STARTED": "Startad",
+      "FINISHED": "Slutförd",
+      "ELAPSED": "Förfluten tid",
+      "PROCESSED": "Behandlade",
+      "ERRORS": "Fel"
+    }
+  }
+}

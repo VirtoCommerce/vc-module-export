@@ -1,0 +1,83 @@
+{
+  "EXPORT": {
+    "MENU": {
+      "TITLE": "Eksport ogólny"
+    },
+    "PAGES": {
+      "SETTINGS": {
+        "TYPE": "Typ danych",
+        "TYPE_HINT": "Rodzaj danych do eksportu",
+        "PROVIDER": "Format",
+        "PROVIDER_HINT": "JSON zachowuje pełną strukturę; CSV to płaska tabela",
+        "DATA": "Eksportowane dane",
+        "PROPERTIES": "Eksportowane właściwości",
+        "SELECTED": "Wybrano {count} z {total}",
+        "CHOOSE": "Wybierz",
+        "TOOLBAR": {
+          "START": "Rozpocznij eksport"
+        },
+        "TYPE_LOCKED": "Ustawione przez ekran, z którego rozpoczęto eksport",
+        "FILTERED": "Filtr: {name}"
+      },
+      "DATA": {
+        "TITLE": "Wybierz dane",
+        "EMPTY": "Brak danych",
+        "RESTRICTED": "Ten typ danych jest eksportowany w całości: nie można wybierać elementów pojedynczo.",
+        "HINT": "Zaznacz elementy, aby wyeksportować tylko je; jeśli nic nie jest zaznaczone, eksportowane jest wszystko, co pasuje do wyszukiwania.",
+        "COLUMNS": {
+          "IMAGE": "Obraz",
+          "NAME": "Nazwa",
+          "CODE": "Kod",
+          "PARENT": "Element nadrzędny",
+          "TYPE": "Typ"
+        },
+        "TOOLBAR": {
+          "APPLY": "Zastosuj",
+          "REFRESH": "Odśwież"
+        },
+        "FILTER": "Filtr",
+        "FILTER_NONE": "Brak filtra",
+        "NEW_FILTER": "Nowy filtr",
+        "EDIT_FILTER": "Edytuj filtr"
+      },
+      "PROPERTIES": {
+        "TITLE": "Wybierz właściwości",
+        "COLUMNS": {
+          "NAME": "Właściwość",
+          "GROUP": "Grupa"
+        },
+        "TOOLBAR": {
+          "APPLY": "Zastosuj",
+          "ALL": "Zaznacz wszystko"
+        }
+      },
+      "PROGRESS": {
+        "TITLE": "Eksport",
+        "DOWNLOAD": "Pobierz plik",
+        "TOOLBAR": {
+          "CANCEL": "Anuluj"
+        }
+      },
+      "FILTER": {
+        "NEW": "Nowy filtr",
+        "NAME": "Nazwa filtra",
+        "NAME_PLACEHOLDER": "Wprowadź nazwę, aby zapisać filtr",
+        "NO_FIELDS": "Dla tego typu danych nie ma jeszcze pól filtra: dodaje je moduł, do którego należy.",
+        "DELETE_CONFIRMATION": "Usunąć filtr \"{name}\"?",
+        "TOOLBAR": {
+          "APPLY": "Zastosuj",
+          "SAVE": "Zapisz i zastosuj",
+          "RESET": "Resetuj",
+          "DELETE": "Usuń"
+        }
+      }
+    },
+    "JOB": {
+      "STARTED": "Rozpoczęto",
+      "FINISHED": "Zakończono",
+      "ELAPSED": "Upłynęło",
+      "PROCESSED": "Przetworzone",
+      "ERRORS": "Błędy"
+    }
+  }
+}
