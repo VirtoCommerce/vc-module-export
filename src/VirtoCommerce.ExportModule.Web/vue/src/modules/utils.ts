@@ -1,4 +1,5 @@
-import { ref } from "vue";
+import { i18n } from "@vc-shell/framework";
+import { ref, watch } from "vue";
 
 // The server's own message instead of the generated client's generic one
 export function errorText(e: unknown) {
@@ -13,23 +14,42 @@ export function errorText(e: unknown) {
 }
 
 // The data type and provider names the AngularJS blades showed: the owning modules' legacy texts
-// (export.types.<type>.name, export.provider-names.<provider>) in the platform's merged localization, loaded once
+// (export.types.<type>.name, export.provider-names.<provider>) in the platform's merged localization. The server
+// returns only the asked language's texts: the UI's language first, English for what it lacks; loaded once per language.
 type LegacyNames = { types?: Record<string, { name?: string }>; "provider-names"?: Record<string, string> };
-const legacy = ref<LegacyNames>({});
-let legacyLoad: Promise<void> | undefined;
-export function loadLegacyNames() {
-  legacyLoad ??= fetch("/api/platform/localization?lang=en")
-    .then((r) => (r.ok ? r.json() : {}))
-    .then((x: { export?: LegacyNames }) => {
-      legacy.value = x.export ?? {};
-    })
-    .catch(() => undefined);
-  return legacyLoad;
+const legacy = ref<LegacyNames[]>([]);
+const legacyLoads = new Map<string, Promise<LegacyNames>>();
+let legacyWanted = false;
+
+// the language the UI shows now (vue-i18n's global locale, a string or a ref)
+function currentLocale(): string {
+  const locale = i18n.global.locale as unknown;
+  return String((locale as { value?: string } | null)?.value ?? locale ?? "") || "en";
 }
+
+function loadLocale(locale: string) {
+  let loaded = legacyLoads.get(locale);
+  if (!loaded) {
+    loaded = fetch(`/api/platform/localization?lang=${encodeURIComponent(locale)}`)
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((x: { export?: LegacyNames }) => x.export ?? {})
+      .catch(() => ({}));
+    legacyLoads.set(locale, loaded);
+  }
+  return loaded;
+}
+
+export async function loadLegacyNames(locale = currentLocale()) {
+  legacyWanted = true;
+  const loaded = await Promise.all(locale === "en" ? [loadLocale("en")] : [loadLocale(locale), loadLocale("en")]);
+  if (locale === currentLocale()) legacy.value = loaded; // a later switch wins
+}
+// once asked for, the names follow the user's language switches
+watch(currentLocale, (locale) => legacyWanted && loadLegacyNames(locale));
 
 // a type without a legacy name: "VirtoCommerce.PricingModule.Data.ExportImport.ExportablePricelist" -> "Pricing: Pricelist"
 export function typeLabel(typeName?: string) {
-  const known = legacy.value.types?.[typeName ?? ""]?.name;
+  const known = legacy.value.map((x) => x.types?.[typeName ?? ""]?.name).find(Boolean);
   if (known) return known;
   const parts = (typeName ?? "").split(".");
   const module = parts.find((p) => p.endsWith("Module"))?.replace(/Module$/, "") ?? parts[1] ?? "";
@@ -37,7 +57,8 @@ export function typeLabel(typeName?: string) {
   return module ? `${module}: ${name}` : name;
 }
 
-export const providerLabel = (typeName?: string) => legacy.value["provider-names"]?.[typeName ?? ""] ?? typeName ?? "";
+export const providerLabel = (typeName?: string) =>
+  legacy.value.map((x) => x["provider-names"]?.[typeName ?? ""]).find(Boolean) ?? typeName ?? "";
 
 // localStorage may be unavailable (blocked, private mode): then nothing is remembered
 export function storageGet(key: string) {
