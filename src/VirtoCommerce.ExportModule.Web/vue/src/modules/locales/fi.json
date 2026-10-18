@@ -1,0 +1,83 @@
+{
+  "EXPORT": {
+    "MENU": {
+      "TITLE": "Yleinen vienti"
+    },
+    "PAGES": {
+      "SETTINGS": {
+        "TYPE": "Tietotyyppi",
+        "TYPE_HINT": "Vietävien tietojen tyyppi",
+        "PROVIDER": "Muoto",
+        "PROVIDER_HINT": "JSON säilyttää koko rakenteen; CSV on litteä taulukko",
+        "DATA": "Viedyt tiedot",
+        "PROPERTIES": "Viedyt ominaisuudet",
+        "SELECTED": "{count} / {total} valittu",
+        "CHOOSE": "Valitse",
+        "TOOLBAR": {
+          "START": "Aloita vienti"
+        },
+        "TYPE_LOCKED": "Määritetty näkymässä, josta vienti aloitettiin",
+        "FILTERED": "Suodatin: {name}"
+      },
+      "DATA": {
+        "TITLE": "Valitse tiedot",
+        "EMPTY": "Ei tietoja",
+        "RESTRICTED": "Tämä tietotyyppi viedään kokonaisuutena: kohteita ei voi valita yksitellen.",
+        "HINT": "Valitse kohteet, jos haluat viedä vain ne; jos mitään ei ole valittu, kaikki hakua vastaavat viedään.",
+        "COLUMNS": {
+          "IMAGE": "Kuva",
+          "NAME": "Nimi",
+          "CODE": "Koodi",
+          "PARENT": "Ylätaso",
+          "TYPE": "Tyyppi"
+        },
+        "TOOLBAR": {
+          "APPLY": "Käytä",
+          "REFRESH": "Päivitä"
+        },
+        "FILTER": "Suodatin",
+        "FILTER_NONE": "Ei suodatinta",
+        "NEW_FILTER": "Uusi suodatin",
+        "EDIT_FILTER": "Muokkaa suodatinta"
+      },
+      "PROPERTIES": {
+        "TITLE": "Valitse ominaisuudet",
+        "COLUMNS": {
+          "NAME": "Ominaisuus",
+          "GROUP": "Ryhmä"
+        },
+        "TOOLBAR": {
+          "APPLY": "Käytä",
+          "ALL": "Valitse kaikki"
+        }
+      },
+      "PROGRESS": {
+        "TITLE": "Vienti",
+        "DOWNLOAD": "Lataa tiedosto",
+        "TOOLBAR": {
+          "CANCEL": "Peruuta"
+        }
+      },
+      "FILTER": {
+        "NEW": "Uusi suodatin",
+        "NAME": "Suodattimen nimi",
+        "NAME_PLACEHOLDER": "Tallenna suodatin antamalla sille nimi",
+        "NO_FIELDS": "Tälle tietotyypille ei ole vielä suodatinkenttiä: ne lisää moduuli, johon tietotyyppi kuuluu.",
+        "DELETE_CONFIRMATION": "Poistetaanko suodatin \"{name}\"?",
+        "TOOLBAR": {
+          "APPLY": "Käytä",
+          "SAVE": "Tallenna ja käytä",
+          "RESET": "Palauta",
+          "DELETE": "Poista"
+        }
+      }
+    },
+    "JOB": {
+      "STARTED": "Aloitettu",
+      "FINISHED": "Valmis",
+      "ELAPSED": "Kulunut aika",
+      "PROCESSED": "Käsitelty",
+      "ERRORS": "Virheet"
+    }
+  }
+}
