@@ -1,0 +1,83 @@
+{
+  "EXPORT": {
+    "MENU": {
+      "TITLE": "ייצוא כללי"
+    },
+    "PAGES": {
+      "SETTINGS": {
+        "TYPE": "סוג נתונים",
+        "TYPE_HINT": "סוג הנתונים לייצוא",
+        "PROVIDER": "פורמט",
+        "PROVIDER_HINT": "JSON שומר על המבנה המלא; CSV הוא טבלה שטוחה",
+        "DATA": "נתונים לייצוא",
+        "PROPERTIES": "מאפיינים לייצוא",
+        "SELECTED": "נבחרו: {count} מתוך {total}",
+        "CHOOSE": "בחירה",
+        "TOOLBAR": {
+          "START": "התחלת ייצוא"
+        },
+        "TYPE_LOCKED": "נקבע לפי המסך שממנו הופעל הייצוא",
+        "FILTERED": "מסנן: {name}"
+      },
+      "DATA": {
+        "TITLE": "בחירת נתונים",
+        "EMPTY": "אין נתונים",
+        "RESTRICTED": "סוג נתונים זה מיוצא בשלמותו: לא ניתן לבחור פריטים בנפרד.",
+        "HINT": "יש לבחור פריטים כדי לייצא רק אותם; אם לא נבחר דבר, ייוצא כל מה שתואם לחיפוש.",
+        "COLUMNS": {
+          "IMAGE": "תמונה",
+          "NAME": "שם",
+          "CODE": "קוד",
+          "PARENT": "הורה",
+          "TYPE": "סוג"
+        },
+        "TOOLBAR": {
+          "APPLY": "החלה",
+          "REFRESH": "רענון"
+        },
+        "FILTER": "מסנן",
+        "FILTER_NONE": "ללא מסנן",
+        "NEW_FILTER": "מסנן חדש",
+        "EDIT_FILTER": "עריכת מסנן"
+      },
+      "PROPERTIES": {
+        "TITLE": "בחירת מאפיינים",
+        "COLUMNS": {
+          "NAME": "מאפיין",
+          "GROUP": "קבוצה"
+        },
+        "TOOLBAR": {
+          "APPLY": "החלה",
+          "ALL": "בחירת הכול"
+        }
+      },
+      "PROGRESS": {
+        "TITLE": "ייצוא",
+        "DOWNLOAD": "הורדת הקובץ",
+        "TOOLBAR": {
+          "CANCEL": "ביטול"
+        }
+      },
+      "FILTER": {
+        "NEW": "מסנן חדש",
+        "NAME": "שם המסנן",
+        "NAME_PLACEHOLDER": "יש להזין שם כדי לשמור את המסנן",
+        "NO_FIELDS": "עדיין אין שדות סינון זמינים לסוג נתונים זה: המודול שאליו הוא שייך מוסיף אותם.",
+        "DELETE_CONFIRMATION": "האם למחוק את המסנן \"{name}\"?",
+        "TOOLBAR": {
+          "APPLY": "החלה",
+          "SAVE": "שמירה והחלה",
+          "RESET": "איפוס",
+          "DELETE": "מחיקה"
+        }
+      }
+    },
+    "JOB": {
+      "STARTED": "התחלה",
+      "FINISHED": "סיום",
+      "ELAPSED": "זמן שחלף",
+      "PROCESSED": "עובדו",
+      "ERRORS": "שגיאות"
+    }
+  }
+}

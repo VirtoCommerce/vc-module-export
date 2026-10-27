@@ -1,0 +1,83 @@
+{
+  "EXPORT": {
+    "MENU": {
+      "TITLE": "Generisk eksport"
+    },
+    "PAGES": {
+      "SETTINGS": {
+        "TYPE": "Datatype",
+        "TYPE_HINT": "Typen data som skal eksporteres",
+        "PROVIDER": "Format",
+        "PROVIDER_HINT": "JSON beholder hele strukturen; CSV er en flat tabell",
+        "DATA": "Eksporterte data",
+        "PROPERTIES": "Eksporterte egenskaper",
+        "SELECTED": "{count} av {total} valgt",
+        "CHOOSE": "Velg",
+        "TOOLBAR": {
+          "START": "Start eksport"
+        },
+        "TYPE_LOCKED": "Angitt av skjermbildet eksporten ble startet fra",
+        "FILTERED": "Filter: {name}"
+      },
+      "DATA": {
+        "TITLE": "Velg data",
+        "EMPTY": "Ingen data",
+        "RESTRICTED": "Denne datatypen eksporteres samlet: elementer kan ikke velges enkeltvis.",
+        "HINT": "Velg elementer for å eksportere bare dem; uten valg eksporteres alt som samsvarer med søket.",
+        "COLUMNS": {
+          "IMAGE": "Bilde",
+          "NAME": "Navn",
+          "CODE": "Kode",
+          "PARENT": "Overordnet",
+          "TYPE": "Type"
+        },
+        "TOOLBAR": {
+          "APPLY": "Bruk",
+          "REFRESH": "Oppdater"
+        },
+        "FILTER": "Filter",
+        "FILTER_NONE": "Ingen filter",
+        "NEW_FILTER": "Nytt filter",
+        "EDIT_FILTER": "Rediger filter"
+      },
+      "PROPERTIES": {
+        "TITLE": "Velg egenskaper",
+        "COLUMNS": {
+          "NAME": "Egenskap",
+          "GROUP": "Gruppe"
+        },
+        "TOOLBAR": {
+          "APPLY": "Bruk",
+          "ALL": "Velg alle"
+        }
+      },
+      "PROGRESS": {
+        "TITLE": "Eksport",
+        "DOWNLOAD": "Last ned fil",
+        "TOOLBAR": {
+          "CANCEL": "Avbryt"
+        }
+      },
+      "FILTER": {
+        "NEW": "Nytt filter",
+        "NAME": "Filternavn",
+        "NAME_PLACEHOLDER": "Skriv inn et navn for å lagre filteret",
+        "NO_FIELDS": "Ingen filterfelt er tilgjengelige for denne datatypen ennå: modulen som eier den, legger dem til.",
+        "DELETE_CONFIRMATION": "Slette filteret \"{name}\"?",
+        "TOOLBAR": {
+          "APPLY": "Bruk",
+          "SAVE": "Lagre og bruk",
+          "RESET": "Tilbakestill",
+          "DELETE": "Slett"
+        }
+      }
+    },
+    "JOB": {
+      "STARTED": "Startet",
+      "FINISHED": "Fullført",
+      "ELAPSED": "Medgått tid",
+      "PROCESSED": "Behandlet",
+      "ERRORS": "Feil"
+    }
+  }
+}
