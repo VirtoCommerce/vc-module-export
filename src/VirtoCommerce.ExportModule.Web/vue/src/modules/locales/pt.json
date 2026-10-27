@@ -1,0 +1,83 @@
+{
+  "EXPORT": {
+    "MENU": {
+      "TITLE": "Exportação genérica"
+    },
+    "PAGES": {
+      "SETTINGS": {
+        "TYPE": "Tipo de dados",
+        "TYPE_HINT": "O tipo de dados a exportar",
+        "PROVIDER": "Formato",
+        "PROVIDER_HINT": "JSON mantém a estrutura completa; CSV é uma tabela plana",
+        "DATA": "Dados exportados",
+        "PROPERTIES": "Propriedades exportadas",
+        "SELECTED": "{count} de {total} selecionados",
+        "CHOOSE": "Selecionar",
+        "TOOLBAR": {
+          "START": "Iniciar exportação"
+        },
+        "TYPE_LOCKED": "Definido pela página em que a exportação foi iniciada",
+        "FILTERED": "Filtro: {name}"
+      },
+      "DATA": {
+        "TITLE": "Selecionar dados",
+        "EMPTY": "Sem dados",
+        "RESTRICTED": "Este tipo de dados é exportado por completo: não é possível escolher os itens um a um.",
+        "HINT": "Selecione itens para exportar apenas esses; sem seleção, é exportado tudo o que corresponde à pesquisa.",
+        "COLUMNS": {
+          "IMAGE": "Imagem",
+          "NAME": "Nome",
+          "CODE": "Código",
+          "PARENT": "Pai",
+          "TYPE": "Tipo"
+        },
+        "TOOLBAR": {
+          "APPLY": "Aplicar",
+          "REFRESH": "Atualizar"
+        },
+        "FILTER": "Filtro",
+        "FILTER_NONE": "Sem filtro",
+        "NEW_FILTER": "Novo filtro",
+        "EDIT_FILTER": "Editar filtro"
+      },
+      "PROPERTIES": {
+        "TITLE": "Selecionar propriedades",
+        "COLUMNS": {
+          "NAME": "Propriedade",
+          "GROUP": "Grupo"
+        },
+        "TOOLBAR": {
+          "APPLY": "Aplicar",
+          "ALL": "Selecionar tudo"
+        }
+      },
+      "PROGRESS": {
+        "TITLE": "Exportação",
+        "DOWNLOAD": "Baixar arquivo",
+        "TOOLBAR": {
+          "CANCEL": "Cancelar"
+        }
+      },
+      "FILTER": {
+        "NEW": "Novo filtro",
+        "NAME": "Nome do filtro",
+        "NAME_PLACEHOLDER": "Insira um nome para salvar o filtro",
+        "NO_FIELDS": "Ainda não há campos de filtro disponíveis para este tipo de dados: o módulo a que pertence os adiciona.",
+        "DELETE_CONFIRMATION": "Excluir o filtro \"{name}\"?",
+        "TOOLBAR": {
+          "APPLY": "Aplicar",
+          "SAVE": "Salvar e aplicar",
+          "RESET": "Redefinir",
+          "DELETE": "Excluir"
+        }
+      }
+    },
+    "JOB": {
+      "STARTED": "Iniciado",
+      "FINISHED": "Concluído",
+      "ELAPSED": "Tempo decorrido",
+      "PROCESSED": "Processado",
+      "ERRORS": "Erros"
+    }
+  }
+}
